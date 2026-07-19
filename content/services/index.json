@@ -1,0 +1,138 @@
+{
+  "title": {
+    "zh": "摄影服务",
+    "ja": "サービス",
+    "en": "Services"
+  },
+  "description": {
+    "zh": "郑州 & 漯河 · 专业摄影",
+    "ja": "鄭州 & 漯河 · プロ攝影",
+    "en": "Zhengzhou & Luohe · Professional"
+  },
+  "categories": [
+    {
+      "id": "portrait",
+      "name": {
+        "zh": "写真拍摄",
+        "ja": "ポートレート",
+        "en": "Portrait"
+      },
+      "price": "¥398 起",
+      "description": {
+        "zh": "个人写真 · 情侣 · 闺蜜 · 含精修",
+        "ja": "個人 · カップル · レタッチ込み",
+        "en": "Solo · Couple · Friends · Retouched"
+      },
+      "features": {
+        "zh": [
+          "Nikon Z8 4500万像素",
+          "自然光 & 灯光",
+          "精修调色",
+          "郑州/漯河均可"
+        ],
+        "en": [
+          "Nikon Z8 45MP",
+          "Natural & studio light",
+          "Professional retouch",
+          "Flexible location"
+        ]
+      },
+      "icon": "📷"
+    },
+    {
+      "id": "event",
+      "name": {
+        "zh": "活动跟拍",
+        "ja": "イベント",
+        "en": "Event"
+      },
+      "price": "¥1500 /半天",
+      "description": {
+        "zh": "年会 · 开业 · 发布会 · 会议记录",
+        "ja": "年会 · 開業式 · カンファレンス",
+        "en": "Conference · Ceremony · Conference"
+      },
+      "features": {
+        "zh": [
+          "多机位可选",
+          "航拍加购 +¥500",
+          "当日快修",
+          "4小时/半天"
+        ],
+        "en": [
+          "Multi-camera",
+          "Aerial add-on",
+          "Same-day preview",
+          "4hr half-day"
+        ]
+      },
+      "icon": "🎬"
+    },
+    {
+      "id": "aerial",
+      "name": {
+        "zh": "航拍服务",
+        "ja": "空撮",
+        "en": "Aerial"
+      },
+      "price": "+¥500",
+      "description": {
+        "zh": "城市全景 · 活动俯瞰 · 地产航拍",
+        "ja": "都市パノラマ · イベント · 不動産",
+        "en": "City panorama · Event · Real estate"
+      },
+      "features": {
+        "zh": [
+          "DJI 4K",
+          "FPV 可选",
+          "后期调色",
+          "合规飞行"
+        ],
+        "en": [
+          "DJI 4K",
+          "FPV available",
+          "Color grading",
+          "Licensed flight"
+        ]
+      },
+      "icon": "🚁"
+    }
+  ],
+  "process": [
+    {
+      "step": 1,
+      "zh": "微信联系",
+      "ja": "WeChat",
+      "en": "Contact"
+    },
+    {
+      "step": 2,
+      "zh": "沟通需求",
+      "ja": "打ち合わせ",
+      "en": "Discuss"
+    },
+    {
+      "step": 3,
+      "zh": "确认方案",
+      "ja": "プラン確定",
+      "en": "Confirm"
+    },
+    {
+      "step": 4,
+      "zh": "拍摄执行",
+      "ja": "撮影",
+      "en": "Shoot"
+    },
+    {
+      "step": 5,
+      "zh": "精修交付",
+      "ja": "納品",
+      "en": "Deliver"
+    }
+  ],
+  "cta": {
+    "zh": "微信联系 · S0688888860",
+    "ja": "WeChat · S0688888860",
+    "en": "WeChat · S0688888860"
+  }
+}
