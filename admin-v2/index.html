@@ -482,10 +482,11 @@ window.editExhibition=function(i){
 }
 
 // ═══ SETTINGS ═══
+function updateSiteTitle(v){store.siteTitle=v;localStorage.setItem("cms_site_title",v);showToast("✅ 标题已更新，发布后生效")}
 function renderSettings(){
   return `<div class="sec-title">⚙ Settings</div>
     <div class="dash-info">
-      <div class="info-row"><span class="key">网站标题</span><span class="val">瓛瓛 HuanHuan</span></div>
+      <div class="info-row"><span class="key">网站标题</span><span class="val"><input id="siteTitle" value="藏魄 HuanHuan" onchange="updateSiteTitle(this.value)" style="background:var(--card);border:1px solid var(--border);color:var(--text);padding:.2rem .4rem;border-radius:3px;font-family:inherit;font-size:.7rem;width:200px"></span></div>
       <div class="info-row"><span class="key">域名</span><span class="val">stellanhuan.github.io</span></div>
       <div class="info-row"><span class="key">版本</span><span class="val">V2.0-alpha</span></div>
       <div class="info-row"><span class="key">照片数量</span><span class="val">${store.photos.length} 张</span></div>
