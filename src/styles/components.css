@@ -1,0 +1,67 @@
+/* ═══════════════════════════
+   Component Styles — V3.1
+   预留组件结构。当前留空，V3 重构时迁移。
+   ═══════════════════════════ */
+
+/* ── Navigation ── */
+/* .nav { ... } */
+/* .nav--hidden { ... } */
+
+/* ── Hero ── */
+/* .hero { ... } */
+/* .hero--loaded { ... } */
+
+/* ── Quote / Macro Type ── */
+/* .macro-type { ... } */
+
+/* ── Gallery / Photo Grid ── */
+/* .gallery-item { ... } */
+/* .gallery-item--portrait { ... } */
+/* .gallery-item--pano { ... } */
+
+/* ── Horizontal Scroll ── */
+/* .hscroll { ... } */
+/* .hscroll-card { ... } */
+
+/* ── Booking Cards ── */
+/* .booking-card { ... } */
+/* .booking-card--featured { ... } */
+
+/* ── About Section ── */
+/* .about { ... } */
+/* .timeline { ... } */
+
+/* ── Contact Section ── */
+/* .contact { ... } */
+/* .contact-card { ... } */
+
+/* ── Lightbox ── */
+/* .lightbox { ... } */
+
+/* ── Scroll Progress ── */
+/* .scroll-progress { ... } */
+
+/* ── Film Grain ── */
+/* .grain { ... } */
+
+/* ── Custom Cursor ── */
+/* .cursor { ... } */
+
+/* ── Language Switcher ── */
+/* .lang-switch { ... } */
+
+/* ── Reveal Animation ── */
+/* .reveal { ... } */
+/* .reveal.visible { ... } */
+
+/* ── Parallax ── */
+/* .parallax { ... } */
+
+/* ── Footer ── */
+/* .footer { ... } */
+
+/* ── Admin Components ── */
+/* .stat-card { ... } */
+/* .photo-card { ... } */
+/* .proj-card { ... } */
+/* .booking-card { ... } */

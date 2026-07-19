@@ -1,0 +1,92 @@
+/* ═══════════════════════════
+   Base Styles — V3.1
+   Reset + typography foundation
+   ═══════════════════════════ */
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+/* ── Body ── */
+body {
+  font-family: var(--font-serif);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: var(--leading-normal);
+  overflow-x: hidden;
+}
+
+/* ── Headings ── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-gold-light);
+  line-height: var(--leading-tight);
+}
+
+h1 { font-size: var(--text-hero); }
+h2 { font-size: var(--text-display); }
+h3 { font-size: var(--text-h3); }
+
+/* ── Links ── */
+a {
+  color: var(--color-gold-dim);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a:hover {
+  color: var(--color-gold-light);
+}
+
+/* ── Images ── */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity var(--duration-image) var(--ease-out);
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(184, 147, 79, 0.2);
+  color: var(--color-gold-light);
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

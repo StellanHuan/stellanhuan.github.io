@@ -1,0 +1,140 @@
+/* ═══════════════════════════════════════════
+   Design Tokens — Stellan Photography V3.1
+   单一真相来源。所有组件引用这些变量。
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* ── Color Tokens ── */
+  /* Surface */
+  --color-bg:             #080604;
+  --color-bg-elevated:    #0e0b08;
+  --color-bg-card:        #110d0a;
+
+  /* Brand Gold */
+  --color-gold:           #b8934f;
+  --color-gold-light:     #d4b978;
+  --color-gold-dim:       #7a6238;
+
+  /* Text */
+  --color-text:           #d4cec4;
+  --color-text-dim:       #9a9288;
+  --color-text-bright:    #e8e0d4;
+
+  /* Border */
+  --color-border:         rgba(184, 147, 79, 0.12);
+  --color-border-hover:   rgba(184, 147, 79, 0.25);
+
+  /* Semantic */
+  --color-success:        #7bae7f;
+  --color-danger:         #8b3a3a;
+  --color-coral:          #ec8f8d;
+
+  /* ── Typography Tokens ── */
+  --font-sans:            "PingFang SC", "SF Pro Display", -apple-system, sans-serif;
+  --font-serif:           "Noto Serif SC", "Songti SC", "STSong", serif;
+  --font-mono:            "JetBrains Mono", ui-monospace, monospace;
+
+  --font-weight-light:    200;
+  --font-weight-regular:  300;
+  --font-weight-medium:   400;
+  --font-weight-bold:     500;   /* 仅此一级加粗，不放纵 */
+
+  /* Type Scale (clamp-based fluid) */
+  --text-hero:            clamp(3rem, 7vw, 5.5rem);
+  --text-display:         clamp(1.8rem, 3.5vw, 2.6rem);
+  --text-h1:              1.4rem;
+  --text-h2:              1.2rem;
+  --text-h3:              1rem;
+  --text-body:            0.9rem;
+  --text-small:           0.75rem;
+  --text-caption:         0.65rem;
+  --text-micro:           0.55rem;
+
+  --leading-relaxed:      2.2;
+  --leading-normal:       1.7;
+  --leading-tight:        1.4;
+
+  --tracking-wide:        0.25em;
+  --tracking-normal:      0.1em;
+  --tracking-tight:       0.03em;
+
+  /* ── Spacing Tokens (4px grid) ── */
+  --space-0:              0;
+  --space-1:              0.25rem;   /* 4px */
+  --space-2:              0.5rem;    /* 8px */
+  --space-3:              0.75rem;   /* 12px */
+  --space-4:              1rem;      /* 16px */
+  --space-5:              1.5rem;    /* 24px */
+  --space-6:              2rem;      /* 32px */
+  --space-8:              3rem;      /* 48px */
+  --space-10:             4rem;      /* 64px */
+  --space-12:             6rem;      /* 96px */
+  --space-16:             10rem;     /* 160px */
+
+  /* ── Grid Tokens ── */
+  --grid-gap:             1rem;
+  --grid-gap-sm:          0.5rem;
+  --grid-photo-min:       140px;
+  --grid-photo-min-sm:    100px;
+  --grid-photo-min-lg:    200px;
+
+  /* ── Breakpoint Tokens ── */
+  --bp-mobile:            480px;
+  --bp-tablet:            768px;
+  --bp-desktop:           1024px;
+  --bp-wide:              1440px;
+
+  /* ── Layout Tokens ── */
+  --max-width-content:    1200px;
+  --max-width-reading:    680px;
+  --nav-height:           56px;
+
+  /* ── Border Radius Tokens ── */
+  --radius-sm:            4px;
+  --radius-md:            6px;
+  --radius-lg:            8px;
+  --radius-pill:          20px;
+  --radius-round:         50%;
+
+  /* ── Motion Tokens ── */
+  /* Apple Fluid Interface springs */
+  --ease-spring:          cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:             cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:          cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Durations (Apple guideline: 150-400ms) */
+  --duration-instant:     100ms;
+  --duration-fast:        200ms;
+  --duration-normal:      350ms;
+  --duration-slow:        500ms;
+  --duration-reveal:      800ms;
+  --duration-image:       700ms;
+
+  /* Spring parameters (for JS animation) */
+  --spring-damping:       1.0;      /* critically damped — no bounce */
+  --spring-response:      0.4;      /* seconds to target */
+  --spring-bounce:        0.2;      /* overshoot — only for momentum gestures */
+
+  /* ── Visual Effect Tokens ── */
+  --blur-nav:             blur(16px);
+  --blur-card:            blur(12px);
+  --blur-light:           blur(8px);
+  --opacity-grain:        0.035;
+  --opacity-overlay:      0.88;
+
+  /* ── Shadow Tokens ── */
+  --shadow-sm:            0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md:            0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg:            0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-gold:          0 4px 12px rgba(184, 147, 79, 0.1);
+  --shadow-img:           0 4px 20px rgba(0, 0, 0, 0.06);
+
+  /* ── Z-Index Tokens ── */
+  --z-grain:              9990;
+  --z-progress:           9995;
+  --z-cursor-ring:        9998;
+  --z-cursor:             9999;
+  --z-nav:                100;
+  --z-lightbox:           200;
+  --z-dropdown:           300;
+}
