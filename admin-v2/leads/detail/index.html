@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Detail — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem;max-width:800px;margin:0 auto}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.7rem;margin-bottom:1.5rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.1em;color:var(--gold-l);font-size:1.3rem;margin-bottom:.3rem}
+  .sub{font-size:.7rem;color:var(--text-d);margin-bottom:2rem}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin-bottom:2rem}
+  .info-item{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1rem}
+  .info-item .lbl{font-size:.6rem;color:var(--gold-d);letter-spacing:.1em;margin-bottom:.3rem}
+  .info-item .val{font-size:.85rem;color:var(--text)}
+  .section{margin-bottom:2rem}
+  .section h2{font-size:.7rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:1rem;text-transform:uppercase}
+  .timeline{position:relative;padding-left:1.5rem}
+  .timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border)}
+  .tl-item{position:relative;padding-bottom:1.2rem}
+  .tl-item::before{content:'';position:absolute;left:-1.55rem;top:.3rem;width:8px;height:8px;border-radius:50%;background:var(--gold-d)}
+  .tl-item .time{font-size:.6rem;color:var(--gold-d)}
+  .tl-item .action{font-size:.75rem;color:var(--text);margin-top:.2rem}
+  .note-form{display:flex;gap:.5rem;margin-top:1rem}
+  .note-form input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.5rem;border-radius:4px;font-family:inherit;font-size:.7rem}
+  .note-form button{background:var(--gold-d);color:var(--bg);border:none;padding:.5rem 1rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer}
+  .status-select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:.3rem .6rem;border-radius:4px;font-family:inherit;font-size:.7rem}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Leads</a>
+<div id="content"></div>
+<script>
+const params=new URLSearchParams(window.location.search);
+const leadId=params.get('id');
+const leads=JSON.parse(localStorage.getItem('crm_leads')||'[]');
+const lead=leads.find(l=>String(l.time)===leadId||l.name===decodeURIComponent(leadId||''));
+if(!lead){document.getElementById('content').innerHTML='<p>Lead not found</p>'}else{
+  const timeline=JSON.parse(localStorage.getItem('lead_timeline_'+lead.time)||'[]');
+  const notes=JSON.parse(localStorage.getItem('lead_notes_'+lead.time)||'[]');
+  
+  document.getElementById('content').innerHTML=`
+    <h1>${lead.name||'未命名'}</h1>
+    <div class="sub">${lead.type==='print'?'🖼 Print':'📷 咨询'} · ${lead.source||'Website'}</div>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">状态</div><div class="val"><select class="status-select" onchange="changeStatus('${lead.time}',this.value)">${['New','Contacted','Quoted','Confirmed','Completed'].map(s=>`<option ${lead.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div>
+      <div class="info-item"><div class="lbl">Email</div><div class="val">${lead.email||'—'}</div></div>
+      <div class="info-item"><div class="lbl">类型</div><div class="val">${lead.type||'—'}</div></div>
+      <div class="info-item"><div class="lbl">日期</div><div class="val">${lead.time?new Date(lead.time).toLocaleDateString('zh-CN'):'—'}</div></div>
+    </div>
+    <div class="section"><h2>Activity Timeline</h2><div class="timeline">${timeline.length?timeline.map(t=>`<div class="tl-item"><div class="time">${new Date(t.time).toLocaleString('zh-CN')}</div><div class="action">${t.action}</div></div>`).join(''):'<div class="tl-item"><div class="action" style="color:var(--text-d)">暂无活动</div></div>'}</div></div>
+    <div class="section"><h2>Notes</h2>${notes.map((n,i)=>`<div class="tl-item"><div class="time">${new Date(n.time).toLocaleString('zh-CN')}</div><div class="action">${n.text}</div></div>`).join('')||'<div style="color:var(--text-d);font-size:.7rem">暂无备注</div>'}<div class="note-form"><input id="noteInput" placeholder="添加备注..."><button onclick="addNote('${lead.time}')">添加</button></div></div>`;
+}
+
+window.changeStatus=function(time,status){
+  const lead=leads.find(l=>String(l.time)===time);
+  if(lead){const old=lead.status;lead.status=status;lead.updated=Date.now();localStorage.setItem('crm_leads',JSON.stringify(leads));addTimeline(time,`状态: ${old} → ${status}`);Analytics?.track('lead_stage_changed',{from:old,to:status});location.reload()}
+};
+window.addNote=function(time){
+  const input=document.getElementById('noteInput');if(!input||!input.value.trim())return;
+  const notes=JSON.parse(localStorage.getItem('lead_notes_'+time)||'[]');
+  notes.push({text:input.value.trim(),time:Date.now()});
+  localStorage.setItem('lead_notes_'+time,JSON.stringify(notes));
+  addTimeline(time,'添加备注: '+input.value.trim());
+  Analytics?.track('lead_note_added');
+  location.reload();
+};
+function addTimeline(time,action){
+  const tl=JSON.parse(localStorage.getItem('lead_timeline_'+time)||'[]');
+  tl.push({action,time:Date.now()});
+  localStorage.setItem('lead_timeline_'+time,JSON.stringify(tl));
+}
+// Auto-log lead creation
+if(!JSON.parse(localStorage.getItem('lead_timeline_'+lead.time)||'[]').length){addTimeline(lead.time,'Lead created via '+(lead.type||'inquiry'))}
+</script>
+</body>
+</html>

@@ -65,7 +65,7 @@ function renderTable(){
   filtered.sort((a,b)=>(b.time||0)-(a.time||0));
   document.getElementById('leadTable').innerHTML=filtered.length?filtered.map(l=>`
     <tr>
-      <td>${l.name||'—'}</td>
+      <td><a href="detail/?id=${l.time}" style="color:var(--gold-l);text-decoration:none">${l.name||'—'}</a></td>
       <td>${l.type==='print'?'🖼 Print':'📷 咨询'}</td>
       <td>${l.source||'—'}</td>
       <td>${l.time?new Date(l.time).toLocaleDateString('zh-CN'):'—'}</td>
