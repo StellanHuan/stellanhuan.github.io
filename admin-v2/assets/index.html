@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assets — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:1.5rem}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.1rem;margin-bottom:1rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.65rem;margin-bottom:1.5rem;display:inline-block}
+  .toolbar{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+  .toolbar input,.toolbar select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:.3rem .6rem;border-radius:4px;font-family:inherit;font-size:.65rem}
+  .toolbar input{flex:1;min-width:200px}
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:.7rem}
+  th{text-align:left;padding:.5rem;color:var(--gold-d);font-size:.6rem;letter-spacing:.1em;border-bottom:1px solid var(--border);font-weight:400;position:sticky;top:0;background:var(--bg)}
+  td{padding:.4rem .5rem;border-bottom:1px solid var(--border);color:var(--text-d);vertical-align:middle}
+  td img{width:60px;height:45px;object-fit:cover;border-radius:3px}
+  .badge{display:inline-block;padding:.15rem .4rem;border-radius:10px;font-size:.55rem;margin:0 .1rem}
+  .badge-portrait{background:rgba(184,147,79,.15);color:var(--gold-l)}
+  .badge-street{background:rgba(123,174,127,.15);color:var(--green)}
+  .badge-used{background:rgba(123,174,127,.1);color:var(--green)}
+  .badge-unused{background:rgba(139,58,58,.1);color:var(--red)}
+  .clickable{cursor:pointer;color:var(--gold-l)}
+  .empty{text-align:center;padding:3rem;color:var(--text-d)}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>🗂 Asset Manager</h1>
+<div class="toolbar">
+  <input id="searchInput" placeholder="搜索标题/文件名..." oninput="renderTable()">
+  <select id="seriesFilter" onchange="renderTable()"><option value="">全部系列</option><option>portrait</option><option>street</option><option>landscape</option><option>aerial</option></select>
+  <select id="usageFilter" onchange="renderTable()"><option value="">全部</option><option value="used">已使用</option><option value="unused">未使用</option></select>
+  <span style="font-size:.65rem;color:var(--text-d);display:flex;align-items:center" id="countDisplay"></span>
+</div>
+<div class="table-wrap"><table><thead><tr><th></th><th>文件</th><th>标题</th><th>系列</th><th>标签</th><th>使用</th><th>格式</th></tr></thead><tbody id="tableBody"></tbody></table></div>
+<script>
+let photos=[];
+fetch('../../data.json').then(r=>r.json()).then(d=>{
+  photos=d.photos||[];
+  renderTable();
+}).catch(()=>{
+  // Fallback: try relative
+  fetch('../../content/photos/index.json').then(r=>r.json()).then(d=>{photos=d;renderTable()});
+});
+
+function getUsage(file){
+  const fn=file.split('/').pop();
+  const sections=JSON.parse(localStorage.getItem('cms_sections')||'{}');
+  const used=[];
+  for(const[k,v]of Object.entries(sections||{})){if(Array.isArray(v)&&v.includes(fn))used.push(k)}
+  return used;
+}
+
+function renderTable(){
+  const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+  const sf=document.getElementById('seriesFilter')?.value||'';
+  const uf=document.getElementById('usageFilter')?.value||'';
+  
+  let filtered=photos;
+  if(q) filtered=filtered.filter(p=>p.title.toLowerCase().includes(q)||p.file.toLowerCase().includes(q));
+  if(sf) filtered=filtered.filter(p=>p.series===sf);
+  if(uf==='used') filtered=filtered.filter(p=>getUsage(p.file).length);
+  if(uf==='unused') filtered=filtered.filter(p=>!getUsage(p.file).length);
+  
+  document.getElementById('countDisplay').textContent=`${filtered.length} / ${photos.length}`;
+  
+  document.getElementById('tableBody').innerHTML=filtered.length?filtered.map(p=>{
+    const usage=getUsage(p.file);
+    const formats={jpeg:!!p.file,webp:true,avif:true,thumb:true};
+    return `<tr>
+      <td><img src="../../${p.file}" alt="" loading="lazy" onerror="this.style.display='none'"></td>
+      <td style="font-size:.6rem">${p.file.split('/').pop()}</td>
+      <td>${p.title||'—'}</td>
+      <td><span class="badge badge-${p.series}">${p.series||'—'}</span></td>
+      <td>${(p.tags||[]).slice(0,3).map(t=>`<span class="badge">${t}</span>`).join('')}</td>
+      <td>${usage.length?usage.map(u=>`<span class="badge badge-used">${u}</span>`).join(' '):'<span class="badge badge-unused">未使用</span>'}</td>
+      <td style="font-size:.55rem">JPEG · WEBP · AVIF · THUMB</td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="7" class="empty">无匹配资产</td></tr>';
+}
+</script>
+</body>
+</html>
