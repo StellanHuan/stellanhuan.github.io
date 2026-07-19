@@ -133,8 +133,7 @@ const store={
 };
 
 function saveStore(){
-  // Strip data URLs before saving (too big for localStorage)
-  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,...c}=p;return c});
+  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,_isUpload,...c}=p;return c});
   localStorage.setItem('cms_photos',JSON.stringify(cleanPhotos));
   localStorage.setItem('cms_sections',JSON.stringify(store.sections));
 }
@@ -279,7 +278,7 @@ window.toggleFilter=function(type,val){
 
 window.applyFilters=function(q){store.filters.search=q;renderPhotoGrid()};
 window.clearSelection=function(){store.selectedPhotos.clear();renderPhotoGrid()};
-window.deletePhoto=function(file){if(!confirm('确定删除这张照片？'))return;store.photos=store.photos.filter(p=>p.file.split('/').pop()!==file);Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>f!==file)});store.selectedPhotos.delete(file);saveStore();renderPhotoGrid();showToast('🗑 已删除')};
+window.deletePhoto=function(file){if(!confirm('确定删除这张照片？'))return;const p=store.photos.find(pp=>pp.file.split('/').pop()===file);if(p&&p._isUpload)deleteUpload(file);store.photos=store.photos.filter(p=>p.file.split('/').pop()!==file);Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>f!==file)});store.selectedPhotos.delete(file);saveStore();renderPhotoGrid();showToast('🗑 已删除')};
 window.setGridSize=function(s){
   document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active',b.textContent==={s:'小',m:'中',l:'大'}[s]));
   const grid=document.getElementById('photoGrid');grid.className='photo-grid size-'+s;
@@ -287,17 +286,36 @@ window.setGridSize=function(s){
 window.batchTag=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const tag=prompt('输入标签 (逗号分隔)');if(!tag)return;const tags=tag.split(',').map(t=>t.trim());store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p){p.tags=[...new Set([...(p.tags||[]),...tags])]}});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 标签已添加')};
 window.batchSeries=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const series=prompt('输入系列 (portrait/street/landscape/aerial)');if(!series)return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p)p.series=series});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 系列已更新')};
 
-// ═══ UPLOAD ═══
+// ═══ UPLOAD (IndexedDB backed) ═══
+const idb=window.indexedDB.open('stellan-cms',1);
+idb.onupgradeneeded=function(e){e.target.result.createObjectStore('uploads')};
+
+function saveUpload(key,dataUrl){return new Promise(r=>{const db=idb.result;const tx=db.transaction('uploads','readwrite');tx.objectStore('uploads').put(dataUrl,key);tx.oncomplete=()=>r()})}
+function loadUpload(key){return new Promise(r=>{const db=idb.result;const tx=db.transaction('uploads','readonly');const req=tx.objectStore('uploads').get(key);req.onsuccess=()=>r(req.result)})}
+function deleteUpload(key){const db=idb.result;const tx=db.transaction('uploads','readwrite');tx.objectStore('uploads').delete(key)}
+
+idb.onsuccess=async function(){
+  // Restore uploaded photo previews from IndexedDB
+  for(const p of store.photos){
+    if(p._isUpload&&!p._dataUrl){
+      p._dataUrl=await loadUpload(p.file);
+    }
+  }
+  if(window.location.hash.replace('#','')==='photos') renderPhotoGrid();
+};
+
 window.handleUpload=function(files){
   if(!files.length)return;
   let processed=0;
   Array.from(files).forEach(file=>{
     const reader=new FileReader();
-    reader.onload=function(e){
-      const name='upload_'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9.]/g,'_');
-      store.photos.push({file:name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_dataUrl:e.target.result,_size:file.size});
+    reader.onload=async function(e){
+      const name='upload_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'_'+file.name.replace(/[^a-zA-Z0-9.]/g,'_');
+      const dataUrl=e.target.result;
+      await saveUpload(name,dataUrl);
+      store.photos.push({file:name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_isUpload:true,_dataUrl:dataUrl});
       processed++;
-      if(processed===files.length){saveStore();renderPhotoGrid();showToast(`✅ 已添加 ${processed} 张照片。导出 data.js 时会一并打包`)}
+      if(processed===files.length){saveStore();renderPhotoGrid();showToast(`✅ 已添加 ${processed} 张`)}
     };
     reader.readAsDataURL(file);
   });
