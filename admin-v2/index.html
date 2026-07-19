@@ -44,6 +44,10 @@
   .search-box:focus{outline:none;border-color:var(--gold-dim)}
   .photo-grid-area{flex:1;overflow-y:auto}
   .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem}
+  .photo-grid.size-s{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
+  .photo-grid.size-l{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .size-btn{background:var(--card-bg);border:1px solid var(--border);color:var(--text-dim);padding:.2rem .6rem;border-radius:3px;font-size:.6rem;cursor:pointer;font-family:inherit}
+  .size-btn.active,.size-btn:hover{color:var(--gold-light);border-color:var(--gold-dim)}
   .photo-card{border-radius:6px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:border-color .2s;background:var(--card-bg);position:relative}
   .photo-card:hover{border-color:var(--gold-dim)}
   .photo-card.selected{border-color:var(--gold-light)}
@@ -209,6 +213,10 @@ function photos(){
         <span style="flex:1"></span>
         <button onclick="document.getElementById('uploadInput').click()" style="background:var(--gold-dim);color:var(--bg)">📤 本地上传</button>
         <input type="file" id="uploadInput" accept="image/*" multiple style="display:none" onchange="handleUpload(this.files)">
+        <span style="font-size:.6rem;color:var(--text-dim);margin-left:.5rem">视图:</span>
+        <button onclick="setGridSize('s')" class="size-btn">小</button>
+        <button onclick="setGridSize('m')" class="size-btn active">中</button>
+        <button onclick="setGridSize('l')" class="size-btn">大</button>
       </div>
       <div class="photo-grid" id="photoGrid"></div>
     </div>
@@ -262,6 +270,10 @@ window.toggleFilter=function(type,val){
 window.applyFilters=function(q){store.filters.search=q;renderPhotoGrid()};
 window.clearSelection=function(){store.selectedPhotos.clear();renderPhotoGrid()};
 window.deletePhoto=function(file){if(!confirm('确定删除这张照片？'))return;store.photos=store.photos.filter(p=>p.file.split('/').pop()!==file);Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>f!==file)});store.selectedPhotos.delete(file);renderPhotoGrid();showToast('🗑 已删除')};
+window.setGridSize=function(s){
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active',b.textContent==={s:'小',m:'中',l:'大'}[s]));
+  const grid=document.getElementById('photoGrid');grid.className='photo-grid size-'+s;
+};
 window.batchTag=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const tag=prompt('输入标签 (逗号分隔)');if(!tag)return;const tags=tag.split(',').map(t=>t.trim());store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p){p.tags=[...new Set([...(p.tags||[]),...tags])]}});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 标签已添加')};
 window.batchSeries=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const series=prompt('输入系列 (portrait/street/landscape/aerial)');if(!series)return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p)p.series=series});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 系列已更新')};
 
