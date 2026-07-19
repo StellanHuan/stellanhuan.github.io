@@ -53,6 +53,8 @@
   .photo-card .info .m{color:var(--text-dim);font-size:.55rem}
   .photo-card .check{position:absolute;top:.3rem;right:.3rem;width:18px;height:18px;border-radius:3px;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;font-size:.6rem;opacity:0;transition:opacity .2s}
   .photo-card.selected .check,.photo-card:hover .check{opacity:1}
+  .photo-card .del-btn{position:absolute;top:.3rem;left:.3rem;width:18px;height:18px;border-radius:3px;background:rgba(139,58,58,.8);color:#fff;border:none;font-size:.55rem;cursor:pointer;display:none;align-items:center;justify-content:center}
+  .photo-card:hover .del-btn{display:flex}
   .batch-bar{display:flex;gap:.5rem;align-items:center;padding:.5rem 0;font-size:.7rem}
   .batch-bar button{background:var(--card-bg);border:1px solid var(--border);color:var(--text-dim);padding:.3rem .8rem;border-radius:4px;cursor:pointer;font-size:.65rem;font-family:inherit}
   .batch-bar button:hover{color:var(--gold-light);border-color:var(--gold-dim)}
@@ -233,6 +235,7 @@ function renderPhotoGrid(){
     return `<div class="photo-card ${sel?'selected':''}" data-file="${f}" onclick="togglePhoto('${f}',event)">
       <img src="${src}" alt="${p.title}" loading="lazy">
       <div class="check">${sel?'✓':''}</div>
+      <button class="del-btn" onclick="event.stopPropagation();deletePhoto('${f}')">🗑</button>
       <div class="info"><span class="t">${p.title}</span><span class="m">${p.series||''} · ${(p.tags||[]).slice(0,2).join(' ')}</span></div>
     </div>`;
   }).join('');
@@ -258,6 +261,7 @@ window.toggleFilter=function(type,val){
 
 window.applyFilters=function(q){store.filters.search=q;renderPhotoGrid()};
 window.clearSelection=function(){store.selectedPhotos.clear();renderPhotoGrid()};
+window.deletePhoto=function(file){if(!confirm('确定删除这张照片？'))return;store.photos=store.photos.filter(p=>p.file.split('/').pop()!==file);Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>f!==file)});store.selectedPhotos.delete(file);renderPhotoGrid();showToast('🗑 已删除')};
 window.batchTag=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const tag=prompt('输入标签 (逗号分隔)');if(!tag)return;const tags=tag.split(',').map(t=>t.trim());store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p){p.tags=[...new Set([...(p.tags||[]),...tags])]}});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 标签已添加')};
 window.batchSeries=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const series=prompt('输入系列 (portrait/street/landscape/aerial)');if(!series)return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p)p.series=series});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 系列已更新')};
 
