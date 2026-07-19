@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:1.5rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.65rem;margin-bottom:1.5rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.1rem;margin-bottom:1rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.6rem;margin-bottom:1.5rem}
+  .kpi{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+  .kpi .val{font-size:1.6rem;font-weight:200;color:var(--gold-l)}
+  .kpi .lbl{font-size:.55rem;color:var(--text-d);letter-spacing:.1em;margin-top:.2rem}
+  .kpi .sub{font-size:.5rem;color:var(--text-d);margin-top:.1rem}
+  .section{margin-bottom:1.5rem}
+  .section h2{font-size:.65rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:.8rem;text-transform:uppercase}
+  .bar-row{display:flex;align-items:center;gap:.5rem;padding:.3rem 0;font-size:.65rem}
+  .bar-row .label{width:80px;color:var(--text-d);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .bar-row .bar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+  .bar-row .bar{height:100%;background:var(--gold-d);border-radius:3px}
+  .bar-row .count{width:40px;color:var(--text-d);text-align:right;font-size:.6rem}
+  .funnel{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+  .f-step{flex:1;min-width:100px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.8rem;text-align:center}
+  .f-step .n{font-size:1.2rem;color:var(--gold-l);font-weight:200}
+  .f-step .l{font-size:.55rem;color:var(--text-d);margin-top:.2rem}
+  .f-arrow{color:var(--gold-d)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:768px){.two-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📊 Business Dashboard</h1>
+<div class="grid" id="kpiGrid"></div>
+<div class="two-col">
+  <div class="section"><h2>Revenue by Month</h2><div id="revenueChart"></div></div>
+  <div class="section"><h2>Lead Funnel</h2><div id="leadFunnel"></div></div>
+</div>
+<div class="two-col">
+  <div class="section"><h2>Top Assets</h2><div id="topAssets"></div></div>
+  <div class="section"><h2>License Status</h2><div id="licenseStatus"></div></div>
+</div>
+<script>
+const L=key=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return[]}};
+const leads=L('crm_leads');const quotes=L('quotes');const contracts=L('contracts');
+const invoices=L('invoices');const licenses=L('licenses');const proj=L('cms_projects');
+
+const revenue=invoices.filter(i=>i.status==='Paid').reduce((s,i)=>s+(i.amount||0),0);
+const pending=invoices.filter(i=>i.status!=='Paid').reduce((s,i)=>s+(i.amount||0),0);
+const activeLicenses=licenses.filter(l=>l.status==='Active').length;
+
+document.getElementById('kpiGrid').innerHTML=`
+  <div class="kpi"><div class="val">${leads.length}</div><div class="lbl">Leads</div><div class="sub">CRM</div></div>
+  <div class="kpi"><div class="val">${quotes.length}</div><div class="lbl">Quotes</div></div>
+  <div class="kpi"><div class="val">${contracts.length}</div><div class="lbl">Contracts</div></div>
+  <div class="kpi"><div class="val">¥${revenue.toLocaleString()}</div><div class="lbl">Revenue</div><div class="sub">Paid</div></div>
+  <div class="kpi"><div class="val">¥${pending.toLocaleString()}</div><div class="lbl">Pending</div></div>
+  <div class="kpi"><div class="val">${activeLicenses}</div><div class="lbl">Active Licenses</div></div>
+  <div class="kpi"><div class="val">${proj.length}</div><div class="lbl">Projects</div></div>
+  <div class="kpi"><div class="val">${licenses.filter(l=>l.status==='Expired').length}</div><div class="lbl">Expired</div></div>`;
+
+// Revenue by month
+const months={};
+invoices.forEach(i=>{const m=i.date?.slice(0,7)||'?';months[m]=(months[m]||0)+(i.status==='Paid'?i.amount:0)});
+const maxR=Math.max(1,...Object.values(months));
+document.getElementById('revenueChart').innerHTML=Object.entries(months).sort().map(([m,v])=>`<div class="bar-row"><span class="label">${m}</span><div class="bar-wrap"><div class="bar" style="width:${v/maxR*100}%"></div></div><span class="count">¥${(v/1000).toFixed(0)}k</span></div>`).join('')||'<div style="color:var(--text-d);font-size:.6rem">No data</div>';
+
+// Lead funnel
+const leadSteps=[
+  {n:leads.length,l:'Total Leads'},
+  {n:quotes.length,l:'Quoted'},
+  {n:contracts.length,l:'Contracted'},
+  {n:invoices.filter(i=>i.status==='Paid').length,l:'Paid'}
+];
+document.getElementById('leadFunnel').innerHTML='<div class="funnel">'+leadSteps.map((s,i)=>`${i>0?'<div class="f-arrow">→</div>':''}<div class="f-step"><div class="n">${s.n}</div><div class="l">${s.l}</div></div>`).join('')+'</div>';
+
+// Top assets (from license data)
+const assetCount={};licenses.forEach(l=>{assetCount[l.asset]= (assetCount[l.asset]||0)+1});
+const topA=Object.entries(assetCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
+const maxA=topA[0]?.[1]||1;
+document.getElementById('topAssets').innerHTML=topA.length?topA.map(([a,c])=>`<div class="bar-row"><span class="label">${a}</span><div class="bar-wrap"><div class="bar" style="width:${c/maxA*100}%"></div></div><span class="count">${c}</span></div>`).join(''):'<div style="color:var(--text-d);font-size:.6rem">No licenses yet</div>';
+
+// License status
+const licStatus={};['Active','Expired','Draft','Renewed'].forEach(s=>licStatus[s]=licenses.filter(l=>l.status===s).length);
+document.getElementById('licenseStatus').innerHTML=Object.entries(licStatus).map(([s,c])=>`<div class="bar-row"><span class="label">${s}</span><div class="bar-wrap"><div class="bar" style="width:${c/Math.max(1,...Object.values(licStatus))*100}%"></div></div><span class="count">${c}</span></div>`).join('');
+</script>
+</body>
+</html>
