@@ -1,0 +1,18 @@
+{
+  "admin_notification": {
+    "subject": "New Inquiry: {{project_type}} from {{name}}",
+    "body": "New inquiry received.\n\nName: {{name}}\nEmail: {{email}}\nProject: {{project_type}}\nBudget: {{budget}}\nDate: {{date}}\nLocation: {{location}}\n\nMessage:\n{{description}}\n\n---\nSent via Stellan Photography website"
+  },
+  "customer_confirmation": {
+    "subject": "Thank you for your inquiry, {{name}}",
+    "body": "Hi {{name}},\n\nThank you for reaching out. I've received your inquiry about {{project_type}}.\n\nI'll review your project details and get back to you within 24 hours via WeChat (S0688888860).\n\nIn the meantime, feel free to browse more of my work at:\nhttps://stellanhuan.github.io\n\nBest,\nStellan Huan\n瓛瓛"
+  },
+  "print_purchase_notification": {
+    "subject": "Print Purchase: {{print_title}} from {{name}}",
+    "body": "Print purchase inquiry.\n\nPrint: {{print_title}}\nSize: {{size}}\nQuantity: {{quantity}}\n\nCustomer: {{name}}\nEmail: {{email}}\n\nMessage: {{message}}"
+  },
+  "print_purchase_confirmation": {
+    "subject": "Print Inquiry: {{print_title}}",
+    "body": "Hi {{name}},\n\nThank you for your interest in \"{{print_title}}\" ({{size}}, ¥{{price}}).\n\nI'll check availability and contact you within 24 hours.\n\nBest,\nStellan"
+  }
+}
