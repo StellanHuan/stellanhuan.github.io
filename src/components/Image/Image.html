@@ -1,0 +1,33 @@
+<!-- ═══════════════════════════════════
+   Image Component — V3.2.2
+   Usage examples (not for direct inclusion)
+   ═══════════════════════════════════ -->
+
+<!--
+  The Image component is a JavaScript function, not an HTML template.
+  Include Image.js and call renderImage() to generate <picture> elements.
+
+  ── Basic Usage ──
+  <script src="src/components/Image/Image.js"></script>
+  <script>
+    const photo = { file: 'images/web_001.jpeg', title: '光的粒子' };
+    document.getElementById('gallery').innerHTML = renderImage(photo, {
+      loading: 'lazy',
+      sizes: '(max-width: 768px) 100vw, 50vw'
+    });
+  </script>
+
+  ── Generated HTML ──
+  <picture>
+    <source srcset="assets/images/avif/web_001.avif" type="image/avif">
+    <source srcset="assets/images/webp/web_001.webp" type="image/webp">
+    <img src="images/web_001.jpeg" alt="光的粒子" loading="lazy" width="1600" height="1067" decoding="async">
+  </picture>
+
+  ── Gallery Integration ──
+  const photos = SITE_DATA.photos;
+  const html = photos.map(p => renderImage(p, {
+    className: 'img-4x3 img-zoom img-rounded'
+  })).join('');
+  document.getElementById('grid').innerHTML = html;
+-->

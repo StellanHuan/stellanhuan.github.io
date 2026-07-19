@@ -1,0 +1,63 @@
+/* ═══════════════════════════════════
+   Image Component — V3.2.2
+   所有值引用 tokens.css
+   ═══════════════════════════════════ */
+
+/* ── Picture wrapper ── */
+picture {
+  display: block;
+}
+
+/* ── Base image styles ── */
+picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Lazy loading fade-in ── */
+picture img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity var(--duration-image) var(--ease-out);
+}
+
+picture img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* ── Cover mode (for hero/full-bleed) ── */
+picture.img-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Contain mode (for lightbox) ── */
+picture.img-contain img {
+  object-fit: contain;
+}
+
+/* ── Aspect ratios ── */
+picture.img-4x3 img { aspect-ratio: 4 / 3; }
+picture.img-3x4 img { aspect-ratio: 3 / 4; }
+picture.img-16x9 img { aspect-ratio: 16 / 9; }
+picture.img-1x1 img { aspect-ratio: 1 / 1; }
+
+/* ── Hover zoom ── */
+picture.img-zoom img {
+  transition: transform var(--duration-image) var(--ease-out);
+}
+
+picture.img-zoom:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Rounded corners ── */
+picture.img-rounded img {
+  border-radius: var(--radius-md);
+}
+
+/* ── Shadow ── */
+picture.img-shadow img {
+  box-shadow: var(--shadow-img);
+}
