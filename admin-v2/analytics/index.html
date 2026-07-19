@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem;min-height:100vh}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.2rem;margin-bottom:1.5rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.7rem;letter-spacing:.1em;display:inline-block;margin-bottom:2rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem;margin-bottom:2rem}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.2rem;text-align:center}
+  .stat .num{font-size:2rem;font-weight:200;color:var(--gold-l)}
+  .stat .lbl{font-size:.6rem;color:var(--text-d);letter-spacing:.1em;margin-top:.3rem}
+  .section{margin-bottom:2rem}
+  .section h2{font-size:.75rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:1rem;text-transform:uppercase}
+  .row{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;background:var(--card);border:1px solid var(--border);border-radius:4px;margin-bottom:.3rem;font-size:.75rem}
+  .row .bar-wrap{flex:1;height:4px;background:var(--border);border-radius:2px;margin:0 1rem;overflow:hidden}
+  .row .bar{height:100%;background:var(--gold-d);border-radius:2px;transition:width .5s}
+  .empty{text-align:center;padding:3rem;color:var(--text-d);font-size:.8rem}
+  .funnel{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .funnel-step{flex:1;min-width:120px;text-align:center;padding:1rem;background:var(--card);border:1px solid var(--border);border-radius:4px}
+  .funnel-step .n{font-size:1.4rem;color:var(--gold-l);font-weight:200}
+  .funnel-step .l{font-size:.6rem;color:var(--text-d);margin-top:.3rem}
+  .funnel-arrow{color:var(--gold-d);font-size:1.2rem}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📊 Analytics Dashboard</h1>
+<div class="grid" id="statsGrid"></div>
+<div class="section"><h2>Top Pages</h2><div id="topPages"></div></div>
+<div class="section"><h2>Top Photos</h2><div id="topPhotos"></div></div>
+<div class="section"><h2>Inquiry Funnel</h2><div id="funnel"></div></div>
+
+<script>
+// Load analytics from localStorage
+const days=[];
+for(let i=0;i<30;i++){const d=new Date();d.setDate(d.getDate()-i);const k='analytics_'+d.toISOString().split('T')[0];try{const v=JSON.parse(localStorage.getItem(k)||'[]');days.push(...v)}catch(e){}}
+if(!days.length){document.body.innerHTML+='<div class="empty">暂无数据。网站部署后将自动收集。</div>'}
+
+// Stats
+const pv=days.filter(d=>d.event==='page_view').length;
+const uniqueSessions=new Set(days.map(d=>d.data?.sessionId)).size;
+const conversions=days.filter(d=>d.event==='wechat_copy'||d.event==='inquiry_submit').length;
+const lightboxOpens=days.filter(d=>d.event==='lightbox_open').length;
+
+document.getElementById('statsGrid').innerHTML=`
+  <div class="stat"><div class="num">${pv}</div><div class="lbl">Page Views</div></div>
+  <div class="stat"><div class="num">${uniqueSessions}</div><div class="lbl">Unique Sessions</div></div>
+  <div class="stat"><div class="num">${lightboxOpens}</div><div class="lbl">Photo Views</div></div>
+  <div class="stat"><div class="num">${conversions}</div><div class="lbl">Conversions</div></div>`;
+
+// Top pages
+const pages={};
+days.filter(d=>d.event==='page_view').forEach(d=>{const p=d.data?.path||'/';pages[p]=(pages[p]||0)+1});
+const topPages=Object.entries(pages).sort((a,b)=>b[1]-a[1]).slice(0,8);
+const maxP=topPages[0]?.[1]||1;
+document.getElementById('topPages').innerHTML=topPages.map(([p,c])=>`<div class="row"><span>${p}</span><div class="bar-wrap"><div class="bar" style="width:${c/maxP*100}%"></div></div><span>${c}</span></div>`).join('')||'<div class="empty">—</div>';
+
+// Top photos
+const photos={};
+days.filter(d=>d.event==='lightbox_open').forEach(d=>{const p=d.data?.photo||'?';photos[p]=(photos[p]||0)+1});
+const topPhotos=Object.entries(photos).sort((a,b)=>b[1]-a[1]).slice(0,8);
+const maxPh=topPhotos[0]?.[1]||1;
+document.getElementById('topPhotos').innerHTML=topPhotos.map(([p,c])=>`<div class="row"><span>${p}</span><div class="bar-wrap"><div class="bar" style="width:${c/maxPh*100}%"></div></div><span>${c}</span></div>`).join('')||'<div class="empty">—</div>';
+
+// Funnel
+const start=days.filter(d=>d.event==='inquiry_start').length||1;
+const submit=days.filter(d=>d.event==='inquiry_submit').length;
+const wechatC=days.filter(d=>d.event==='wechat_copy').length;
+document.getElementById('funnel').innerHTML=`
+  <div class="funnel-step"><div class="n">${start}</div><div class="l">浏览咨询页</div></div>
+  <div class="funnel-arrow">→</div>
+  <div class="funnel-step"><div class="n">${submit}</div><div class="l">提交咨询</div></div>
+  <div class="funnel-arrow">→</div>
+  <div class="funnel-step"><div class="n">${wechatC}</div><div class="l">复制微信</div></div>`;
+</script>
+</body>
+</html>
