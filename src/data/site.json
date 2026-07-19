@@ -1,0 +1,71 @@
+{
+  "name": {
+    "zh": "瓛瓛",
+    "en": "Stellan Huan"
+  },
+  "title": "瓛瓛 HuanHuan — Photography",
+  "domain": "stellanhuan.github.io",
+  "language": "zh",
+  "languages": [
+    "zh",
+    "ja",
+    "en"
+  ],
+  "social": {
+    "wechat": "S0688888860",
+    "github": "StellanHuan"
+  },
+  "sections": {
+    "hero": [
+      "web_001.jpeg"
+    ],
+    "featured": [
+      "web_002.jpeg",
+      "web_003.jpeg"
+    ],
+    "hscroll": [
+      "web_007.jpeg",
+      "web_009.jpeg",
+      "web_015.jpeg",
+      "web_018.jpeg",
+      "web_023.jpeg",
+      "web_026.jpeg",
+      "web_030.jpeg"
+    ],
+    "landscape": [
+      "web_005.jpeg",
+      "web_029.jpeg"
+    ],
+    "aerial": [
+      "web_020.jpeg",
+      "web_027.jpeg"
+    ],
+    "about": [
+      "web_008.jpeg"
+    ],
+    "booking_portrait": [
+      "web_001.jpeg"
+    ],
+    "booking_event": [
+      "web_015.jpeg"
+    ],
+    "booking_aerial": [
+      "web_004.jpeg"
+    ]
+  },
+  "booking": {
+    "portrait": {
+      "price": 398,
+      "currency": "CNY"
+    },
+    "event": {
+      "price": 1500,
+      "unit": "half-day"
+    },
+    "aerial": {
+      "price": 500,
+      "addon": true
+    }
+  },
+  "copyright": "© 2026 瓛瓛 HuanHuan"
+}

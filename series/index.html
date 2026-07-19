@@ -4,25 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>瓛瓛 — Series</title>
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
   :root{--bg:#080604;--gold:#b8934f;--gold-light:#d4b978;--gold-dim:#7a6238;--text:#d4cec4;--text-dim:#9a9288;--border:rgba(184,147,79,.12);--ease-out:cubic-bezier(.16,1,.3,1)}
   body{font-family:"PingFang SC","Hiragino Sans GB","Noto Serif SC","Songti SC",serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
   .grain{position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
-
-  /* Nav */
   .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(8,6,4,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
   .nav a{color:var(--text-dim);text-decoration:none;font-size:.75rem;letter-spacing:.15em;transition:color .25s}
   .nav a:hover{color:var(--gold-light)}
-
-  /* Hero */
   .series-hero{padding:10rem 3rem 4rem;max-width:1200px;margin:0 auto}
   .series-hero .tag{font-size:.65rem;letter-spacing:.5em;color:var(--gold-dim);margin-bottom:1.5rem;display:block}
   .series-hero h1{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;letter-spacing:.2em;color:var(--gold-light);margin-bottom:1rem}
   .series-hero .sub{font-size:.85rem;color:var(--text-dim);letter-spacing:.1em;line-height:2}
-
-  /* Grid */
   .grid-wrap{padding:0 3rem 6rem;max-width:1400px;margin:0 auto}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:1px;background:var(--border)}
   .grid-item{position:relative;overflow:hidden;aspect-ratio:4/3;cursor:pointer;background:var(--bg)}
@@ -34,12 +28,8 @@
   .grid-item:hover .overlay{opacity:1}
   .overlay .t{font-size:.9rem;color:var(--gold-light);letter-spacing:.1em}
   .overlay .m{font-size:.7rem;color:var(--text-dim);margin-top:.3rem;letter-spacing:.05em}
-
-  /* Reveal */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
-  .reveal.visible{opacity:1;transform:translateY(0) scale(1)}
-
-  /* Lightbox */
+  .reveal.visible{opacity:1;transform:translateY(0)}
   .lb{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.96);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;cursor:zoom-out}
   .lb.open{opacity:1;pointer-events:auto}
   .lb img{max-width:92vw;max-height:92vh;object-fit:contain;box-shadow:0 4px 40px rgba(0,0,0,.5)}
@@ -54,47 +44,44 @@
 </head>
 <body>
 <div class="grain"></div>
-
-<nav class="nav">
-  <a href="../index.html">← 返回主页</a>
-  <a href="../index.html">HUANHUAN</a>
-</nav>
-
-<div class="series-hero">
-  <span class="tag" id="seriesTag">SERIES</span>
-  <h1 id="seriesTitle">Series</h1>
-  <p class="sub" id="seriesDesc"></p>
-</div>
-
-<div class="grid-wrap">
-  <div class="grid" id="grid"></div>
-</div>
-
+<nav class="nav"><a href="../index.html">← 返回主页</a><a href="../index.html">Stellan</a></nav>
+<div class="series-hero"><span class="tag" id="seriesTag">SERIES</span><h1 id="seriesTitle">Series</h1><p class="sub" id="seriesDesc"></p></div>
+<div class="grid-wrap"><div class="grid" id="grid"></div></div>
 <div class="lb" id="lb">
-  <button class="lb-close">&times;</button>
-  <button class="lb-nav lb-prev">‹</button>
-  <img src="" alt="" id="lbImg">
-  <button class="lb-nav lb-next">›</button>
+  <button class="lb-close">&times;</button><button class="lb-nav lb-prev">‹</button>
+  <img src="" alt="" id="lbImg"><button class="lb-nav lb-next">›</button>
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
+<script src="../src/data/series.js"></script>
 <script>
+// ═══ Read from SERIES_DATA ═══
 const series=(window.location.hash||'#portrait').replace('#','');
-const meta={portrait:{zh:'肖像',en:'Portrait',tag:'PORTRAIT',desc:'Nikon Z8 · 人物の光と影'},street:{zh:'街头片段',en:'Street',tag:'STREET',desc:'郑州与东京的街头偶遇'},landscape:{zh:'风光与航拍',en:'Landscape & Aerial',tag:'LANDSCAPE & AERIAL',desc:'俯瞰与远望 · DJI & Nikon Z8'},aerial:{zh:'俯瞰',en:'Aerial',tag:'AERIAL',desc:'空からの視点 · DJI'}};
+const info=SERIES_DATA?.[series]||SERIES_DATA?.portrait;
+
+const meta={
+  portrait:{tag:'PORTRAIT',zh:'肖像',en:'Portrait'},
+  street:{tag:'STREET',zh:'街头的呼吸',en:'Street'},
+  landscape:{tag:'LANDSCAPE & AERIAL',zh:'大地与天空',en:'Landscape & Aerial'},
+  aerial:{tag:'AERIAL',zh:'俯瞰',en:'Aerial'}
+};
 const m=meta[series]||meta.portrait;
+
 document.getElementById('seriesTag').textContent=m.tag;
 document.getElementById('seriesTitle').textContent=m.zh+' / '+m.en;
-document.getElementById('seriesDesc').textContent=m.desc;
+document.getElementById('seriesDesc').textContent=info?.description?.zh||'';
 
-const P=[];
-for(let i=1;i<=30;i++)P.push(`../images/web_${String(i).padStart(3,'0')}.jpeg?v=3`);
-const offsets={portrait:0,street:6,landscape:12,aerial:18};
-const start=offsets[series]||0;
+// Build photo list from series data
+const files=info?.photos||[];
+const P=files.map(f=>`../images/${f}`);
+const total=P.length||12;
+
 const grid=document.getElementById('grid');
 const indices=[];
-for(let i=0;i<12;i++){const idx=(start+i)%P.length;indices.push(idx);
+for(let i=0;i<Math.min(total,24);i++){
+  indices.push(i);
   const item=document.createElement('div');item.className='grid-item reveal';
-  item.innerHTML=`<img src="${P[idx]}" alt="${m.zh} ${i+1}" loading="lazy" decoding="async" width="1600" height="1067"><div class="overlay"><span class="t">${m.zh} · ${i+1}</span><span class="m">Nikon Z8 · 2026</span></div>`;
+  item.innerHTML=`<img src="${P[i%P.length]}" alt="${m.zh} ${i+1}" loading="lazy" decoding="async" width="1600" height="1067"><div class="overlay"><span class="t">${m.zh} · ${i+1}</span><span class="m">Nikon Z8 · 2026</span></div>`;
   item.style.transitionDelay=`${i*.06}s`;
   item.addEventListener('click',()=>openLB(i));grid.appendChild(item);
 }
@@ -107,9 +94,9 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCounter=document.getElementById('lbCounter');let lbIdx=0;
 function openLB(i){lbIdx=i;updateLB();lb.classList.add('open');document.body.style.overflow='hidden'}
 function closeLB(){lb.classList.remove('open');document.body.style.overflow=''}
-function prevLB(){lbIdx=(lbIdx-1+12)%12;updateLB()}
-function nextLB(){lbIdx=(lbIdx+1)%12;updateLB()}
-function updateLB(){lbImg.src=P[indices[lbIdx]];lbCounter.textContent=`${lbIdx+1} / 12`}
+function prevLB(){lbIdx=(lbIdx-1+total)%total;updateLB()}
+function nextLB(){lbIdx=(lbIdx+1)%total;updateLB()}
+function updateLB(){lbImg.src=P[lbIdx%P.length];lbCounter.textContent=`${lbIdx+1} / ${total}`}
 lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-close'))closeLB()});
 document.querySelector('.lb-prev').addEventListener('click',e=>{e.stopPropagation();prevLB()});
 document.querySelector('.lb-next').addEventListener('click',e=>{e.stopPropagation();nextLB()});
