@@ -204,6 +204,9 @@ function photos(){
         <button onclick="batchTag()">批量标签</button>
         <button onclick="batchSeries()">批量系列</button>
         <button onclick="clearSelection()">取消选择</button>
+        <span style="flex:1"></span>
+        <button onclick="document.getElementById('uploadInput').click()" style="background:var(--gold-dim);color:var(--bg)">📤 本地上传</button>
+        <input type="file" id="uploadInput" accept="image/*" multiple style="display:none" onchange="handleUpload(this.files)">
       </div>
       <div class="photo-grid" id="photoGrid"></div>
     </div>
@@ -226,8 +229,9 @@ function renderPhotoGrid(){
   grid.innerHTML=filtered.map(p=>{
     const f=p.file.split('/').pop();
     const sel=store.selectedPhotos.has(f);
+    const src=p._dataUrl?p._dataUrl:`../${p.file}`;
     return `<div class="photo-card ${sel?'selected':''}" data-file="${f}" onclick="togglePhoto('${f}',event)">
-      <img src="../${p.file}" alt="${p.title}" loading="lazy">
+      <img src="${src}" alt="${p.title}" loading="lazy">
       <div class="check">${sel?'✓':''}</div>
       <div class="info"><span class="t">${p.title}</span><span class="m">${p.series||''} · ${(p.tags||[]).slice(0,2).join(' ')}</span></div>
     </div>`;
@@ -256,6 +260,41 @@ window.applyFilters=function(q){store.filters.search=q;renderPhotoGrid()};
 window.clearSelection=function(){store.selectedPhotos.clear();renderPhotoGrid()};
 window.batchTag=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const tag=prompt('输入标签 (逗号分隔)');if(!tag)return;const tags=tag.split(',').map(t=>t.trim());store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p){p.tags=[...new Set([...(p.tags||[]),...tags])]}});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 标签已添加')};
 window.batchSeries=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const series=prompt('输入系列 (portrait/street/landscape/aerial)');if(!series)return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p)p.series=series});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 系列已更新')};
+
+// ═══ UPLOAD ═══
+window.handleUpload=function(files){
+  if(!files.length)return;
+  let processed=0;
+  Array.from(files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=function(e){
+      const name='upload_'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9.]/g,'_');
+      store.photos.push({file:name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_dataUrl:e.target.result,_size:file.size});
+      processed++;
+      if(processed===files.length){renderPhotoGrid();showToast(`✅ 已添加 ${processed} 张照片。导出 data.js 时会一并打包`)}
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
+// Override deploy to include uploaded photos
+const origDeploy=deploy;
+deploy=function(){
+  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,_size,...clean}=p;return clean});
+  const data={photos:cleanPhotos,sections:store.sections};
+  const js='// Stellan CMS export\nconst SITE_DATA = '+JSON.stringify(data,null,2)+';';
+  const blob=new Blob([js],{type:'text/javascript'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();
+  // Also offer zip of new images if any
+  const newPhotos=store.photos.filter(p=>p._dataUrl);
+  if(newPhotos.length){
+    setTimeout(()=>{
+      const msg='你有 '+newPhotos.length+' 张新上传的照片需要手动放到 images/ 文件夹。\n文件名已列在下载的 data.js 中。';
+      showToast('📤 '+msg);
+    },500);
+  }
+  showToast('💾 data.js 已下载！有新照片请手动放到 images/ 文件夹');
+};
 
 // Override photos page to render grid after HTML is injected
 const origNavigate=navigate;
