@@ -374,11 +374,18 @@ deploy=function(){
 const origNavigate=navigate;
 navigate=function(route){
   origNavigate(route);
-  if(route==='photos') setTimeout(renderPhotoGrid,50);
+  if(route==='photos'||route==='sections') setTimeout(()=>{if(route==='photos')renderPhotoGrid();if(route==='sections')renderAddPhotoGrid()},100);
 };
 
 // Init
-navigate(window.location.hash.replace('#','')||'dashboard');
+async function initApp(){
+  await new Promise(r=>{if(idb.result)r();else idb.onsuccess=()=>r()});
+  for(const p of store.photos){
+    if(p._isUpload&&!p._dataUrl) p._dataUrl=await loadUpload(p.file);
+  }
+  navigate(window.location.hash.replace('#','')||'dashboard');
+}
+initApp();
 
 // ═══ PROJECTS ═══
 function renderProjects(){
@@ -495,7 +502,7 @@ function renderSections(){
       <div class="section-photos drop-target" data-section="${key}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleSectionDrop('${key}',event)">
         ${files.map(f=>{
           const p=store.photos.find(pp=>pp.file.split('/').pop()===f);
-          return p?`<div class="section-photo" data-file="${f}"><img src="../${p.file}" alt=""><button class="remove-btn" onclick="removeFromSection('${key}','${f}')">×</button><span class="photo-label">${p.title}</span></div>`:`<div class="section-photo empty">—</div>`;
+          return p?`<div class="section-photo" data-file="${f}"><img src="${p._dataUrl?'':'../'}${p.file}" alt=""><button class="remove-btn" onclick="removeFromSection('${key}','${f}')">×</button><span class="photo-label">${p.title}</span></div>`:`<div class="section-photo empty">—</div>`;
         }).join('')||'<div class="section-photo empty">拖照片到这里</div>'}
       </div>
     </div>`;
@@ -510,7 +517,7 @@ function renderAddPhotoGrid(){
   if(!grid)return;
   const usedFiles=new Set(Object.values(store.sections).flat());
   const unused=store.photos.filter(p=>!usedFiles.has(p.file.split('/').pop()));
-  grid.innerHTML=unused.map(p=>`<div class="add-photo-card" draggable="true" data-file="${p.file.split('/').pop()}" ondragstart="event.dataTransfer.setData('text/plain','${p.file.split('/').pop()}')"><img src="../${p.file}" alt=""><span>${p.title}</span></div>`).join('')||'<span style="color:var(--text-dim);font-size:.7rem">所有照片已分配 ✓</span>';
+  grid.innerHTML=unused.map(p=>`<div class="add-photo-card" draggable="true" data-file="${p.file.split('/').pop()}" ondragstart="event.dataTransfer.setData('text/plain','${p.file.split('/').pop()}')"><img src="${p._dataUrl||'../'+p.file}" alt=""><span>${p.title}</span></div>`).join('')||'<span style="color:var(--text-dim);font-size:.7rem">所有照片已分配 ✓</span>';
 }
 
 window.handleSectionDrop=function(key,e){
