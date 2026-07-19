@@ -92,6 +92,29 @@
   .proj-body{padding:.6rem 1rem;font-size:.65rem;color:var(--text-dim);line-height:1.6}
   .btn-sm{background:var(--card-bg);border:1px solid var(--border);color:var(--text-dim);padding:.3rem .7rem;border-radius:4px;cursor:pointer;font-size:.6rem;font-family:inherit;transition:all .2s}
   .btn-sm:hover{color:var(--gold-light);border-color:var(--gold-dim)}
+
+  /* Mobile */
+  @media(max-width:768px){
+    body{flex-direction:column}
+    .sidebar{width:100%;height:auto;flex-direction:row;padding:.5rem 1rem;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border)}
+    .sidebar-logo{display:none}
+    .sidebar-nav{display:flex;flex-direction:row;gap:.3rem;overflow-x:auto}
+    .sidebar-nav a{padding:.4rem .8rem;font-size:.65rem;border-left:none;border-bottom:2px solid transparent;white-space:nowrap}
+    .sidebar-nav a.active{border-left:none;border-bottom-color:var(--gold-dim)}
+    .sidebar-footer{display:none}
+    .main{padding:.8rem}
+    .dash-grid{grid-template-columns:repeat(3,1fr);gap:.4rem}
+    .stat-card{padding:.6rem}
+    .stat-card .num{font-size:1.4rem}
+    .photos-layout{flex-direction:column}
+    .photo-filters{width:100%;display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem}
+    .photo-filters .filter-group{flex-shrink:0}
+    .photo-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+    .photo-grid.size-l{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+    .batch-bar{flex-wrap:wrap;gap:.3rem}
+    .batch-bar button{font-size:.6rem;padding:.2rem .5rem}
+    .sections-list{gap:.5rem}
+  }
 </style>
 </head>
 <body>
