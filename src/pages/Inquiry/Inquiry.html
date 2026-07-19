@@ -1,0 +1,57 @@
+<!-- Inquiry Page V6.3 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>预约咨询 — 瓛瓛 HuanHuan</title>
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="../../src/styles/base.css">
+<link rel="stylesheet" href="Inquiry.css">
+</head>
+<body>
+<div class="grain"></div>
+<nav class="nav"><a href="../../index.html">← 返回</a><a href="../../index.html">Stellan</a></nav>
+<main class="inquiry-wrap">
+  <header class="inquiry-hero">
+    <span class="tag">INQUIRY</span>
+    <h1 data-lang="zh">预约咨询</h1><h1 data-lang="ja">お問い合わせ</h1><h1 data-lang="en">Inquiry</h1>
+    <p data-lang="zh">告诉我你的需求，我来为你定制方案</p>
+    <p data-lang="ja">あなたのニーズを教えてください</p>
+    <p data-lang="en">Tell me about your project</p>
+  </header>
+  <form class="inquiry-form" id="inquiryForm" action="https://formsubmit.co/965946974@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="摄影预约咨询">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none"><!-- spam trap -->
+    <div class="form-group"><label data-lang="zh">姓名 *</label><label data-lang="ja">名前 *</label><label data-lang="en">Name *</label><input type="text" name="name" required placeholder="你的名字"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label data-lang="zh">公司/品牌</label><label data-lang="ja">会社</label><label data-lang="en">Company</label><input type="text" name="company" placeholder="可选"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label data-lang="zh">项目类型 *</label><label data-lang="ja">プロジェクト *</label><label data-lang="en">Project Type *</label><select name="project_type" required><option value="">请选择</option><option value="portrait">写真 / Portrait</option><option value="event">活动跟拍 / Event</option><option value="aerial">航拍 / Aerial</option><option value="other">其他 / Other</option></select></div>
+      <div class="form-group"><label data-lang="zh">预算范围</label><label data-lang="ja">予算</label><label data-lang="en">Budget</label><select name="budget"><option value="">请选择</option><option value="under_1000">¥1000以下</option><option value="1000_3000">¥1000-3000</option><option value="3000_5000">¥3000-5000</option><option value="5000_plus">¥5000以上</option><option value="not_sure">不确定</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label data-lang="zh">拍摄日期</label><label data-lang="ja">日付</label><label data-lang="en">Date</label><input type="date" name="date"></div>
+      <div class="form-group"><label data-lang="zh">拍摄地点</label><label data-lang="ja">場所</label><label data-lang="en">Location</label><input type="text" name="location" placeholder="郑州 / 漯河 / 其他"></div>
+    </div>
+    <div class="form-group"><label data-lang="zh">项目描述</label><label data-lang="ja">詳細</label><label data-lang="en">Description</label><textarea name="description" rows="4" placeholder="说说你的想法..."></textarea></div>
+    <div class="form-error" id="formError"></div>
+    <button type="submit" class="submit-btn" id="submitBtn"><span data-lang="zh">提交咨询</span><span data-lang="ja">送信</span><span data-lang="en">Submit Inquiry</span></button>
+    <p class="form-note" data-lang="zh">提交后我会在24小时内通过微信联系你</p>
+    <p class="form-note" data-lang="ja">24時間以内にWeChatでご連絡します</p>
+    <p class="form-note" data-lang="en">I'll contact you via WeChat within 24 hours</p>
+  </form>
+  <div class="inquiry-success" id="inquirySuccess" style="display:none">
+    <div class="success-icon">✓</div>
+    <h2 data-lang="zh">提交成功！</h2><h2 data-lang="ja">送信完了！</h2><h2 data-lang="en">Submitted!</h2>
+    <p data-lang="zh">我会尽快通过微信联系你</p><p data-lang="ja">WeChatでご連絡します</p><p data-lang="en">I'll reach out via WeChat soon</p>
+    <p class="wechat-hint">微信：S0688888860</p>
+  </div>
+</main>
+<script src="../../src/analytics/config.js"></script>
+<script src="../../src/analytics/analytics.js"></script>
+<script src="Inquiry.js"></script>
+</body>
+</html>

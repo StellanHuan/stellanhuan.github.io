@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Inquiry",
+  "type": "object",
+  "required": [
+    "name",
+    "project_type"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "company": {
+      "type": "string"
+    },
+    "project_type": {
+      "type": "string",
+      "enum": [
+        "portrait",
+        "event",
+        "aerial",
+        "other"
+      ]
+    },
+    "budget": {
+      "type": "string",
+      "enum": [
+        "under_1000",
+        "1000_3000",
+        "3000_5000",
+        "5000_plus",
+        "not_sure"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "location": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000
+    }
+  }
+}
