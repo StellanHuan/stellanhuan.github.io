@@ -312,7 +312,7 @@ window.handleUpload=function(files){
       const name='upload_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';
       const dataUrl=e.target.result;
       await saveUpload(name,dataUrl);
-      store.photos.push({file:name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_isUpload:true,_dataUrl:dataUrl});
+      store.photos.push({file:'images/'+name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_isUpload:true,_dataUrl:dataUrl});
       newFiles.push({name:name,dataUrl:dataUrl});
       processed++;
       if(processed===files.length){
@@ -331,7 +331,7 @@ window.handleUpload=function(files){
 // Override deploy to include uploaded photos
 const origDeploy=deploy;
 deploy=function(){
-  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,_size,...clean}=p;return clean});
+  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...clean}=p;return clean});
   const data={photos:cleanPhotos,sections:store.sections};
   const js='// Stellan CMS export\nconst SITE_DATA = '+JSON.stringify(data,null,2)+';';
   const blob=new Blob([js],{type:'text/javascript'});
