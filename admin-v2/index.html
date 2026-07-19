@@ -176,24 +176,26 @@ function p(n){return `<div class="page-placeholder">${n} — 开发中</div>`}
 // ═══ TOAST + DEPLOY ═══
 function showToast(msg){let t=document.getElementById('adminToast');if(!t){t=document.createElement('div');t.id='adminToast';t.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#b8934f;color:#0d0a06;padding:.7rem 2rem;border-radius:8px;font-size:.8rem;z-index:999;transition:opacity .3s';document.body.appendChild(t)}t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2500)}
 function deploy(){const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||'{}');const data={photos:store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...c}=p;return c}),sections:store.sections,seriesMeta};const js='const SITE_DATA = '+JSON.stringify(data,null,2)+';';const token=localStorage.getItem('github_token');if(token){publishToGitHub(js,token)}else{const blob=new Blob([js],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();showToast('💾 已下载。⚙ Settings 里设置 GitHub Token 可一键发布')}}
-async function publishToGitHub(content,token){showToast('🚀 发布中...');try{
-  // Also generate series.js
+async function publishToGitHub(content,token){showToast('🚀 发布中...');const statusEl=document.getElementById('deployStatus');if(statusEl)statusEl.innerHTML='⏳ 发布中...';
+  try{
   const series={portrait:{photos:[...(store.sections.featured||[]),...(store.sections.booking_portrait||[])],name:{zh:'目光所及'}},street:{photos:store.sections.hscroll||[],name:{zh:'街头的呼吸'}},landscape:{photos:[...(store.sections.landscape||[]),...(store.sections.aerial||[])],name:{zh:'大地与天空'}},aerial:{photos:store.sections.aerial||[],name:{zh:'俯瞰'}}};
   const seriesJS='const SERIES_DATA = '+JSON.stringify(series,null,2)+';';
-  
+  const siteData={sections:store.sections};
+  const ts=new Date().toISOString().slice(0,19).replace('T',' ');
   const files=[
     {path:'data.js',content:content,msg:'Update data.js'},
     {path:'src/data/series.js',content:seriesJS,msg:'Update series.js'},
-    {path:'src/data/site.json',content:JSON.stringify({sections:store.sections},null,2),msg:'Update site sections'}
+    {path:'src/data/site.json',content:JSON.stringify(siteData,null,2),msg:'Update site sections'}
   ];
-  
+  let lastSha='';
   for(const f of files){
     const sha=await(await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/contents/'+f.path,{headers:{'Authorization':'token '+token}})).json().then(d=>d.sha);
-    const res=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/contents/'+f.path,{method:'PUT',headers:{'Authorization':'token '+token},body:JSON.stringify({message:f.msg,content:btoa(unescape(encodeURIComponent(f.content))),sha})});
-    if(!res.ok){const e=await res.json();showToast('❌ '+f.path+': '+e.message);return}
+    const res=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/contents/'+f.path,{method:'PUT',headers:{'Authorization':'token '+token},body:JSON.stringify({message:'Admin: '+f.msg+' ['+ts+']',content:btoa(unescape(encodeURIComponent(f.content))),sha})});
+    if(!res.ok){const e=await res.json();showToast('❌ '+f.path+': '+e.message);if(statusEl)statusEl.innerHTML='❌ 失败';return}
+    const r=await res.json();lastSha=r.content?.sha?.slice(0,7)||'';
   }
-  showToast('✅ 发布成功！1分钟后刷新官网')
-}catch(e){showToast('❌ 网络错误');deploy()}}
+  showToast('✅ 已发布！');if(statusEl)statusEl.innerHTML='✅ 已发布 · '+lastSha+' · 1分钟后刷新官网';
+}catch(e){showToast('❌ '+e.message);if(statusEl)statusEl.innerHTML='❌ 网络错误'}}
 window.setupToken=function(){const t=prompt('GitHub Token (需要 repo 权限):');if(t){localStorage.setItem('github_token',t);showToast('✅ Token 已保存')}};
 
 // ═══ JOURNAL ═══
@@ -518,7 +520,7 @@ function renderSections(){
   const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||JSON.stringify({featured:{title:'目光所及',desc:'精选作品',link:'portrait'},hscroll:{title:'街头的呼吸',desc:'街头偶遇',link:'street'},landscape:{title:'大地与天空',desc:'风光与航拍',link:'landscape'}}));
   window._seriesMeta=seriesMeta;
   function saveSeriesMeta(){localStorage.setItem('cms_series_meta',JSON.stringify(seriesMeta))}
-  let html='<div class="sec-title">Sections 区块编辑器</div><p style="font-size:.65rem;color:var(--text-dim);margin-bottom:1rem">拖拽照片到区块 | 点照片移除</p><div class="sections-list" id="sectionsList">';
+  let html='<div class="sec-title">Sections 区块编辑器</div><p style="font-size:.65rem;color:var(--text-dim);margin-bottom:1rem">拖拽照片到区块 | 点照片移除 | <button onclick="saveStore();deploy()" style="background:var(--gold-d);color:var(--bg);border:none;padding:.3rem .8rem;border-radius:3px;font-family:inherit;font-size:.6rem;cursor:pointer">💾 保存并发布</button> <span id="deployStatus" style="font-size:.6rem;color:var(--gold-dim)"></span></p><div class="sections-list" id="sectionsList">';
   for(const[key,name]of Object.entries(names)){
     const files=store.sections[key]||[];
     const sm=seriesMeta[key];
