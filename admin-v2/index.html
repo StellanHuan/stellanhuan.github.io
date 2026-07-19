@@ -174,7 +174,7 @@ function p(n){return `<div class="page-placeholder">${n} — 开发中</div>`}
 
 // ═══ TOAST + DEPLOY ═══
 function showToast(msg){let t=document.getElementById('adminToast');if(!t){t=document.createElement('div');t.id='adminToast';t.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#b8934f;color:#0d0a06;padding:.7rem 2rem;border-radius:8px;font-size:.8rem;z-index:999;transition:opacity .3s';document.body.appendChild(t)}t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2500)}
-function deploy(){const data={photos:store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...c}=p;return c}),sections:store.sections};const js='const SITE_DATA = '+JSON.stringify(data,null,2)+';';const token=localStorage.getItem('github_token');if(token){publishToGitHub(js,token)}else{const blob=new Blob([js],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();showToast('💾 已下载。⚙ Settings 里设置 GitHub Token 可一键发布')}}
+function deploy(){const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||'{}');const data={photos:store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...c}=p;return c}),sections:store.sections,seriesMeta};const js='const SITE_DATA = '+JSON.stringify(data,null,2)+';';const token=localStorage.getItem('github_token');if(token){publishToGitHub(js,token)}else{const blob=new Blob([js],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();showToast('💾 已下载。⚙ Settings 里设置 GitHub Token 可一键发布')}}
 async function publishToGitHub(content,token){showToast('🚀 发布中...');try{const sha=await(await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/contents/data.js',{headers:{'Authorization':'token '+token}})).json().then(d=>d.sha);const res=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/contents/data.js',{method:'PUT',headers:{'Authorization':'token '+token},body:JSON.stringify({message:'Auto-deploy from CMS',content:btoa(unescape(encodeURIComponent(content))),sha})});if(res.ok){showToast('✅ 发布成功！1分钟后刷新官网')}else{const e=await res.json();showToast('❌ '+e.message)}}catch(e){showToast('❌ 网络错误，已下载备用');deploy()}}
 window.setupToken=function(){const t=prompt('GitHub Token (需要 repo 权限):');if(t){localStorage.setItem('github_token',t);showToast('✅ Token 已保存')}};
 
@@ -497,15 +497,26 @@ window.exportAll=function(){
 }
 function renderSections(){
   const names={hero:'🎬 Hero',featured:'01 目光所及',hscroll:'02 街头的呼吸',landscape:'03 大地(左)',aerial:'03 天空(右)',about:'05 关于',booking_portrait:'04 预约·人像',booking_event:'04 预约·活动',booking_aerial:'04 预约·航拍'};
-  let html='<div class="sec-title">Sections 区块编辑器</div><p style="font-size:.65rem;color:var(--text-dim);margin-bottom:1rem">拖拽照片到区块 / 拖区块排序 / 点照片移除</p><div class="sections-list" id="sectionsList">';
+  const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||JSON.stringify({featured:{title:'目光所及',desc:'精选作品',link:'portrait'},hscroll:{title:'街头的呼吸',desc:'街头偶遇',link:'street'},landscape:{title:'大地与天空',desc:'风光与航拍',link:'landscape'}}));
+  window._seriesMeta=seriesMeta;
+  function saveSeriesMeta(){localStorage.setItem('cms_series_meta',JSON.stringify(seriesMeta))}
+  let html='<div class="sec-title">Sections 区块编辑器</div><p style="font-size:.65rem;color:var(--text-dim);margin-bottom:1rem">拖拽照片到区块 | 点照片移除</p><div class="sections-list" id="sectionsList">';
   for(const[key,name]of Object.entries(names)){
     const files=store.sections[key]||[];
-    html+=`<div class="section-block" data-section="${key}" draggable="true">
-      <div class="section-head">⋮⋮ ${name} <span class="count">${files.length}张</span></div>
-      <div class="section-photos drop-target" data-section="${key}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleSectionDrop('${key}',event)">
+    const sm=seriesMeta[key];
+    html+=`<div class="section-block" data-section="${key}">
+      <div class="section-head">⋮⋮ ${name} <span class="count">${files.length}张</span></div>`;
+    if(sm){
+      html+=`<div style="padding:.5rem 1rem;display:flex;gap:.5rem;flex-wrap:wrap">
+        <input value="${sm.title||''}" onchange="_seriesMeta['${key}'].title=this.value;localStorage.setItem('cms_series_meta',JSON.stringify(_seriesMeta))" placeholder="标题" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.2rem .5rem;border-radius:3px;font-size:.6rem;width:120px">
+        <input value="${sm.desc||''}" onchange="_seriesMeta['${key}'].desc=this.value;localStorage.setItem('cms_series_meta',JSON.stringify(_seriesMeta))" placeholder="描述" style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.2rem .5rem;border-radius:3px;font-size:.6rem;flex:1">
+        <span style="font-size:.55rem;color:var(--text-dim);display:flex;align-items:center">→ series/#${sm.link}</span>
+      </div>`;
+    }
+    html+=`<div class="section-photos drop-target" data-section="${key}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleSectionDrop('${key}',event)">
         ${files.map(f=>{
           const p=store.photos.find(pp=>pp.file.split('/').pop()===f);
-          return p?`<div class="section-photo" data-file="${f}"><img src="${p._dataUrl?'':'../'}${p.file}" alt=""><button class="remove-btn" onclick="removeFromSection('${key}','${f}')">×</button><span class="photo-label">${p.title}</span></div>`:`<div class="section-photo empty">—</div>`;
+          return p?`<div class="section-photo" data-file="${f}"><img src="${p._dataUrl||'../'+p.file}" alt=""><button class="remove-btn" onclick="removeFromSection('${key}','${f}')">×</button><span class="photo-label">${p.title}</span></div>`:`<div class="section-photo empty">—</div>`;
         }).join('')||'<div class="section-photo empty">拖照片到这里</div>'}
       </div>
     </div>`;
