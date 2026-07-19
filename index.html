@@ -304,7 +304,7 @@
   <a href="series/#portrait" class="more-link" data-lang="en">View More →</a>
 </div>
 
-<div class="duo">
+<div class="duo" id="featuredDuo">
   <div class="duo-item reveal"><img alt="" id="duo1a" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">PORTRAIT</div><div class="duo-overlay"><span class="duo-title">肖像</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
   <div class="duo-item reveal reveal-d1"><img alt="" id="duo1b" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">STREET</div><div class="duo-overlay"><span class="duo-title">街头</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
 </div>
@@ -339,7 +339,7 @@
   <a href="series/#landscape" class="more-link" data-lang="en">View More →</a>
 </div>
 
-<div class="duo">
+<div class="duo" id="landscapeDuo">
   <div class="duo-item reveal" style="flex:1"><img alt="" id="duo2a" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">LANDSCAPE</div><div class="duo-overlay"><span class="duo-title">风光</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
   <div class="duo-item reveal reveal-d1" style="flex:1.7"><img alt="" id="duo2b" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">AERIAL</div><div class="duo-overlay"><span class="duo-title">俯瞰</span><span class="duo-meta">DJI · 2026</span></div></div>
 </div>
@@ -551,17 +551,54 @@ function getPhoto(key,i){const a=sec[key];return a?`images/${a[i%a.length]}`:P[i
 function getTitle(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.title:''}
 function getSeries(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.series:'portrait'}
 
-// Assign photos with data.js sections
+// Assign hero + about + booking
 ['heroImg'].forEach((id,i)=>document.getElementById(id).src=getPhoto('hero',i));
-document.getElementById('duo1a').src=getPhoto('featured',0);
-document.getElementById('duo1b').src=getPhoto('featured',1);
-document.getElementById('duo2a').src=getPhoto('landscape',0);
-document.getElementById('duo2b').src=getPhoto('aerial',0);
 document.getElementById('aboutImg').src=getPhoto('about',0);
 document.getElementById('bkImg1').src=getPhoto('booking_portrait',0);
 document.getElementById('bkImg2').src=getPhoto('booking_event',0);
 document.getElementById('bkImg3').src=getPhoto('booking_aerial',0);
 
+// Dynamic Featured Duo (from sections data)
+const featuredPhotos=sec['featured']||[];
+const featDuo=document.getElementById('featuredDuo');
+if(featDuo&&featuredPhotos.length){
+  let html='';
+  for(let i=0;i<featuredPhotos.length;i+=2){
+    const a=featuredPhotos[i],b=featuredPhotos[i+1];
+    html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
+      <img src="images/${a}" alt=""><div class="duo-label">${i===0?'PORTRAIT':'STREET'}</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
+    </div>`;
+    if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
+      <img src="images/${b}" alt=""><div class="duo-label">STREET</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
+    </div>`;
+  }
+  featDuo.innerHTML=html;
+}
+
+// Dynamic Landscape Duo
+const landPhotos=sec['landscape']||[];
+const aerPhotos=sec['aerial']||[];
+const landDuo=document.getElementById('landscapeDuo');
+if(landDuo){
+  let html='';
+  const allLand=[...landPhotos,...aerPhotos];
+  for(let i=0;i<allLand.length;i+=2){
+    const a=allLand[i],b=allLand[i+1];
+    html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
+      <img src="images/${a}" alt=""><div class="duo-label">${i<landPhotos.length?'LANDSCAPE':'AERIAL'}</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
+    </div>`;
+    if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
+      <img src="images/${b}" alt=""><div class="duo-label">AERIAL</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">DJI · 2026</span></div>
+    </div>`;
+  }
+  landDuo.innerHTML=html;
+}
+
+// Hscroll
 const hscroll=document.getElementById('hscroll');
 const hscrollPhotos=sec['hscroll']||[];
 for(let i=0;i<hscrollPhotos.length;i++){
@@ -571,9 +608,9 @@ for(let i=0;i<hscrollPhotos.length;i++){
   card.innerHTML=`<img src="${src}" alt="Street" loading="lazy" width="1600" height="900"><div class="info"><span class="t">街头 ${i+1}</span><span class="m">Nikon Z8</span></div>`;
   hscroll.appendChild(card);
 }
-// Dots
+// Dots (dynamic count)
 const dots=document.getElementById('hscrollDots');
-for(let i=0;i<6;i++){const d=document.createElement('div');d.className='hscroll-dot';dots.appendChild(d)}
+for(let i=0;i<hscrollPhotos.length;i++){const d=document.createElement('div');d.className='hscroll-dot';dots.appendChild(d)}
 hscroll.addEventListener('scroll',()=>{
   const idx=Math.round(hscroll.scrollLeft/(hscroll.scrollWidth/Math.max(1,hscrollPhotos.length)));
   dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
