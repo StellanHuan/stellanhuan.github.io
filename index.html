@@ -537,20 +537,35 @@
   <span data-lang="en">© 2026 瓛瓛 HuanHuan<br>Student of Arimoto Shinya · Chasing light</span>
 </footer>
 
+<script src="data.js"></script>
 <script>
-// ═══ PHOTOS ═══
-const P=[];
-for(let i=1;i<=30;i++)P.push(`images/web_${String(i).padStart(3,'0')}.jpeg?v=3`);
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-//const pool=shuffle([...P]);
-const pool=[...P]; // 固定顺序，不随机
-['heroImg','media1','duo1a','duo1b','duo2a','duo2b','aboutImg','bkImg1','bkImg2','bkImg3'].forEach((id,i)=>document.getElementById(id).src=pool[i]);
+// ═══ PHOTOS (from data.js) ═══
+const P=SITE_DATA.photos.map(p=>p.file);
+const photosByFile={};
+SITE_DATA.photos.forEach(p=>{photosByFile[p.file]=p});
+const sec=SITE_DATA.sections;
+function getPhoto(key,i){const a=sec[key];return a?`images/${a[i%a.length]}`:P[i%P.length]}
+function getTitle(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.title:''}
+function getSeries(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.series:'portrait'}
+
+// Assign photos with data.js sections
+['heroImg','media1'].forEach((id,i)=>document.getElementById(id).src=getPhoto('hero',i));
+document.getElementById('duo1a').src=getPhoto('featured',0);
+document.getElementById('duo1b').src=getPhoto('featured',1);
+document.getElementById('duo2a').src=getPhoto('landscape',0);
+document.getElementById('duo2b').src=getPhoto('aerial',0);
+document.getElementById('aboutImg').src=getPhoto('about',0);
+document.getElementById('bkImg1').src=getPhoto('booking_portrait',0);
+document.getElementById('bkImg2').src=getPhoto('booking_event',0);
+document.getElementById('bkImg3').src=getPhoto('booking_aerial',0);
 
 const hscroll=document.getElementById('hscroll');
-for(let i=7;i<Math.min(pool.length,13);i++){
+const hscrollPhotos=sec['hscroll']||[];
+for(let i=0;i<hscrollPhotos.length;i++){
+  const src=`images/${hscrollPhotos[i]}`;
   const card=document.createElement('div');
   card.className='hscroll-card';
-  card.innerHTML=`<img src="${pool[i]}" alt="Street" loading="lazy" width="1600" height="900"><div class="info"><span class="t">街头 ${i-6}</span><span class="m">Nikon Z8</span></div>`;
+  card.innerHTML=`<img src="${src}" alt="Street" loading="lazy" width="1600" height="900"><div class="info"><span class="t">街头 ${i+1}</span><span class="m">Nikon Z8</span></div>`;
   hscroll.appendChild(card);
 }
 // Dots
@@ -681,9 +696,8 @@ function applyMomentum(){
 }
 
 // ═══ ABOUT PHOTO CYCLE ═══
-let aboutIdx=pool.indexOf(document.getElementById('aboutImg').src.split('/').pop());
-if(aboutIdx<0)aboutIdx=6;
-setInterval(()=>{aboutIdx=(aboutIdx+1)%pool.length;document.getElementById('aboutImg').src=pool[aboutIdx]},6000);
+let aboutIdx=0;
+setInterval(()=>{aboutIdx=(aboutIdx+1)%P.length;document.getElementById('aboutImg').src=P[aboutIdx]},6000);
 
 // ═══ HERO LOAD ═══
 window.addEventListener('load',()=>{
