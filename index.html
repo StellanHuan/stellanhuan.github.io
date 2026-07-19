@@ -63,11 +63,11 @@
   /* ===== HERO ===== */
   .hero{
     height:100vh;display:flex;align-items:flex-end;justify-content:flex-start;
-    position:relative;overflow:hidden;padding:0 0 6rem 3rem;
+    position:relative;overflow:hidden;padding:0 0 4rem 2.5rem;
   }
   .hero-bg{
     position:absolute;inset:0;z-index:1;
-    background:linear-gradient(to top,rgba(8,6,4,.35) 0%,rgba(8,6,4,.1) 50%,rgba(8,6,4,0) 100%);
+    background:linear-gradient(to top,rgba(8,6,4,.25) 0%,rgba(8,6,4,.05) 60%,rgba(8,6,4,0) 100%);
   }
   .hero-img{
     position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;
@@ -78,8 +78,8 @@
   .hero.loaded h1{opacity:1;transform:translateY(0);filter:blur(0)}
   .hero .ja{font-size:.75rem;letter-spacing:.5em;color:var(--gold-dim);margin-bottom:1.2rem;opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease-out) .25s,transform .8s var(--ease-out) .25s}
   .hero.loaded .ja{opacity:1;transform:translateY(0)}
-  .hero .rule{width:40px;height:1px;background:var(--gold);margin-bottom:1.2rem;opacity:0;transform:scaleX(0);transition:opacity .6s var(--ease-out) .5s,transform .6s var(--ease-out) .5s}
-  .hero.loaded .rule{opacity:1;transform:scaleX(1)}
+  
+  
   .hero .intro{font-size:.85rem;color:#f0e8d8;letter-spacing:.1em;line-height:2;opacity:0;transform:translateY(12px);transition:opacity .8s var(--ease-out) .65s,transform .8s var(--ease-out) .65s}
   .hero.loaded .intro{opacity:1;transform:translateY(0)}
 
@@ -93,7 +93,7 @@
 
   /* ===== MACRO TYPE ===== */
   .macro-type{padding:8rem 3rem;max-width:900px;margin:0 auto}
-  .macro-type .big{font-size:clamp(1.8rem,4vw,3rem);line-height:1.5;letter-spacing:.06em;color:var(--text-bright);font-weight:200}
+  .macro-type .big{font-size:clamp(2rem,5vw,3.5rem);line-height:1.8;letter-spacing:.04em;color:var(--text-bright);font-weight:200}
   .macro-type .big .hl{color:var(--gold-light)}
   .macro-type .ref{margin-top:3rem;font-size:.75rem;color:var(--text-dim);letter-spacing:.3em;text-align:right}
 
@@ -275,7 +275,7 @@
     <p class="ja" data-lang="ja">Stellan · フォトグラフィー</p>
     <p class="ja" data-lang="zh">Stellan</p>
     <p class="ja" data-lang="en">Stellan</p>
-    <div class="rule"></div>
+    
     <div class="intro" data-lang="zh">按下快门的那一秒，世界安静下来<br>郑州与东京之间，光替我说话</div>
     <div class="intro" data-lang="ja">シャッターを切る一秒、世界が静まる<br>鄭州と東京のあいだで、光が代わりに語る</div>
     <div class="intro" data-lang="en">The world goes quiet at the shutter's click<br>Between Zhengzhou and Tokyo, the light speaks for me</div>
@@ -361,8 +361,8 @@
       <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:380px;aspect-ratio:4/3;">
         <img loading="lazy" decoding="async" width="1600" height="1067" alt="Portrait" id="bkImg1" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
         <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);transition:opacity .5s cubic-bezier(.16,1,.3,1);"></div>
-        <div class="bk-badge" style="position:absolute;top:1.2rem;left:1.2rem;font-size:.55rem;color:var(--gold-light);letter-spacing:.3em;background:rgba(184,147,79,.18);padding:.3rem .8rem;border-radius:20px;backdrop-filter:blur(8px);">MOST POPULAR</div>
-        <div class="bk-badge" style="position:absolute;top:1.2rem;left:1.2rem;font-size:.55rem;color:var(--gold-light);letter-spacing:.3em;background:rgba(184,147,79,.18);padding:.3rem .8rem;border-radius:20px;backdrop-filter:blur(8px);">MOST POPULAR</div>
+        
+        
       </div>
       <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);transition:background .4s;">
         <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
