@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contracts — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem;max-width:900px;margin:0 auto}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.65rem;margin-bottom:1.5rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.1rem;margin-bottom:1.5rem}
+  .layout{display:flex;gap:2rem}
+  .form-panel{flex:1}.preview-panel{flex:1;position:sticky;top:2rem}
+  .fg{margin-bottom:1rem}
+  .fg label{display:block;font-size:.6rem;color:var(--gold-d);letter-spacing:.1em;margin-bottom:.2rem}
+  .fg input,.fg select,.fg textarea{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.5rem;border-radius:4px;font-family:inherit;font-size:.7rem}
+  .row{display:flex;gap:.5rem}.row .fg{flex:1}
+  .btn{background:var(--gold-d);color:var(--bg);border:none;padding:.5rem 1.2rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer;margin-right:.5rem;letter-spacing:.05em}
+  .btn-o{background:var(--card);border:1px solid var(--gold-d);color:var(--gold-l)}
+  .preview{background:#fff;color:#1a1a1a;padding:2rem;border-radius:4px;font-size:.7rem;line-height:2;min-height:500px}
+  .preview h2{font-size:.9rem;text-align:center;margin-bottom:1rem}
+  .preview .section{margin-bottom:1rem}
+  .preview .section h3{font-size:.7rem;border-bottom:1px solid #ccc;margin-bottom:.5rem}
+  .list{margin-bottom:2rem}
+  .list-item{display:flex;justify-content:space-between;padding:.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;margin-bottom:.3rem;font-size:.7rem;cursor:pointer}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📄 Contract Generator</h1>
+<div id="listView"><div class="section-title" style="font-size:.65rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:1rem">CONTRACTS</div><div class="list" id="contractList"></div><button class="btn" onclick="newContract()">+ 新建合同</button></div>
+<div id="editView" style="display:none">
+  <div class="layout">
+    <div class="form-panel">
+      <div class="fg"><label>客户 *</label><input id="cClient"></div>
+      <div class="row"><div class="fg"><label>项目类型</label><select id="cType"><option>Portrait</option><option>Event</option><option>Aerial</option></select></div><div class="fg"><label>合同金额 ¥</label><input type="number" id="cPrice" value="0"></div></div>
+      <div class="row"><div class="fg"><label>拍摄日期</label><input type="date" id="cDate"></div><div class="fg"><label>交付日期</label><input type="date" id="cDelivery"></div></div>
+      <div class="fg"><label>使用授权</label><select id="cUsage"><option>个人使用</option><option>商业授权</option><option>买断版权</option></select></div>
+      <div class="fg"><label>服务内容</label><textarea id="cService" rows="3" placeholder="拍摄内容、时长、地点、交付数量..."></textarea></div>
+      <div class="fg"><label>附加条款</label><textarea id="cTerms" rows="2" placeholder="取消政策、修改次数、额外费用..."></textarea></div>
+      <button class="btn" onclick="saveContract()">💾 保存</button>
+      <button class="btn btn-o" onclick="printContract()">🖨 打印 PDF</button>
+      <button class="btn btn-o" onclick="sendContract()">✉ 发送</button>
+      <button class="btn" onclick="showList()" style="background:none;color:var(--text-d);border:none">← 返回</button>
+    </div>
+    <div class="preview-panel"><div class="preview" id="preview"></div></div>
+  </div>
+</div>
+<script>
+let contracts=JSON.parse(localStorage.getItem('contracts')||'[]');let editId=null;
+
+function showList(){document.getElementById('listView').style.display='block';document.getElementById('editView').style.display='none';renderList()}
+function newContract(){editId=null;['cClient','cPrice','cDate','cDelivery','cService','cTerms'].forEach(id=>document.getElementById(id).value='');updatePreview();document.getElementById('listView').style.display='none';document.getElementById('editView').style.display='block'}
+function renderList(){document.getElementById('contractList').innerHTML=contracts.length?contracts.map((c,i)=>`<div class="list-item" onclick="editContract(${i})"><span>${c.client} · ${c.type}</span><span style="color:var(--gold-d)">¥${c.price||0} · ${c.date}</span></div>`).join(''):'<div style="text-align:center;padding:2rem;color:var(--text-d)">暂无合同</div>'}
+function editContract(i){const c=contracts[i];editId=i;document.getElementById('cClient').value=c.client;document.getElementById('cType').value=c.type;document.getElementById('cPrice').value=c.price;document.getElementById('cDate').value=c.date;document.getElementById('cDelivery').value=c.delivery;document.getElementById('cUsage').value=c.usage;document.getElementById('cService').value=c.service;document.getElementById('cTerms').value=c.terms;updatePreview();document.getElementById('listView').style.display='none';document.getElementById('editView').style.display='block'}
+
+function getData(){return{client:document.getElementById('cClient').value,type:document.getElementById('cType').value,price:document.getElementById('cPrice').value,date:document.getElementById('cDate').value,delivery:document.getElementById('cDelivery').value,usage:document.getElementById('cUsage').value,service:document.getElementById('cService').value,terms:document.getElementById('cTerms').value}}
+
+function updatePreview(){
+  const d=getData();
+  document.getElementById('preview').innerHTML=`
+    <h2>摄影服务合同</h2>
+    <div class="section"><h3>甲方（客户）</h3><p>${d.client||'________'}</p></div>
+    <div class="section"><h3>乙方（摄影师）</h3><p>瓛瓛 Stellan Huan</p></div>
+    <div class="section"><h3>服务内容</h3><p>类型: ${d.type}<br>金额: ¥${Number(d.price||0).toLocaleString()}<br>拍摄日期: ${d.date||'____'}<br>交付日期: ${d.delivery||'____'}<br>${d.service||''}</p></div>
+    <div class="section"><h3>使用授权</h3><p>${d.usage||'________'}</p></div>
+    <div class="section"><h3>附加条款</h3><p>${d.terms||'无'}</p></div>
+    <p style="text-align:center;margin-top:2rem">甲方签字: ________<br>乙方签字: 瓛瓛<br>日期: ${new Date().toLocaleDateString('zh-CN')}</p>`;
+}
+
+function saveContract(){
+  const d=getData();if(!d.client)return alert('请输入客户名称');
+  const c={...d,price:Number(d.price)||0,created:new Date().toISOString().split('T')[0]};
+  if(editId!==null)contracts[editId]=c;else{contracts.push(c);Analytics?.track('contract_created')}
+  localStorage.setItem('contracts',JSON.stringify(contracts));showList();
+}
+function printContract(){window.print()}
+function sendContract(){
+  const d=getData();
+  fetch('https://formsubmit.co/965946974@qq.com',{method:'POST',body:new URLSearchParams({_subject:'Contract: '+d.client,message:`摄影服务合同\n客户: ${d.client}\n类型: ${d.type}\n金额: ¥${d.price}\n日期: ${d.date}`,_template:'table'})});
+  alert('合同已发送');Analytics?.track('contract_sent');
+}
+
+renderList();showList();
+</script>
+</body>
+</html>
