@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "title": "Tokyo Rain #1",
+    "photo": "web_023.jpeg",
+    "size": "A3",
+    "price": 680,
+    "stock": 10,
+    "public": true,
+    "paperType": "Hahnemühle Photo Rag",
+    "edition": "Limited 1/20"
+  },
+  {
+    "title": "俯瞰郑州",
+    "photo": "web_004.jpeg",
+    "size": "A2",
+    "price": 1200,
+    "stock": 5,
+    "public": true,
+    "paperType": "Canson Infinity",
+    "edition": "Limited 1/10"
+  },
+  {
+    "title": "街の断片",
+    "photo": "web_009.jpeg",
+    "size": "A4",
+    "price": 380,
+    "stock": 20,
+    "public": true,
+    "paperType": "Ilford Gold Fibre",
+    "edition": "Open Edition"
+  }
+]
