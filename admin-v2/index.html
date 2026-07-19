@@ -183,7 +183,8 @@ async function publishToGitHub(content,token){showToast('🚀 发布中...');try
   
   const files=[
     {path:'data.js',content:content,msg:'Update data.js'},
-    {path:'src/data/series.js',content:seriesJS,msg:'Update series.js'}
+    {path:'src/data/series.js',content:seriesJS,msg:'Update series.js'},
+    {path:'src/data/site.json',content:JSON.stringify({sections:store.sections},null,2),msg:'Update site sections'}
   ];
   
   for(const f of files){
