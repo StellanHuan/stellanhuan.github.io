@@ -1,0 +1,48 @@
+<!-- ═══════════════════════════════════
+   Projects Page — V4.3
+   Data-driven project showcase from projects.json
+   ═══════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — 瓛瓛 HuanHuan</title>
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="../../src/styles/base.css">
+<link rel="stylesheet" href="../../src/styles/layout.css">
+<link rel="stylesheet" href="../../src/components/Image/Image.css">
+<link rel="stylesheet" href="../../src/components/Gallery/Gallery.css">
+<link rel="stylesheet" href="../../src/components/Lightbox/Lightbox.css">
+<link rel="stylesheet" href="Projects.css">
+</head>
+<body>
+<div class="grain"></div>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-back">← 返回主页</a>
+  <a href="../../index.html" class="nav-brand">Stellan</a>
+</nav>
+
+<header class="projects-hero">
+  <span class="projects-tag">PROJECTS</span>
+  <h1 data-lang="zh">摄影项目</h1>
+  <h1 data-lang="ja">プロジェクト</h1>
+  <h1 data-lang="en">Projects</h1>
+  <p class="projects-desc" data-lang="zh">有主题的系列创作</p>
+  <p class="projects-desc" data-lang="ja">テーマのあるシリーズ作品</p>
+  <p class="projects-desc" data-lang="en">Thematic series and commissions</p>
+</header>
+
+<main class="projects-list" id="projectsList"></main>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<include src="../../src/components/Lightbox/Lightbox.html">
+
+<script src="../../src/data/projects.json" type="application/json" id="projectsData"></script>
+<script src="../../src/components/Image/Image.js"></script>
+<script src="../../src/components/Gallery/Gallery.js"></script>
+<script src="../../src/components/Lightbox/Lightbox.js"></script>
+<script src="Projects.js"></script>
+</body>
+</html>
