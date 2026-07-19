@@ -95,7 +95,10 @@
     <a href="#exhibitions" data-route="exhibitions"><span class="icon">🏛</span> Exhibitions</a>
     <a href="#settings" data-route="settings"><span class="icon">⚙</span> Settings</a>
   </nav>
-  <div class="sidebar-footer"><span class="dot online"></span> GitHub Connected · v2.0</div>
+  <div class="sidebar-footer">
+    <button onclick="deploy()" style="width:100%;background:var(--gold-dim);color:var(--bg);border:none;padding:.4rem;border-radius:4px;cursor:pointer;font-size:.65rem;font-family:inherit;margin-bottom:.5rem;letter-spacing:.05em">🚀 导出 data.js</button>
+    <span class="dot online"></span> GitHub Connected · v2.0
+  </div>
 </aside>
 
 <main class="main" id="mainContent"></main>
@@ -111,8 +114,17 @@ const store={
 };
 
 // ═══ ROUTER ═══
-const pages={dashboard,photos,sections:renderSections,journal(){return p('✍ Journal')},projects(){return p('🗂 Projects')},prints(){return p('🖼 Prints')},exhibitions(){return p('🏛 Exhibitions')},settings(){return p('⚙ Settings')}};
+const pages={dashboard,photos,sections:renderSections,journal:renderJournal,projects(){return p('🗂 Projects')},prints(){return p('🖼 Prints')},exhibitions(){return p('🏛 Exhibitions')},settings(){return p('⚙ Settings')}};
 function p(n){return `<div class="page-placeholder">${n} — 开发中</div>`}
+
+// ═══ TOAST + DEPLOY ═══
+function showToast(msg){let t=document.getElementById('adminToast');if(!t){t=document.createElement('div');t.id='adminToast';t.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#b8934f;color:#0d0a06;padding:.7rem 2rem;border-radius:8px;font-size:.8rem;z-index:999;transition:opacity .3s';document.body.appendChild(t)}t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2500)}
+function deploy(){const data={photos:store.photos,sections:store.sections};const js='// Stellan CMS export\nconst SITE_DATA = '+JSON.stringify(data,null,2)+';';const blob=new Blob([js],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();showToast('💾 data.js 已下载！去 GitHub 替换文件')}
+
+// ═══ JOURNAL ═══
+function renderJournal(){return `<div class="sec-title">✍ Journal 编辑器</div><div style="display:flex;gap:1rem;height:calc(100vh - 200px)"><div style="flex:1;display:flex;flex-direction:column"><input class="search-box" placeholder="文章标题" id="jTitle" style="margin-bottom:.5rem"><textarea id="jBody" style="flex:1;background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:1rem;border-radius:4px;font-family:inherit;font-size:.8rem;resize:none;line-height:1.8" placeholder="Markdown 正文...\n\n支持 Markdown 语法"></textarea></div><div style="flex:1;background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:1rem;overflow-y:auto;font-size:.8rem;line-height:1.8;color:var(--text)" id="jPreview"><span style="color:var(--text-dim)">👈 写完点预览</span></div></div><div style="margin-top:.5rem;display:flex;gap:.5rem"><button class="btn" onclick="previewJournal()" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text-dim);padding:.4rem 1rem;border-radius:4px;cursor:pointer;font-size:.65rem;font-family:inherit">👁 预览</button><button class="btn" onclick="exportJournal()" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text-dim);padding:.4rem 1rem;border-radius:4px;cursor:pointer;font-size:.65rem;font-family:inherit">💾 导出 MD</button></div>`}
+function previewJournal(){const t=document.getElementById('jTitle')?.value||'未命名';const b=document.getElementById('jBody')?.value||'';document.getElementById('jPreview').innerHTML=`<h2 style="color:var(--gold-light);margin-bottom:1rem;font-size:1rem">${t}</h2>${b.replace(/\n/g,'<br>')}`}
+function exportJournal(){const t=document.getElementById('jTitle')?.value||'journal';const b=document.getElementById('jBody')?.value||'';const md=`# ${t}\n\n${b}`;const blob=new Blob([md],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`${t}.md`;a.click();showToast('💾 '+t+'.md 已导出')}
 
 function navigate(route){
   document.querySelectorAll('.sidebar-nav a').forEach(a=>a.classList.toggle('active',a.dataset.route===route));
