@@ -1167,6 +1167,7 @@ const SITE_DATA = {
       "web_055.jpeg"
     ],
     "featured": [
+      "web_004.jpeg",
       "web_016.jpeg",
       "web_026.jpeg",
       "web_036.jpeg",
@@ -1174,17 +1175,16 @@ const SITE_DATA = {
       "web_057.jpeg",
       "web_067.jpeg",
       "web_077.jpeg",
-      "web_087.jpeg",
-      "web_120.jpeg"
+      "web_087.jpeg"
     ],
     "hscroll": [
+      "web_007.jpeg",
       "web_009.jpeg",
       "web_026.jpeg",
       "web_025.jpeg",
       "web_075.jpeg",
       "web_069.jpeg",
-      "web_094.jpeg",
-      "web_130.jpeg"
+      "web_094.jpeg"
     ],
     "landscape": [
       "web_006.jpeg",

@@ -1,6 +1,7 @@
 const SERIES_DATA = {
   "portrait": {
     "photos": [
+      "web_004.jpeg",
       "web_016.jpeg",
       "web_026.jpeg",
       "web_036.jpeg",
@@ -9,7 +10,6 @@ const SERIES_DATA = {
       "web_067.jpeg",
       "web_077.jpeg",
       "web_087.jpeg",
-      "web_120.jpeg",
       "web_128.jpeg",
       "web_110.jpeg",
       "web_072.jpeg"
@@ -17,13 +17,13 @@ const SERIES_DATA = {
   },
   "street": {
     "photos": [
+      "web_007.jpeg",
       "web_009.jpeg",
       "web_026.jpeg",
       "web_025.jpeg",
       "web_075.jpeg",
       "web_069.jpeg",
-      "web_094.jpeg",
-      "web_130.jpeg"
+      "web_094.jpeg"
     ]
   },
   "landscape": {
