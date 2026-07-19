@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem;max-width:800px;margin:0 auto}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.65rem;margin-bottom:1.5rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.1rem;margin-bottom:1.5rem}
+  .btn{background:var(--gold-d);color:var(--bg);border:none;padding:.6rem 1.5rem;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;margin-right:.5rem;letter-spacing:.05em}
+  .btn-o{background:var(--card);border:1px solid var(--gold-d);color:var(--gold-l)}
+  .report{background:#fff;color:#1a1a1a;padding:3rem;border-radius:8px;font-size:.8rem;line-height:2;margin-top:1.5rem}
+  .report h2{font-size:1.2rem;text-align:center;margin-bottom:.5rem;color:#333}
+  .report .date{text-align:center;color:#999;font-size:.65rem;margin-bottom:2rem}
+  .report table{width:100%;border-collapse:collapse;margin:1.5rem 0}
+  .report th,.report td{padding:.5rem;text-align:left;border-bottom:1px solid #eee;font-size:.7rem}
+  .report th{background:#f9f9f9;font-weight:600}
+  .report .highlight{background:#fff9e6;padding:1rem;border-radius:4px;margin:1rem 0}
+  .report .footer{margin-top:2rem;text-align:center;color:#999;font-size:.6rem;border-top:1px solid #eee;padding-top:1rem}
+  @media print{body{background:#fff}.back,.btn{display:none}.report{box-shadow:none;padding:1rem}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📈 Weekly Business Report</h1>
+<button class="btn" onclick="generateReport()">🔄 Generate Report</button>
+<button class="btn btn-o" onclick="window.print()">🖨 Print PDF</button>
+<button class="btn btn-o" onclick="sendReport()">✉ Email Report</button>
+<div id="reportArea"></div>
+<script>
+const L=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch{return[]}};
+
+function generateReport(){
+  const leads=L('crm_leads');const quotes=L('quotes');const contracts=L('contracts');
+  const invoices=L('invoices');const licenses=L('licenses');
+  const weekAgo=new Date(Date.now()-7*86400000);
+  
+  const thisWeek={
+    leads:leads.filter(l=>l.time>weekAgo.getTime()).length,
+    quotes:quotes.filter(q=>new Date(q.date)>weekAgo).length,
+    contracts:contracts.filter(c=>new Date(c.created)>weekAgo).length,
+    revenue:invoices.filter(i=>i.status==='Paid'&&new Date(i.date)>weekAgo).reduce((s,i)=>s+i.amount,0),
+    newLicenses:licenses.filter(l=>l.created&&new Date(l.created)>weekAgo).length
+  };
+
+  const total={
+    leads:leads.length,quotes:quotes.length,contracts:contracts.length,
+    revenue:invoices.filter(i=>i.status==='Paid').reduce((s,i)=>s+i.amount,0),
+    pending:invoices.filter(i=>i.status!=='Paid').reduce((s,i)=>s+i.amount,0),
+    activeLicenses:licenses.filter(l=>l.status==='Active').length,
+    expiredLicenses:licenses.filter(l=>l.status==='Expired').length
+  };
+
+  const leadStatus={};leads.forEach(l=>{leadStatus[l.status||'New']=(leadStatus[l.status||'New']||0)+1});
+
+  document.getElementById('reportArea').innerHTML=`
+    <div class="report">
+      <h2>STELLAN PHOTOGRAPHY</h2>
+      <div class="date">Weekly Business Report · ${new Date().toLocaleDateString('zh-CN')}</div>
+      
+      <h3 style="font-size:.8rem;margin-bottom:.5rem">📊 This Week</h3>
+      <table><tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>New Leads</td><td>${thisWeek.leads}</td></tr>
+        <tr><td>Quotes Sent</td><td>${thisWeek.quotes}</td></tr>
+        <tr><td>Contracts Signed</td><td>${thisWeek.contracts}</td></tr>
+        <tr><td>Revenue</td><td>¥${thisWeek.revenue.toLocaleString()}</td></tr>
+        <tr><td>New Licenses</td><td>${thisWeek.newLicenses}</td></tr>
+      </table>
+
+      <h3 style="font-size:.8rem;margin-bottom:.5rem">💰 Financial Overview</h3>
+      <table><tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>Total Revenue (Paid)</td><td>¥${total.revenue.toLocaleString()}</td></tr>
+        <tr><td>Pending Payments</td><td>¥${total.pending.toLocaleString()}</td></tr>
+        <tr><td>Active Licenses</td><td>${total.activeLicenses}</td></tr>
+        <tr><td>Expired Licenses</td><td>${total.expiredLicenses}</td></tr>
+      </table>
+
+      <h3 style="font-size:.8rem;margin-bottom:.5rem">📋 Lead Status</h3>
+      <table><tr><th>Status</th><th>Count</th></tr>
+        ${Object.entries(leadStatus).map(([s,c])=>`<tr><td>${s}</td><td>${c}</td></tr>`).join('')}
+      </table>
+
+      <div class="highlight">
+        <b>Summary:</b> ${total.leads} total leads, ${total.quotes} quotes, ${total.contracts} contracts. 
+        Revenue: ¥${total.revenue.toLocaleString()}. Active licenses: ${total.activeLicenses}.
+      </div>
+
+      <div class="footer">Generated by Stellan CMS · ${new Date().toISOString().split('T')[0]}</div>
+    </div>`;
+  Analytics?.track('report_generated');
+}
+
+function sendReport(){
+  const report=document.querySelector('.report')?.innerText||'No report generated';
+  fetch('https://formsubmit.co/965946974@qq.com',{method:'POST',body:new URLSearchParams({_subject:'Weekly Report - '+new Date().toLocaleDateString('zh-CN'),message:report,_template:'table'})});
+  alert('Report emailed!');Analytics?.track('report_sent');
+}
+
+generateReport();
+</script>
+</body>
+</html>
