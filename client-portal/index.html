@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal — Stellan Photography</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .container{width:100%;max-width:600px;padding:2rem}
+  .login-box{text-align:center}
+  .login-box h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.2rem;margin-bottom:.5rem}
+  .login-box p{font-size:.7rem;color:var(--text-d);margin-bottom:2rem}
+  .login-box input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.8rem;border-radius:6px;font-family:inherit;font-size:.9rem;text-align:center;margin-bottom:1rem}
+  .login-box input:focus{outline:none;border-color:var(--gold-d)}
+  .login-box button{background:var(--gold-d);color:var(--bg);border:none;padding:.8rem 3rem;border-radius:6px;font-family:inherit;font-size:.85rem;cursor:pointer;letter-spacing:.1em}
+  .error{color:var(--red);font-size:.65rem;margin-top:.5rem}
+  .gallery-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+  .gallery-header h2{font-weight:300;letter-spacing:.1em;color:var(--gold-l);font-size:1rem}
+  .gallery-header .logout{color:var(--gold-d);font-size:.65rem;cursor:pointer}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.5rem;margin-bottom:2rem}
+  .grid-item{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
+  .grid-item.selected{border-color:var(--gold-l)}
+  .grid-item img{width:100%;height:100%;object-fit:cover}
+  .grid-item .check{position:absolute;top:.3rem;right:.3rem;width:20px;height:20px;border-radius:50%;background:var(--gold-l);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.6rem;opacity:0;transition:opacity .2s}
+  .grid-item.selected .check{opacity:1}
+  .actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+  .actions button{background:var(--card);border:1px solid var(--border);color:var(--text-d);padding:.6rem 1.2rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer;letter-spacing:.05em}
+  .actions button:hover{color:var(--gold-l);border-color:var(--gold-d)}
+  .actions button.primary{background:var(--gold-d);color:var(--bg);border:none}
+  .notes-area{margin-top:1rem}
+  .notes-area textarea{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.5rem;border-radius:4px;font-family:inherit;font-size:.7rem;resize:vertical;min-height:60px}
+  .status-bar{display:flex;gap:1rem;margin-bottom:1rem;font-size:.65rem;color:var(--text-d)}
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+<script>
+const projects={
+  'DEMO2026':{name:'Zhang Wedding',client:'张先生',date:'2026-06',status:'Review',photos:['web_001.jpeg','web_002.jpeg','web_003.jpeg','web_006.jpeg','web_008.jpeg','web_012.jpeg','web_016.jpeg','web_022.jpeg']},
+  'TOKYO25':{name:'Tokyo Fashion',client:'Yuki',date:'2025-09',status:'Final',photos:['web_009.jpeg','web_023.jpeg','web_030.jpeg','web_007.jpeg','web_018.jpeg','web_026.jpeg']}
+};
+
+let currentProject=null;
+let selected=new Set();
+let notes='';
+
+function renderLogin(){
+  document.getElementById('app').innerHTML=`
+    <div class="login-box">
+      <h1>CLIENT PORTAL</h1>
+      <p>输入你的项目代码查看照片</p>
+      <input id="codeInput" placeholder="项目代码" autofocus onkeydown="if(event.key==='Enter')login()">
+      <button onclick="login()">进入</button>
+      <div class="error" id="loginError"></div>
+      <p style="margin-top:2rem;font-size:.6rem;color:var(--text-d)">Demo代码: DEMO2026 / TOKYO25</p>
+    </div>`;
+}
+
+function login(){
+  const code=document.getElementById('codeInput').value.trim().toUpperCase();
+  if(projects[code]){currentProject=projects[code];selected.clear();notes='';Analytics?.track('client_login',{project:code});renderGallery()}
+  else{document.getElementById('loginError').textContent='项目代码无效'}
+}
+
+function renderGallery(){
+  const p=currentProject;
+  document.getElementById('app').innerHTML=`
+    <div class="gallery-header"><h2>${p.name}</h2><span class="logout" onclick="currentProject=null;renderLogin()">退出</span></div>
+    <div class="status-bar"><span>客户: ${p.client}</span><span>日期: ${p.date}</span><span>状态: ${p.status}</span><span>已选: ${selected.size}/${p.photos.length}</span></div>
+    <div class="grid">${p.photos.map(f=>`
+      <div class="grid-item ${selected.has(f)?'selected':''}" onclick="togglePhoto('${f}')">
+        <img src="../images/${f}" alt="" loading="lazy"><div class="check">✓</div>
+      </div>`).join('')}</div>
+    <div class="notes-area"><textarea placeholder="备注反馈..." onchange="notes=this.value">${notes}</textarea></div>
+    <div class="actions">
+      <button onclick="selectAll()">全选</button><button onclick="selected.clear();renderGallery()">清除选择</button>
+      <button onclick="submitFeedback()">✉ 提交反馈</button>
+      <button class="primary" onclick="downloadSelected()">⬇ 下载已选 (${selected.size})</button>
+    </div>`;
+  Analytics?.track('gallery_view',{project:currentProject?.name});
+}
+
+window.togglePhoto=function(f){selected.has(f)?selected.delete(f):selected.add(f);renderGallery();Analytics?.track('photo_selected',{file:f})};
+window.selectAll=function(){currentProject.photos.forEach(f=>selected.add(f));renderGallery()};
+window.submitFeedback=function(){
+  const sel=Array.from(selected);
+  fetch('https://formsubmit.co/965946974@qq.com',{method:'POST',body:new URLSearchParams({_subject:'Client Feedback: '+currentProject.name,message:`项目: ${currentProject.name}\n已选: ${sel.length}张\n备注: ${notes}`,_template:'table'})});
+  alert('反馈已发送！');Analytics?.track('delivery_download',{project:currentProject.name,count:sel.length});
+};
+window.downloadSelected=function(){
+  const sel=Array.from(selected);if(!sel.length)return alert('请先选择照片');
+  sel.forEach(f=>{const a=document.createElement('a');a.href='../images/'+f;a.download=f;document.body.appendChild(a);a.click();a.remove()});
+  Analytics?.track('delivery_download',{project:currentProject.name,count:sel.length});
+};
+
+renderLogin();
+</script>
+</body>
+</html>
