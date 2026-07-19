@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoices — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.65rem;margin-bottom:1.5rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.1rem;margin-bottom:1.5rem}
+  .stats{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:.8rem 1.2rem;text-align:center}
+  .stat .n{font-size:1.2rem;color:var(--gold-l);font-weight:200}
+  .stat .l{font-size:.55rem;color:var(--text-d);letter-spacing:.1em}
+  .toolbar{display:flex;gap:.5rem;margin-bottom:1rem}
+  .toolbar button,.toolbar select{background:var(--card);border:1px solid var(--border);color:var(--text-d);padding:.4rem .8rem;border-radius:4px;font-family:inherit;font-size:.65rem;cursor:pointer}
+  table{width:100%;border-collapse:collapse;font-size:.7rem}
+  th{text-align:left;padding:.5rem;color:var(--gold-d);font-size:.6rem;letter-spacing:.1em;border-bottom:1px solid var(--border);font-weight:400}
+  td{padding:.5rem;border-bottom:1px solid var(--border);color:var(--text-d)}
+  .status{display:inline-block;padding:.2rem .5rem;border-radius:10px;font-size:.55rem}
+  .s-Paid{background:rgba(123,174,127,.15);color:var(--green)}
+  .s-Sent{background:rgba(184,147,79,.15);color:var(--gold-l)}
+  .s-Draft{background:rgba(128,128,128,.1);color:var(--text-d)}
+  .s-Overdue{background:rgba(139,58,58,.15);color:var(--red)}
+  .s-Partial{background:rgba(184,147,79,.2);color:var(--gold-l)}
+  .form-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;align-items:center;justify-content:center}
+  .form-overlay.show{display:flex}
+  .form-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:2rem;width:100%;max-width:500px}
+  .fg{margin-bottom:1rem}
+  .fg label{display:block;font-size:.6rem;color:var(--gold-d);margin-bottom:.2rem}
+  .fg input,.fg select{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.4rem;border-radius:4px;font-family:inherit;font-size:.7rem}
+  .row{display:flex;gap:.5rem}.row .fg{flex:1}
+  .btn{background:var(--gold-d);color:var(--bg);border:none;padding:.5rem 1rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>💰 Invoices</h1>
+<div class="stats" id="statsBar"></div>
+<div class="toolbar">
+  <button onclick="showForm()">+ New Invoice</button>
+  <select id="statusFilter" onchange="renderTable()"><option value="">All Status</option><option>Draft</option><option>Sent</option><option>Partial Paid</option><option>Paid</option><option>Overdue</option></select>
+  <button onclick="exportCSV()">📥 CSV</button>
+</div>
+<table><thead><tr><th>#</th><th>Client</th><th>Amount</th><th>Date</th><th>Due</th><th>Status</th><th>Action</th></tr></thead><tbody id="tableBody"></tbody></table>
+
+<div class="form-overlay" id="formOverlay">
+  <div class="form-box">
+    <h2 style="font-weight:300;color:var(--gold-l);font-size:1rem;margin-bottom:1.5rem">New Invoice</h2>
+    <div class="fg"><label>Client *</label><input id="iClient"></div>
+    <div class="row"><div class="fg"><label>Amount ¥</label><input type="number" id="iAmount"></div><div class="fg"><label>Due Date</label><input type="date" id="iDue"></div></div>
+    <div class="fg"><label>Notes</label><input id="iNotes"></div>
+    <button class="btn" onclick="saveInvoice()">Save</button>
+    <button class="btn" onclick="hideForm()" style="background:var(--card);border:1px solid var(--border);color:var(--text-d);margin-left:.5rem">Cancel</button>
+  </div>
+</div>
+
+<script>
+let invoices=JSON.parse(localStorage.getItem('invoices')||'[]');
+const STATUSES=['Draft','Sent','Partial Paid','Paid','Overdue'];
+
+function renderStats(){
+  const counts={};STATUSES.forEach(s=>counts[s]=invoices.filter(i=>i.status===s).length);
+  const total=invoices.reduce((s,i)=>s+(i.status==='Paid'?i.amount:0),0);
+  const pending=invoices.reduce((s,i)=>s+(i.status!=='Paid'?i.amount:0),0);
+  document.getElementById('statsBar').innerHTML=`
+    <div class="stat"><div class="n">¥${total.toLocaleString()}</div><div class="l">已收款</div></div>
+    <div class="stat"><div class="n">¥${pending.toLocaleString()}</div><div class="l">待收款</div></div>
+    ${STATUSES.map(s=>`<div class="stat"><div class="n">${counts[s]}</div><div class="l">${s}</div></div>`).join('')}`;
+}
+
+function renderTable(){
+  const sf=document.getElementById('statusFilter')?.value||'';
+  let list=sf?invoices.filter(i=>i.status===sf):[...invoices];
+  list.sort((a,b)=>new Date(b.date)-new Date(a.date));
+  document.getElementById('tableBody').innerHTML=list.length?list.map((i,idx)=>{
+    const origIdx=invoices.indexOf(i);
+    return `<tr>
+      <td>INV-${String(origIdx+1).padStart(3,'0')}</td>
+      <td>${i.client}</td><td>¥${(i.amount||0).toLocaleString()}</td>
+      <td>${i.date}</td><td>${i.due||'—'}</td>
+      <td><span class="status s-${i.status?.replace(' ','')}">${i.status}</span></td>
+      <td><select onchange="updateStatus(${origIdx},this.value)" style="background:var(--card);border:1px solid var(--border);color:var(--text);padding:.2rem;border-radius:3px;font-size:.6rem"><option>—</option>${STATUSES.map(s=>`<option ${i.status===s?'selected':''}>${s}</option>`).join('')}</select></td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-d)">No invoices</td></tr>';
+  renderStats();
+}
+
+window.showForm=()=>document.getElementById('formOverlay').classList.add('show');
+window.hideForm=()=>document.getElementById('formOverlay').classList.remove('show');
+window.saveInvoice=()=>{
+  const c=document.getElementById('iClient').value;if(!c)return alert('Client required');
+  invoices.push({client:c,amount:Number(document.getElementById('iAmount').value)||0,due:document.getElementById('iDue').value,notes:document.getElementById('iNotes').value,status:'Draft',date:new Date().toISOString().split('T')[0]});
+  localStorage.setItem('invoices',JSON.stringify(invoices));Analytics?.track('invoice_created');
+  ['iClient','iAmount','iDue','iNotes'].forEach(id=>document.getElementById(id).value='');
+  hideForm();renderTable();
+};
+window.updateStatus=(i,s)=>{invoices[i].status=s;localStorage.setItem('invoices',JSON.stringify(invoices));if(s==='Paid')Analytics?.track('payment_received',{amount:invoices[i].amount});renderTable()};
+window.exportCSV=()=>{const csv='ID,Client,Amount,Date,Due,Status\n'+invoices.map((i,idx)=>`INV-${String(idx+1).padStart(3,'0')},${i.client},${i.amount},${i.date},${i.due},${i.status}`).join('\n');const b=new Blob([csv]);const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='invoices.csv';a.click()};
+
+renderTable();
+</script>
+</body>
+</html>
