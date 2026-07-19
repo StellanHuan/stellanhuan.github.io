@@ -572,8 +572,15 @@ for(let i=0;i<hscrollPhotos.length;i++){
 const dots=document.getElementById('hscrollDots');
 for(let i=0;i<6;i++){const d=document.createElement('div');d.className='hscroll-dot';dots.appendChild(d)}
 hscroll.addEventListener('scroll',()=>{
-  const idx=Math.round(hscroll.scrollLeft/(hscroll.scrollWidth/6));
+  const idx=Math.round(hscroll.scrollLeft/(hscroll.scrollWidth/Math.max(1,hscrollPhotos.length)));
   dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+});
+// Dot click to scroll
+dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>{
+  d.style.cursor='pointer';
+  d.addEventListener('click',()=>{
+    hscroll.scrollTo({left:(hscroll.scrollWidth/hscrollPhotos.length)*i,behavior:'smooth'});
+  });
 });
 
 // ═══ LANGUAGE (dropdown) ═══
