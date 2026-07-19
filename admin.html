@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>网站管理后台</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC",sans-serif;background:#0d0a06;color:#d4cec4;min-height:100vh}
+  .header{background:#110d0a;border-bottom:1px solid rgba(184,147,79,.15);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+  .header h1{font-size:1rem;font-weight:400;letter-spacing:.2em;color:#d4b978}
+  .header button{background:#b8934f;color:#0d0a06;border:none;padding:.6rem 1.5rem;border-radius:6px;font-size:.8rem;cursor:pointer;letter-spacing:.1em;font-weight:600}
+  .header button:hover{background:#d4b978}
+  .layout{display:flex;height:calc(100vh - 60px)}
+  .pool{flex:2;overflow-y:auto;padding:1.5rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem;align-content:start}
+  .pool-item{border-radius:6px;overflow:hidden;cursor:grab;border:2px solid transparent;transition:border-color .2s;position:relative}
+  .pool-item:hover{border-color:#b8934f}
+  .pool-item.selected{border-color:#d4b978}
+  .pool-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+  .pool-item .label{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.8);padding:.3rem .5rem;font-size:.6rem;text-align:center}
+  .pool-item .label .title{color:#d4b978;display:block}
+  .pool-item .label .series{color:#8a8278;font-size:.55rem}
+  .sidebar{flex:1.2;background:#110d0a;border-left:1px solid rgba(184,147,79,.1);padding:1.5rem;overflow-y:auto;display:flex;flex-direction:column;gap:1.5rem}
+  .section-group h3{font-size:.7rem;color:#7a6238;letter-spacing:.2em;margin-bottom:.8rem;text-transform:uppercase}
+  .drop-zone{min-height:50px;border:1px dashed rgba(184,147,79,.2);border-radius:6px;padding:.5rem;display:flex;flex-wrap:wrap;gap:.4rem;transition:border-color .2s}
+  .drop-zone.drag-over{border-color:#d4b978}
+  .drop-zone .slot{width:60px;height:45px;border-radius:3px;overflow:hidden;position:relative;cursor:pointer;border:2px solid transparent}
+  .drop-zone .slot:hover{border-color:#b8934f}
+  .drop-zone .slot img{width:100%;height:100%;object-fit:cover}
+  .drop-zone .slot .remove{position:absolute;top:2px;right:2px;width:16px;height:16px;background:rgba(0,0,0,.8);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#d4cec4;cursor:pointer;opacity:0;transition:opacity .2s}
+  .drop-zone .slot:hover .remove{opacity:1}
+  .edit-panel{background:rgba(184,147,79,.05);border:1px solid rgba(184,147,79,.15);border-radius:8px;padding:1.2rem}
+  .edit-panel input,.edit-panel select{width:100%;background:#0d0a06;border:1px solid rgba(184,147,79,.2);color:#d4cec4;padding:.5rem .8rem;border-radius:4px;font-size:.8rem;margin-bottom:.8rem;font-family:inherit}
+  .edit-panel label{font-size:.65rem;color:#7a6238;letter-spacing:.1em;display:block;margin-bottom:.3rem}
+  .edit-panel .tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.8rem}
+  .edit-panel .tag{padding:.2rem .6rem;background:rgba(184,147,79,.1);border-radius:20px;font-size:.65rem;cursor:pointer}
+  .edit-panel .tag:hover{background:rgba(184,147,79,.25)}
+  .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#b8934f;color:#0d0a06;padding:.7rem 2rem;border-radius:8px;font-size:.85rem;z-index:100;opacity:0;transition:opacity .3s}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📷 网站管理后台</h1>
+  <button onclick="exportData()">💾 导出并下载 data.js</button>
+</div>
+<div class="layout">
+  <div class="pool" id="photoPool"></div>
+  <div class="sidebar" id="sidebar"></div>
+</div>
+<div class="toast" id="toast">✅ 已复制到剪贴板</div>
+
+<script src="data.js"></script>
+<script>
+// Load current data
+const DATA=JSON.parse(JSON.stringify(SITE_DATA));
+const photos=DATA.photos;
+const sections=DATA.sections;
+let selectedFile=null;
+
+// Build section list for sidebar
+const sectionNames={hero:'🎬 Hero 封面',featured:'01 精选作品 (2张)',hscroll:'02 街头滚动',landscape:'03 大地(左)',aerial:'03 天空(右)',about:'关于区照片',booking_portrait:'预约·人像卡',booking_event:'预约·活动卡',booking_aerial:'预约·航拍卡'};
+
+// Render photo pool
+function renderPool(){
+  const pool=document.getElementById('photoPool');
+  pool.innerHTML=photos.map(p=>{
+    const f=p.file.split('/').pop();
+    return `<div class="pool-item ${selectedFile===f?'selected':''}" data-file="${f}" draggable="true" onclick="selectPhoto('${f}')">
+      <img src="${p.file}" alt="${p.title}" loading="lazy">
+      <div class="label"><span class="title">${p.title}</span><span class="series">${p.series}</span></div>
+    </div>`;
+  }).join('');
+  setupDrag();
+}
+
+// Render sidebar with drop zones
+function renderSidebar(){
+  const sidebar=document.getElementById('sidebar');
+  let html='<div class="edit-panel" id="editPanel"><p style="font-size:.7rem;color:#8a8278;">👈 点击左侧照片编辑</p></div>';
+  for(const[key,name]of Object.entries(sectionNames)){
+    const imgs=(sections[key]||[]).map(f=>{
+      const p=photos.find(pp=>pp.file.split('/').pop()===f);
+      return p?`<div class="slot" data-file="${f}" onclick="removeFromSection('${key}','${f}')"><img src="${p.file}" alt=""><div class="remove">×</div></div>`:'';
+    }).join('');
+    html+=`<div class="section-group"><h3>${name}</h3><div class="drop-zone" data-section="${key}" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="addToSection('${key}',event)">${imgs}</div></div>`;
+  }
+  sidebar.innerHTML=html;
+}
+
+// Select photo → show edit panel
+function selectPhoto(file){
+  selectedFile=file;
+  const p=photos.find(pp=>pp.file.split('/').pop()===file);
+  if(!p)return;
+  document.getElementById('editPanel').innerHTML=`
+    <label>标题</label><input id="editTitle" value="${p.title}" onchange="updatePhoto('${file}','title',this.value)">
+    <label>分类 (series)</label>
+    <select id="editSeries" onchange="updatePhoto('${file}','series',this.value)">
+      <option value="portrait" ${p.series==='portrait'?'selected':''}>人像 Portrait</option>
+      <option value="street" ${p.series==='street'?'selected':''}>街拍 Street</option>
+      <option value="landscape" ${p.series==='landscape'?'selected':''}>风光 Landscape</option>
+      <option value="aerial" ${p.series==='aerial'?'selected':''}>航拍 Aerial</option>
+    </select>
+    <label>标签 (逗号分隔)</label><input id="editTags" value="${(p.tags||[]).join(',')}" onchange="updatePhoto('${file}','tags',this.value.split(',').map(t=>t.trim()))">
+    <img src="${p.file}" style="width:100%;border-radius:4px;margin-top:.5rem" alt="">
+  `;
+  renderPool();
+}
+
+function updatePhoto(file,key,val){
+  const p=photos.find(pp=>pp.file.split('/').pop()===file);
+  if(p)p[key]=val;
+}
+
+// Drag from pool to drop zone
+function setupDrag(){
+  document.querySelectorAll('.pool-item[draggable]').forEach(item=>{
+    item.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',item.dataset.file)});
+  });
+}
+
+function addToSection(sectionKey,e){
+  e.target.classList.remove('drag-over');
+  const file=e.dataTransfer.getData('text/plain');
+  if(!file||!sections[sectionKey])return;
+  if(!sections[sectionKey].includes(file)){
+    sections[sectionKey].push(file);
+    renderSidebar();
+    toast('✅ 已添加');
+  }
+}
+
+function removeFromSection(sectionKey,file){
+  sections[sectionKey]=sections[sectionKey].filter(f=>f!==file);
+  renderSidebar();
+  toast('🗑 已移除');
+}
+
+// Export
+function exportData(){
+  const clean={photos:DATA.photos,sections:DATA.sections};
+  const js='// 编辑此文件修改照片标题、分类、各区块照片分配\nconst SITE_DATA = '+JSON.stringify(clean,null,2)+';';
+  const blob=new Blob([js],{type:'text/javascript'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();
+  toast('💾 data.js 已下载！用这个文件替换网站里的 data.js 然后 git push');
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// Init
+renderPool();
+renderSidebar();
+</script>
+</body>
+</html>
