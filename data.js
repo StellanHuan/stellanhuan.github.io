@@ -1,4 +1,5 @@
 // 编辑此文件修改照片标题、分类、各区块照片分配
+// 前30张为当前使用，31-60为备选池
 const SITE_DATA = {
   "photos": [
     {
@@ -257,6 +258,246 @@ const SITE_DATA = {
       "tags": [
         "街拍",
         "东京"
+      ]
+    },
+    {
+      "file": "images/web_031.jpeg",
+      "title": "余白",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_032.jpeg",
+      "title": "光跡",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_033.jpeg",
+      "title": "隙間",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_034.jpeg",
+      "title": "行方",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_035.jpeg",
+      "title": "残像",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_036.jpeg",
+      "title": "層",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_037.jpeg",
+      "title": "輪郭",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_038.jpeg",
+      "title": "対話",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_039.jpeg",
+      "title": "温度",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_040.jpeg",
+      "title": "気配",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_041.jpeg",
+      "title": "遠景",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_042.jpeg",
+      "title": "静物",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_043.jpeg",
+      "title": "交差",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_044.jpeg",
+      "title": "片隅",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_045.jpeg",
+      "title": "明暗",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_046.jpeg",
+      "title": "通り雨",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_047.jpeg",
+      "title": "陽だまり",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_048.jpeg",
+      "title": "影絵",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_049.jpeg",
+      "title": "遊歩",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_050.jpeg",
+      "title": "浮遊",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_051.jpeg",
+      "title": "瞬き",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_052.jpeg",
+      "title": "黄昏",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_053.jpeg",
+      "title": "朝霧",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_054.jpeg",
+      "title": "夜明け",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_055.jpeg",
+      "title": "水面",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_056.jpeg",
+      "title": "坂道",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_057.jpeg",
+      "title": "路傍",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_058.jpeg",
+      "title": "灯台",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_059.jpeg",
+      "title": "霧中",
+      "series": "portrait",
+      "tags": [
+        "备用"
+      ]
+    },
+    {
+      "file": "images/web_060.jpeg",
+      "title": "帰路",
+      "series": "portrait",
+      "tags": [
+        "备用"
       ]
     }
   ],
