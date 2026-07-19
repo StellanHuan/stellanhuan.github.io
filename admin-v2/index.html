@@ -115,13 +115,20 @@
 // ═══ STORE ═══
 const store={
   photos: SITE_DATA?.photos||[],
-  sections: SITE_DATA?.sections||{},
+  sections: JSON.parse(JSON.stringify(SITE_DATA?.sections||{})),
   selectedPhotos: new Set(),
   filters: {series:[],tags:[],search:''},
-  projects: [],
-  prints: [],
-  exhibitions: []
+  projects: JSON.parse(localStorage.getItem('cms_projects')||'[]'),
+  prints: JSON.parse(localStorage.getItem('cms_prints')||'[]'),
+  exhibitions: JSON.parse(localStorage.getItem('cms_exhibitions')||'[]')
 };
+
+// Persist on unload
+window.addEventListener('beforeunload',()=>{
+  localStorage.setItem('cms_projects',JSON.stringify(store.projects));
+  localStorage.setItem('cms_prints',JSON.stringify(store.prints));
+  localStorage.setItem('cms_exhibitions',JSON.stringify(store.exhibitions));
+});
 
 // ═══ ROUTER ═══
 const pages={dashboard,photos,sections:renderSections,journal:renderJournal,projects:renderProjects,prints:renderPrints,exhibitions:renderExhibitions,settings:renderSettings};
@@ -156,8 +163,9 @@ function dashboard(){
       <div class="stat-card"><div class="num">${s}</div><div class="label">⊞ 区块</div></div>
       <div class="stat-card"><div class="num">${used}</div><div class="label">已使用</div></div>
       <div class="stat-card"><div class="num">${p-used}</div><div class="label">未使用</div></div>
-      <div class="stat-card"><div class="num">0</div><div class="label">✍ Journal</div></div>
-      <div class="stat-card"><div class="num">0</div><div class="label">🗂 Projects</div></div>
+      <div class="stat-card"><div class="num">${(store.projects||[]).length}</div><div class="label">🗂 Projects</div></div>
+      <div class="stat-card"><div class="num">${(store.prints||[]).length}</div><div class="label">🖼 Prints</div></div>
+      <div class="stat-card"><div class="num">${(store.exhibitions||[]).length}</div><div class="label">🏛 Exhibitions</div></div>
     </div>
     <div class="sec-title">站点健康</div>
     <div class="dash-info">
@@ -246,8 +254,8 @@ window.toggleFilter=function(type,val){
 
 window.applyFilters=function(q){store.filters.search=q;renderPhotoGrid()};
 window.clearSelection=function(){store.selectedPhotos.clear();renderPhotoGrid()};
-window.batchTag=function(){alert('批量标签 — 开发中')};
-window.batchSeries=function(){alert('批量系列 — 开发中')};
+window.batchTag=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const tag=prompt('输入标签 (逗号分隔)');if(!tag)return;const tags=tag.split(',').map(t=>t.trim());store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p){p.tags=[...new Set([...(p.tags||[]),...tags])]}});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 标签已添加')};
+window.batchSeries=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const series=prompt('输入系列 (portrait/street/landscape/aerial)');if(!series)return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p)p.series=series});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 系列已更新')};
 
 // Override photos page to render grid after HTML is injected
 const origNavigate=navigate;
