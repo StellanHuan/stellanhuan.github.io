@@ -1,0 +1,40 @@
+<!-- ═══════════════════════════════════
+   Journal Page — V4.4
+   摄影日志：列表 + 详情，数据来自 journal.json
+   ═══════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal — 瓛瓛 HuanHuan</title>
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="../../src/styles/base.css">
+<link rel="stylesheet" href="../../src/styles/layout.css">
+<link rel="stylesheet" href="../../src/components/Image/Image.css">
+<link rel="stylesheet" href="../../src/components/Gallery/Gallery.css">
+<link rel="stylesheet" href="Journal.css">
+</head>
+<body>
+<div class="grain"></div>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-back">← 返回主页</a>
+  <a href="../../index.html" class="nav-brand">Stellan</a>
+</nav>
+
+<header class="journal-hero">
+  <span class="journal-tag">JOURNAL</span>
+  <h1 data-lang="zh">摄影日志</h1>
+  <h1 data-lang="ja">写真日記</h1>
+  <h1 data-lang="en">Journal</h1>
+</header>
+
+<main id="journalContent"></main>
+
+<script src="../../src/data/journal.json" type="application/json" id="journalData"></script>
+<script src="../../src/components/Image/Image.js"></script>
+<script src="../../src/components/Gallery/Gallery.js"></script>
+<script src="Journal.js"></script>
+</body>
+</html>
