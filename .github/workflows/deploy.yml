@@ -1,0 +1,139 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'data.js'
+      - 'data.json'
+      - 'src/data/**'
+      - 'images/**'
+      - 'index.html'
+      - 'series/**'
+      - 'src/pages/**'
+      - 'public/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate JSON Schemas
+        run: |
+          python3 -c "
+          import json, sys, os
+          errors = []
+          files = {
+            'photos': 'content/photos/index.json',
+            'series': 'content/series/index.json',
+            'projects': 'content/projects/index.json',
+            'journal': 'content/journal/index.json',
+            'prints': 'content/prints/index.json',
+            'site': 'src/data/site.json'
+          }
+          for name, path in files.items():
+            if not os.path.exists(path):
+              errors.append(f'MISSING: {path}')
+              continue
+            try:
+              with open(path) as f: json.load(f)
+              print(f'  ✓ {name}')
+            except json.JSONDecodeError as e:
+              errors.append(f'INVALID JSON: {path} — {e}')
+          if errors:
+            for e in errors: print(f'  ✗ {e}')
+            sys.exit(1)
+          print('All JSON valid ✓')
+          "
+
+      - name: Check Images
+        run: |
+          python3 -c "
+          import json, os, sys
+          with open('content/photos/index.json') as f:
+              photos = json.load(f)
+          missing = []
+          for p in photos:
+              path = p['file']
+              if not os.path.exists(path):
+                  missing.append(path)
+          if missing:
+              print(f'Missing images: {len(missing)}')
+              for m in missing[:10]: print(f'  ✗ {m}')
+              sys.exit(1)
+          print(f'All {len(photos)} images present ✓')
+          "
+
+      - name: Export Content → data.js
+        run: python3 scripts/export_content.py
+
+      - name: Generate SEO Files
+        run: python3 scripts/generate_seo.py
+
+      - name: Verify Build Output
+        run: |
+          python3 -c "
+          import json, os, sys
+          checks = [
+            ('data.js', os.path.exists('data.js')),
+            ('sitemap.xml', os.path.exists('public/sitemap.xml')),
+            ('robots.txt', os.path.exists('public/robots.txt')),
+          ]
+          for name, ok in checks:
+            print(f'  {\"✓\" if ok else \"✗\"} {name}')
+            if not ok: sys.exit(1)
+          print('Build verified ✓')
+          "
+
+      - name: Commit Auto-Generated Files
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'actions@github.com'
+          git add data.js data.json src/data/series.js public/sitemap.xml public/robots.txt public/structured-data.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "auto: content rebuild [skip ci]"
+            git push
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: validate-and-build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
