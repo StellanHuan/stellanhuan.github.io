@@ -1,0 +1,39 @@
+<!-- ═══════════════════════════════════
+   Series Page — V3.3
+   使用 Gallery + Image 组件，数据来自 series.js
+   ═══════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瓛瓛 — Series</title>
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="../../src/components/Image/Image.css">
+<link rel="stylesheet" href="../../src/components/Gallery/Gallery.css">
+<link rel="stylesheet" href="Series.css">
+</head>
+<body>
+<div class="grain"></div>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav-back">← 返回主页</a>
+  <a href="../../index.html" class="nav-brand">Stellan</a>
+</nav>
+
+<div class="series-hero" id="seriesHero">
+  <span class="series-tag" id="seriesTag">SERIES</span>
+  <h1 id="seriesTitle">Series</h1>
+  <p class="series-desc" id="seriesDesc"></p>
+</div>
+
+<div class="series-gallery-wrap">
+  <div class="gallery" id="gallery"></div>
+</div>
+
+<script src="../../src/data/series.js"></script>
+<script src="../../src/components/Image/Image.js"></script>
+<script src="../../src/components/Gallery/Gallery.js"></script>
+<script src="Series.js"></script>
+</body>
+</html>
