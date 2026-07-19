@@ -526,7 +526,7 @@
       </div>
     </div>
     <div class="contact-cta">
-      <button onclick="window.location.href='weixin://'"><span data-lang="zh">复制微信号</span><span data-lang="ja">WeChatをコピー</span><span data-lang="en">Copy WeChat</span></button>
+      <button id="copyWechat"><span data-lang="zh">复制微信号</span><span data-lang="ja">WeChatをコピー</span><span data-lang="en">Copy WeChat</span></button>
     </div>
   </div>
 </div>
@@ -540,7 +540,7 @@
 <script>
 // ═══ PHOTOS ═══
 const P=[];
-for(let i=1;i<=30;i++)P.push(`images/web_${String(i).padStart(3,'0')}.jpeg?v=2`);
+for(let i=1;i<=30;i++)P.push(`images/web_${String(i).padStart(3,'0')}.jpeg?v=3`);
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 //const pool=shuffle([...P]);
 const pool=[...P]; // 固定顺序，不随机
@@ -612,13 +612,10 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
 // ═══ CONTACT COPY ═══
-document.querySelector('.contact-cta button')?.addEventListener('click',()=>{
-  navigator.clipboard?.writeText('S0688888860').then(()=>{
-    const btn=document.querySelector('.contact-cta button');
-    const orig=btn.textContent;
-    btn.textContent='✓ 已复制';
-    setTimeout(()=>{btn.textContent=orig},1500);
-  });
+document.getElementById('copyWechat')?.addEventListener('click',async()=>{
+  const btn=document.getElementById('copyWechat');
+  try{await navigator.clipboard.writeText('S0688888860');btn.textContent='✓ 已复制'}catch(e){btn.textContent='微信: S0688888860'}
+  setTimeout(()=>{location.reload()},1500);
 });
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
   link.addEventListener('click',e=>{
