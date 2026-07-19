@@ -22,8 +22,9 @@
   .grid-item{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:6px;cursor:pointer;border:2px solid transparent;transition:border-color .2s}
   .grid-item.selected{border-color:var(--gold-l)}
   .grid-item img{width:100%;height:100%;object-fit:cover}
-  .grid-item .check{position:absolute;top:.3rem;right:.3rem;width:20px;height:20px;border-radius:50%;background:var(--gold-l);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.6rem;opacity:0;transition:opacity .2s}
+  .grid-item .check{position:absolute;top:.3rem;right:.3rem;width:20px;height:20px;border-radius:50%;background:var(--gold-l);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.6rem;opacity:0;transition:opacity .2s;z-index:2}
   .grid-item.selected .check{opacity:1}
+  .watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:1.5rem;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:.5em;pointer-events:none;z-index:1;text-shadow:0 0 10px rgba(0,0,0,.5)}
   .actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
   .actions button{background:var(--card);border:1px solid var(--border);color:var(--text-d);padding:.6rem 1.2rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer;letter-spacing:.05em}
   .actions button:hover{color:var(--gold-l);border-color:var(--gold-d)}
@@ -70,7 +71,7 @@ function renderGallery(){
     <div class="status-bar"><span>客户: ${p.client}</span><span>日期: ${p.date}</span><span>状态: ${p.status}</span><span>已选: ${selected.size}/${p.photos.length}</span></div>
     <div class="grid">${p.photos.map(f=>`
       <div class="grid-item ${selected.has(f)?'selected':''}" onclick="togglePhoto('${f}')">
-        <img src="../images/${f}" alt="" loading="lazy"><div class="check">✓</div>
+        <img src="../images/${f}" alt="" loading="lazy" style="position:relative"><div class="watermark">PREVIEW</div><div class="check">✓</div>
       </div>`).join('')}</div>
     <div class="notes-area"><textarea placeholder="备注反馈..." onchange="notes=this.value">${notes}</textarea></div>
     <div class="actions">
@@ -90,9 +91,15 @@ window.submitFeedback=function(){
 };
 window.downloadSelected=function(){
   const sel=Array.from(selected);if(!sel.length)return alert('请先选择照片');
+  const code=Object.keys(projects).find(k=>projects[k]===currentProject)||'';
+  const logKey='dl_log_'+code;const dlLog=JSON.parse(localStorage.getItem(logKey)||'[]');
+  if(dlLog.length>=50){alert('下载次数已达上限，请联系摄影师');return}
+  Analytics?.track('download_attempt',{project:code,count:sel.length});
   sel.forEach(f=>{const a=document.createElement('a');a.href='../images/'+f;a.download=f;document.body.appendChild(a);a.click();a.remove()});
-  Analytics?.track('delivery_download',{project:currentProject.name,count:sel.length});
-};
+  dlLog.push({time:Date.now(),count:sel.length,files:sel});
+  localStorage.setItem(logKey,JSON.stringify(dlLog));
+  Analytics?.track('download_completed',{project:code,count:sel.length});
+  alert(`已下载 ${sel.length} 张 (剩余 ${50-dlLog.length} 次)`)};
 
 renderLogin();
 </script>
