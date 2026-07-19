@@ -115,7 +115,7 @@
   .block-head .more-link:hover{background:var(--gold-dim);color:var(--bg)}
 
   /* ===== DUO ===== */
-  .duo{display:flex;gap:1rem;padding:4rem 3rem;max-width:1200px;margin:0 auto}
+  .duo{display:flex;gap:1rem;padding:3rem 2.5rem;max-width:1100px;margin:0 auto}
   .duo-item{position:relative;overflow:hidden;border-radius:4px}
   .duo-item:nth-child(1){flex:1.5}.duo-item:nth-child(2){flex:1}
   .duo-item img{width:100%;height:100%;object-fit:cover;display:block;
@@ -134,12 +134,12 @@
 
   /* ===== H-SCROLL ===== */
   .hscroll-wrap{padding:4rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .hscroll-head{padding:0 3rem 2rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end}
+  .hscroll-head{padding:0 2.5rem 1.5rem;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end}
   .hscroll-head .left .tag{font-size:.65rem;letter-spacing:.5em;color:var(--gold-dim);display:block;margin-bottom:.8rem}
   .hscroll-head .left h3{font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light)}
   .hscroll-head .more-link{font-size:.75rem;color:var(--gold-light);letter-spacing:.1em;text-decoration:none;border:1px solid var(--gold-dim);padding:.7rem 1.6rem;border-radius:4px;transition:all .3s var(--ease-out);flex-shrink:0}
   .hscroll-head .more-link:hover{background:var(--gold-dim);color:var(--bg)}
-  .hscroll-track{display:flex;gap:2rem;padding:0 3rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+  .hscroll-track{display:flex;gap:1.5rem;padding:0 2.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
   .hscroll-track::-webkit-scrollbar{display:none}
   .hscroll-dots{display:flex;justify-content:center;gap:.5rem;padding:1.5rem 0 0}
   .hscroll-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .3s}
@@ -200,7 +200,7 @@
   .grain{position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
 
   /* Scroll progress bar */
-  .scroll-progress{position:fixed;top:0;left:0;height:1.5px;background:var(--gold);z-index:9995;transition:width .15s linear}
+  .scroll-progress{position:fixed;top:0;left:0;height:1px;background:var(--gold);z-index:9995;transition:width .15s linear}
 
   @media(max-width:768px){
     .nav{padding:.8rem 1rem}
