@@ -17,40 +17,49 @@
   },
   "sections": {
     "hero": [
-      "web_001.jpeg"
+      "web_055.jpeg"
     ],
     "featured": [
-      "web_002.jpeg",
-      "web_003.jpeg"
+      "web_003.jpeg",
+      "web_124.jpeg",
+      "web_046.jpeg",
+      "web_011.jpeg"
     ],
     "hscroll": [
       "web_007.jpeg",
       "web_009.jpeg",
-      "web_015.jpeg",
-      "web_018.jpeg",
-      "web_023.jpeg",
-      "web_026.jpeg",
-      "web_030.jpeg"
+      "web_026.jpeg"
     ],
     "landscape": [
       "web_005.jpeg",
-      "web_029.jpeg"
+      "web_041.jpeg",
+      "web_045.jpeg",
+      "web_017.jpeg"
     ],
     "aerial": [
-      "web_020.jpeg",
-      "web_027.jpeg"
+      "web_027.jpeg",
+      "web_022.jpeg",
+      "web_044.jpeg",
+      "web_021.jpeg",
+      "web_082.jpeg"
     ],
     "about": [
-      "web_008.jpeg"
+      "web_147.jpeg",
+      "web_139.jpeg",
+      "web_108.jpeg"
     ],
     "booking_portrait": [
-      "web_001.jpeg"
+      "web_133.jpeg",
+      "web_103.jpeg",
+      "web_128.jpeg",
+      "web_110.jpeg"
     ],
     "booking_event": [
-      "web_015.jpeg"
+      "web_040.jpeg"
     ],
     "booking_aerial": [
-      "web_004.jpeg"
+      "web_004.jpeg",
+      "web_010.jpeg"
     ]
   },
   "booking": {
