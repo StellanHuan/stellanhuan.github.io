@@ -1,0 +1,137 @@
+<!-- ═══════════════════════════════════
+   Homepage — V4.2
+   Component-based architecture. All sections rendered from data.
+   ═══════════════════════════════════ -->
+<!DOCTYPE html>
+<html lang="zh-CN" data-current-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瓛瓛 HuanHuan — Photography</title>
+<meta name="description" content="Stellan Huan · Nikon Z8 · 郑州与东京之间的光">
+<meta property="og:title" content="瓛瓛 HuanHuan">
+<meta property="og:description" content="Nikon Z8 · 郑州·东京">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="../../src/styles/base.css">
+<link rel="stylesheet" href="../../src/styles/layout.css">
+<link rel="stylesheet" href="../../src/components/Image/Image.css">
+<link rel="stylesheet" href="../../src/components/Gallery/Gallery.css">
+<link rel="stylesheet" href="../../src/components/Lightbox/Lightbox.css">
+<link rel="stylesheet" href="Home.css">
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Stellan</a>
+    <div class="nav-links">
+      <a href="#work" data-lang="zh">作品</a><a href="#work" data-lang="ja">作品</a><a href="#work" data-lang="en">Work</a>
+      <a href="#about" data-lang="zh">关于</a><a href="#about" data-lang="ja">关于</a><a href="#about" data-lang="en">About</a>
+      <a href="#booking" data-lang="zh">预约</a><a href="#booking" data-lang="ja">予約</a><a href="#booking" data-lang="en">Book</a>
+      <a href="#contact" data-lang="zh">联系</a><a href="#contact" data-lang="ja">連絡</a><a href="#contact" data-lang="en">Contact</a>
+      <div class="lang-dot">
+        <button class="lang-current" id="langCurrent">中文</button>
+        <div class="lang-dropdown" id="langDropdown">
+          <button data-lang-switch="zh" class="active">中文</button>
+          <button data-lang-switch="ja">日本語</button>
+          <button data-lang-switch="en">English</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero"></section>
+
+<!-- ═══ QUOTE ═══ -->
+<section class="macro-type" id="quote"></section>
+
+<!-- ═══ FULL IMAGE ═══ -->
+<div class="full-img" id="fullImage"></div>
+
+<!-- ═══ 01 FEATURED ═══ -->
+<div class="section-header" id="work">
+  <div class="left">
+    <span class="num">01</span>
+    <h2 data-lang="zh">目光所及</h2><h2 data-lang="ja">視線の先</h2><h2 data-lang="en">Within Sight</h2>
+  </div>
+  <a href="series/#portrait" class="more-link" data-lang="zh">阅读更多 →</a>
+  <a href="series/#portrait" class="more-link" data-lang="ja">もっと見る →</a>
+  <a href="series/#portrait" class="more-link" data-lang="en">View More →</a>
+</div>
+<div class="duo" id="featuredDuo"></div>
+
+<!-- ═══ 02 HSCROLL ═══ -->
+<div class="hscroll-wrap">
+  <div class="hscroll-head">
+    <div class="left">
+      <span class="tag">02</span>
+      <h3 data-lang="zh">街头的呼吸</h3><h3 data-lang="ja">街の呼吸</h3><h3 data-lang="en">The Street Breathes</h3>
+    </div>
+    <a href="series/#street" class="more-link" data-lang="zh">阅读更多 →</a>
+    <a href="series/#street" class="more-link" data-lang="ja">もっと見る →</a>
+    <a href="series/#street" class="more-link" data-lang="en">View More →</a>
+  </div>
+  <div class="hscroll-track" id="hscrollTrack"></div>
+  <div class="hscroll-dots" id="hscrollDots"></div>
+</div>
+
+<!-- ═══ 03 LANDSCAPE ═══ -->
+<div class="section-header">
+  <div class="left">
+    <span class="num">03</span>
+    <h2 data-lang="zh">大地与天空</h2><h2 data-lang="ja">大地と空</h2><h2 data-lang="en">Earth & Sky</h2>
+  </div>
+  <a href="series/#landscape" class="more-link" data-lang="zh">阅读更多 →</a>
+  <a href="series/#landscape" class="more-link" data-lang="ja">もっと見る →</a>
+  <a href="series/#landscape" class="more-link" data-lang="en">View More →</a>
+</div>
+<div class="duo duo--reverse" id="landscapeDuo"></div>
+
+<!-- ═══ 04 BOOKING ═══ -->
+<div class="booking-section" id="booking">
+  <div class="booking-header">
+    <span class="num">04</span>
+    <h2 data-lang="zh">写真预约</h2><h2 data-lang="ja">写真予約</h2><h2 data-lang="en">Book a Session</h2>
+  </div>
+  <div class="booking-cards" id="bookingCards"></div>
+  <div class="booking-process" id="bookingProcess"></div>
+</div>
+
+<!-- ═══ 05 ABOUT ═══ -->
+<div class="about-section" id="about"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="contact-section" id="contact">
+  <h3 data-lang="zh">联系</h3><h3 data-lang="ja">お問い合わせ</h3><h3 data-lang="en">Contact</h3>
+  <div class="contact-card">
+    <div class="contact-row"><span class="label">微信</span><span class="value">S0688888860</span></div>
+    <div class="contact-row"><span class="label" data-lang="zh">地区</span><span class="label" data-lang="ja">地域</span><span class="label" data-lang="en">Location</span><span class="value">郑州 · 漯河</span></div>
+    <div class="contact-row"><span class="label" data-lang="zh">服务</span><span class="label" data-lang="ja">内容</span><span class="label" data-lang="en">Services</span><span class="value" data-lang="zh">写真 · 跟拍 · 航拍</span><span class="value" data-lang="ja">ポートレート · イベント · 空撮</span><span class="value" data-lang="en">Portrait · Event · Aerial</span></div>
+  </div>
+  <button id="copyWechat" class="btn-copy"><span data-lang="zh">复制微信号</span><span data-lang="ja">WeChatをコピー</span><span data-lang="en">Copy WeChat</span></button>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span data-lang="zh">© 2026 瓛瓛 HuanHuan<br>有元慎也に師事 · 光を追いかけて</span>
+  <span data-lang="ja">© 2026 瓛瓛 HuanHuan<br>有元慎也に師事 · 光を追いかけて</span>
+  <span data-lang="en">© 2026 瓛瓛 HuanHuan<br>Student of Arimoto Shinya · Chasing light</span>
+</footer>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<include src="../../src/components/Lightbox/Lightbox.html">
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="../../data.js"></script>
+<script src="../../src/data/series.js"></script>
+<script src="../../src/components/Image/Image.js"></script>
+<script src="../../src/components/Gallery/Gallery.js"></script>
+<script src="../../src/components/Lightbox/Lightbox.js"></script>
+<script src="Home.js"></script>
+</body>
+</html>
