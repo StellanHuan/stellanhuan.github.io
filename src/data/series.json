@@ -1,11 +1,6 @@
 {
   "portrait": {
-    "id": "portrait",
-    "name": {
-      "zh": "目光所及"
-    },
     "photos": [
-      "web_004.jpeg",
       "web_016.jpeg",
       "web_026.jpeg",
       "web_036.jpeg",
@@ -14,31 +9,24 @@
       "web_067.jpeg",
       "web_077.jpeg",
       "web_087.jpeg",
+      "web_120.jpeg",
       "web_128.jpeg",
       "web_110.jpeg",
       "web_072.jpeg"
     ]
   },
   "street": {
-    "id": "street",
-    "name": {
-      "zh": "街头的呼吸"
-    },
     "photos": [
-      "web_007.jpeg",
       "web_009.jpeg",
       "web_026.jpeg",
       "web_025.jpeg",
       "web_075.jpeg",
       "web_069.jpeg",
-      "web_094.jpeg"
+      "web_094.jpeg",
+      "web_130.jpeg"
     ]
   },
   "landscape": {
-    "id": "landscape",
-    "name": {
-      "zh": "大地与天空"
-    },
     "photos": [
       "web_006.jpeg",
       "web_042.jpeg",
@@ -51,10 +39,6 @@
     ]
   },
   "aerial": {
-    "id": "aerial",
-    "name": {
-      "zh": "俯瞰"
-    },
     "photos": [
       "web_021.jpeg",
       "web_028.jpeg",
