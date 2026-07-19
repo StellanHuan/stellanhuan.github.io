@@ -1,0 +1,22 @@
+{
+  "original": {
+    "count": 150,
+    "size": 74669983,
+    "size_mb": 71.2
+  },
+  "webp": {
+    "count": 150,
+    "size": 24241650,
+    "size_mb": 23.1
+  },
+  "avif": {
+    "count": 150,
+    "size": 17971677,
+    "size_mb": 17.1
+  },
+  "thumb": {
+    "count": 150,
+    "size": 1626598,
+    "size_mb": 1.6
+  }
+}
