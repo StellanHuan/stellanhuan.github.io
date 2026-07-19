@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quotes — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem;max-width:900px;margin:0 auto}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.7rem;margin-bottom:2rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.2rem;margin-bottom:1.5rem}
+  .layout{display:flex;gap:2rem}
+  .form-panel{flex:1}
+  .preview-panel{flex:1;position:sticky;top:2rem;align-self:flex-start}
+  .fg{margin-bottom:1rem}
+  .fg label{display:block;font-size:.65rem;color:var(--gold-d);letter-spacing:.1em;margin-bottom:.3rem}
+  .fg input,.fg select,.fg textarea{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.5rem;border-radius:4px;font-family:inherit;font-size:.75rem}
+  .fg input:focus,.fg select:focus{outline:none;border-color:var(--gold-d)}
+  .row{display:flex;gap:.5rem}.row .fg{flex:1}
+  .items{margin-bottom:1rem}
+  .item-row{display:flex;gap:.3rem;align-items:center;margin-bottom:.3rem}
+  .item-row input{background:var(--card);border:1px solid var(--border);color:var(--text);padding:.3rem .5rem;border-radius:3px;font-family:inherit;font-size:.7rem}
+  .item-row .desc{flex:2}.item-row .qty{width:60px}.item-row .price{width:80px}.item-row .total{width:80px;color:var(--gold-l);text-align:right;font-size:.7rem}
+  .btn{background:var(--gold-d);color:var(--bg);border:none;padding:.6rem 1.5rem;border-radius:4px;font-family:inherit;font-size:.75rem;cursor:pointer;letter-spacing:.1em;margin-right:.5rem}
+  .btn:hover{background:var(--gold)}
+  .total-bar{display:flex;justify-content:space-between;padding:1rem;background:var(--card);border:1px solid var(--gold-d);border-radius:4px;margin-bottom:1rem}
+  .total-bar .lbl{font-size:.7rem;color:var(--gold-d)}.total-bar .val{font-size:1.5rem;color:var(--gold-l);font-weight:200}
+  .preview{background:#fff;color:#1a1a1a;padding:2rem;border-radius:4px;font-size:.75rem;line-height:1.8;min-height:400px}
+  .preview h2{font-size:1rem;margin-bottom:.5rem;color:#333}
+  .preview table{width:100%;border-collapse:collapse;margin:1rem 0}
+  .preview th,.preview td{padding:.3rem .5rem;text-align:left;border-bottom:1px solid #ddd;font-size:.7rem}
+  .preview .total-row{font-weight:700}
+  .list{margin-bottom:2rem}
+  .list-item{display:flex;justify-content:space-between;padding:.5rem;background:var(--card);border:1px solid var(--border);border-radius:4px;margin-bottom:.3rem;font-size:.7rem;cursor:pointer;align-items:center}
+  .list-item:hover{border-color:var(--gold-d)}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📋 Quote Generator</h1>
+
+<div id="listView">
+  <div class="section-title" style="font-size:.7rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:1rem">SAVED QUOTES</div>
+  <div class="list" id="quoteList"></div>
+  <button class="btn" onclick="newQuote()">+ 新建报价</button>
+</div>
+
+<div id="editView" style="display:none">
+  <div class="layout">
+    <div class="form-panel">
+      <div class="fg"><label>客户名称 *</label><input id="qName" placeholder="客户姓名/公司"></div>
+      <div class="fg"><label>关联 Lead</label><select id="qLead"></select></div>
+      <div class="row"><div class="fg"><label>项目类型</label><select id="qType"><option>Portrait</option><option>Event</option><option>Aerial</option><option>Mixed</option></select></div><div class="fg"><label>有效期</label><input type="date" id="qExpiry"></div></div>
+      <div class="section-title" style="font-size:.65rem;color:var(--gold-d);margin-bottom:.5rem">报价项目</div>
+      <div class="items" id="itemsList"></div>
+      <button class="btn" onclick="addItem()" style="font-size:.65rem;padding:.3rem .8rem;margin-bottom:1rem">+ 添加项目</button>
+      <div class="total-bar"><span class="lbl">合计</span><span class="val" id="grandTotal">¥0</span></div>
+      <div class="fg"><label>备注</label><textarea id="qNotes" rows="2"></textarea></div>
+      <button class="btn" onclick="saveQuote()">💾 保存</button>
+      <button class="btn" onclick="printQuote()" style="background:var(--card);border:1px solid var(--gold-d);color:var(--gold-l)">🖨 打印 PDF</button>
+      <button class="btn" onclick="sendQuote()" style="background:var(--card);border:1px solid var(--gold-d);color:var(--gold-l)">✉ 发送邮件</button>
+      <button class="btn" onclick="showList()" style="background:none;color:var(--text-d);border:none">← 返回列表</button>
+    </div>
+    <div class="preview-panel"><div class="preview" id="preview"></div></div>
+  </div>
+</div>
+
+<script>
+let quotes=JSON.parse(localStorage.getItem('quotes')||'[]');
+let currentItems=[{desc:'',qty:1,price:0}];
+let editId=null;
+
+// Load leads
+const leads=JSON.parse(localStorage.getItem('crm_leads')||'[]');
+document.getElementById('qLead').innerHTML='<option value="">—</option>'+leads.map(l=>`<option value="${l.name}">${l.name}</option>`).join('');
+
+function showList(){document.getElementById('listView').style.display='block';document.getElementById('editView').style.display='none';renderList()}
+function newQuote(){editId=null;currentItems=[{desc:'',qty:1,price:0}];document.getElementById('qName').value='';document.getElementById('qNotes').value='';renderItems();updatePreview();document.getElementById('listView').style.display='none';document.getElementById('editView').style.display='block'}
+function renderList(){document.getElementById('quoteList').innerHTML=quotes.length?quotes.map((q,i)=>`<div class="list-item" onclick="editQuote(${i})"><span>${q.name} · ${q.type}</span><span style="color:var(--gold-d)">¥${q.total||0} · ${q.date}</span></div>`).join(''):'<div style="text-align:center;padding:2rem;color:var(--text-d)">暂无报价</div>'}
+function editQuote(i){const q=quotes[i];editId=i;document.getElementById('qName').value=q.name;document.getElementById('qType').value=q.type;document.getElementById('qExpiry').value=q.expiry||'';document.getElementById('qNotes').value=q.notes||'';currentItems=q.items||[];renderItems();updatePreview();document.getElementById('listView').style.display='none';document.getElementById('editView').style.display='block'}
+
+function renderItems(){document.getElementById('itemsList').innerHTML=currentItems.map((it,i)=>`<div class="item-row"><input class="desc" value="${it.desc}" onchange="updateItem(${i},'desc',this.value)" placeholder="项目描述"><input class="qty" type="number" value="${it.qty}" onchange="updateItem(${i},'qty',this.value)" min="1"><input class="price" type="number" value="${it.price}" onchange="updateItem(${i},'price',this.value)" placeholder="单价"><span class="total">¥${(it.qty*it.price).toLocaleString()}</span><button onclick="currentItems.splice(${i},1);renderItems();updatePreview()" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:.7rem">×</button></div>`).join('');updateTotal()}
+function addItem(){currentItems.push({desc:'',qty:1,price:0});renderItems();updatePreview()}
+function updateItem(i,k,v){currentItems[i][k]=k==='desc'?v:Number(v)||0;updateTotal();updatePreview()}
+function updateTotal(){const t=currentItems.reduce((s,i)=>s+i.qty*i.price,0);document.getElementById('grandTotal').textContent='¥'+t.toLocaleString()}
+
+function updatePreview(){
+  const name=document.getElementById('qName').value||'客户名称';
+  const type=document.getElementById('qType').value;
+  const total=currentItems.reduce((s,i)=>s+i.qty*i.price,0);
+  document.getElementById('preview').innerHTML=`
+    <h2>STELLAN PHOTOGRAPHY</h2>
+    <p style="font-size:.7rem;color:#666">报价单 · Quote</p>
+    <p><b>客户:</b> ${name}<br><b>项目:</b> ${type}<br><b>日期:</b> ${new Date().toLocaleDateString('zh-CN')}</p>
+    <table><tr><th>项目</th><th>数量</th><th>单价</th><th>金额</th></tr>
+    ${currentItems.map(i=>`<tr><td>${i.desc||'—'}</td><td>${i.qty}</td><td>¥${i.price.toLocaleString()}</td><td>¥${(i.qty*i.price).toLocaleString()}</td></tr>`).join('')}
+    <tr class="total-row"><td colspan="3">合计</td><td>¥${total.toLocaleString()}</td></tr></table>
+    <p style="font-size:.65rem;color:#999">有效期: ${document.getElementById('qExpiry').value||'30天'}<br>微信: S0688888860</p>`;
+}
+
+function saveQuote(){
+  const name=document.getElementById('qName').value;if(!name)return alert('请输入客户名称');
+  const q={name,type:document.getElementById('qType').value,items:[...currentItems],total:currentItems.reduce((s,i)=>s+i.qty*i.price,0),expiry:document.getElementById('qExpiry').value,notes:document.getElementById('qNotes').value,date:new Date().toISOString().split('T')[0]};
+  if(editId!==null)quotes[editId]=q;else{quotes.push(q);Analytics?.track('quote_created')}
+  localStorage.setItem('quotes',JSON.stringify(quotes));showList();
+}
+function printQuote(){window.print()}
+function sendQuote(){
+  const name=document.getElementById('qName').value;
+  const total=currentItems.reduce((s,i)=>s+i.qty*i.price,0);
+  const body=`报价单\n客户: ${name}\n合计: ¥${total.toLocaleString()}\n有效期: ${document.getElementById('qExpiry').value||'30天'}\n\n详情请联系微信: S0688888860`;
+  fetch('https://formsubmit.co/965946974@qq.com',{method:'POST',body:new URLSearchParams({_subject:'Quote: '+name,message:body,_template:'table'})});
+  alert('报价已发送到你的邮箱');Analytics?.track('quote_sent');
+}
+
+renderList();showList();
+</script>
+</body>
+</html>
