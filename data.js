@@ -1164,7 +1164,7 @@ const SITE_DATA = {
   ],
   "sections": {
     "hero": [
-      "web_100.jpeg"
+      "web_055.jpeg"
     ],
     "featured": [
       "web_004.jpeg",
