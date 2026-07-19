@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Tokyo Rain",
+    "slug": "tokyo-rain",
+    "description": "2025年梅雨季的东京街头。雨中的行人、霓虹倒影、被打湿的柏油路面——城市在雨季呈现出另一种面貌。",
+    "cover": "web_023.jpeg",
+    "photos": [
+      "web_023.jpeg",
+      "web_009.jpeg",
+      "web_030.jpeg",
+      "web_003.jpeg",
+      "web_007.jpeg",
+      "web_018.jpeg"
+    ],
+    "location": "东京 · 新宿 / 涩谷",
+    "date": "2025-06",
+    "client": "个人项目",
+    "exif": "Nikon Z8 · 35mm f/1.8",
+    "notes": "雨天总是让东京变得更安静。快门声被雨声吞没，取景框里的世界变成了一幅水彩画。这个系列拍了三个雨天，每次都有不同的光线——六月的雨是灰色的，七月的雨带着午后的金色。",
+    "published": true
+  }
+]
