@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licenses — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.65rem;margin-bottom:1.5rem;display:inline-block}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.1rem;margin-bottom:1.5rem}
+  .toolbar{display:flex;gap:.5rem;margin-bottom:1rem}
+  .toolbar button,.toolbar select{background:var(--card);border:1px solid var(--border);color:var(--text-d);padding:.4rem .8rem;border-radius:4px;font-family:inherit;font-size:.65rem;cursor:pointer}
+  table{width:100%;border-collapse:collapse;font-size:.7rem}
+  th{text-align:left;padding:.5rem;color:var(--gold-d);font-size:.6rem;letter-spacing:.1em;border-bottom:1px solid var(--border);font-weight:400}
+  td{padding:.5rem;border-bottom:1px solid var(--border);color:var(--text-d)}
+  .s{display:inline-block;padding:.2rem .5rem;border-radius:10px;font-size:.55rem}
+  .s-Active{background:rgba(123,174,127,.15);color:var(--green)}
+  .s-Draft{background:rgba(128,128,128,.1);color:var(--text-d)}
+  .s-Expired{background:rgba(139,58,58,.15);color:var(--red)}
+  .s-Renewed{background:rgba(184,147,79,.15);color:var(--gold-l)}
+  .form-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;align-items:center;justify-content:center}
+  .form-overlay.show{display:flex}
+  .form-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:2rem;width:100%;max-width:500px}
+  .fg{margin-bottom:1rem}.fg label{display:block;font-size:.6rem;color:var(--gold-d);margin-bottom:.2rem}
+  .fg input,.fg select{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.4rem;border-radius:4px;font-family:inherit;font-size:.7rem}
+  .row{display:flex;gap:.5rem}.row .fg{flex:1}
+  .btn{background:var(--gold-d);color:var(--bg);border:none;padding:.5rem 1rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📜 License Manager</h1>
+<div class="toolbar">
+  <button onclick="showForm()">+ New License</button>
+  <select id="statusFilter" onchange="renderTable()"><option value="">All</option><option>Draft</option><option>Active</option><option>Expired</option><option>Renewed</option></select>
+</div>
+<table><thead><tr><th>Asset</th><th>Client</th><th>Type</th><th>Scope</th><th>Start</th><th>End</th><th>Status</th></tr></thead><tbody id="tableBody"></tbody></table>
+
+<div class="form-overlay" id="formOverlay">
+  <div class="form-box">
+    <h2 style="font-weight:300;color:var(--gold-l);font-size:1rem;margin-bottom:1.5rem">New License</h2>
+    <div class="row"><div class="fg"><label>Asset/Photo</label><input id="lAsset" placeholder="e.g. web_001"></div><div class="fg"><label>Client</label><input id="lClient"></div></div>
+    <div class="fg"><label>Type</label><select id="lType"><option>个人使用</option><option>商业授权</option><option>买断版权</option><option>编辑使用</option></select></div>
+    <div class="row"><div class="fg"><label>Scope</label><select id="lScope"><option>全球</option><option>中国大陆</option><option>亚洲</option></select></div><div class="fg"><label>Exclusive</label><select id="lExclusive"><option>非独家</option><option>独家</option></select></div></div>
+    <div class="row"><div class="fg"><label>Start</label><input type="date" id="lStart"></div><div class="fg"><label>End</label><input type="date" id="lEnd"></div></div>
+    <div class="fg"><label>Fee ¥</label><input type="number" id="lFee"></div>
+    <button class="btn" onclick="saveLicense()">Save</button>
+    <button class="btn" onclick="hideForm()" style="background:var(--card);border:1px solid var(--border);color:var(--text-d);margin-left:.5rem">Cancel</button>
+  </div>
+</div>
+
+<script>
+let licenses=JSON.parse(localStorage.getItem('licenses')||'[]');
+const STATUSES=['Draft','Active','Expired','Renewed'];
+
+function renderTable(){
+  const sf=document.getElementById('statusFilter')?.value||'';
+  let list=sf?licenses.filter(l=>l.status===sf):[...licenses];
+  list.sort((a,b)=>new Date(b.start)-new Date(a.start));
+  document.getElementById('tableBody').innerHTML=list.length?list.map((l,i)=>{
+    const idx=licenses.indexOf(l);
+    // Auto-expire
+    if(l.status==='Active'&&l.end&&new Date(l.end)<new Date()){l.status='Expired';localStorage.setItem('licenses',JSON.stringify(licenses))}
+    return `<tr>
+      <td>${l.asset}</td><td>${l.client}</td><td>${l.type}</td><td>${l.scope} · ${l.exclusive}</td>
+      <td>${l.start}</td><td>${l.end}</td>
+      <td><span class="s s-${l.status}">${l.status}</span></td>
+    </tr>`;
+  }).join(''):'<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-d)">No licenses</td></tr>';
+}
+
+window.showForm=()=>document.getElementById('formOverlay').classList.add('show');
+window.hideForm=()=>document.getElementById('formOverlay').classList.remove('show');
+window.saveLicense=()=>{
+  const a=document.getElementById('lAsset').value;if(!a)return alert('Asset required');
+  licenses.push({asset:a,client:document.getElementById('lClient').value,type:document.getElementById('lType').value,scope:document.getElementById('lScope').value,exclusive:document.getElementById('lExclusive').value,start:document.getElementById('lStart').value,end:document.getElementById('lEnd').value,fee:Number(document.getElementById('lFee').value)||0,status:'Draft',created:new Date().toISOString().split('T')[0]});
+  localStorage.setItem('licenses',JSON.stringify(licenses));Analytics?.track('license_created');
+  hideForm();renderTable();
+};
+renderTable();
+</script>
+</body>
+</html>
