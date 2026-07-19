@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a;--warn:#c9a050}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.2rem;margin-bottom:1.5rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.7rem;margin-bottom:2rem;display:inline-block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-bottom:2rem}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.2rem;text-align:center}
+  .card .val{font-size:1.8rem;font-weight:200}
+  .card .lbl{font-size:.6rem;color:var(--text-d);letter-spacing:.1em;margin-top:.3rem}
+  .ok{color:var(--green)}.warn{color:var(--warn)}.err{color:var(--red)}
+  .section{margin-bottom:2rem}
+  .section h2{font-size:.7rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:1rem;text-transform:uppercase}
+  .log-list{max-height:400px;overflow-y:auto}
+  .log-item{display:flex;gap:.5rem;padding:.4rem .8rem;font-size:.65rem;border-bottom:1px solid var(--border);align-items:center}
+  .log-type{font-size:.55rem;padding:.15rem .4rem;border-radius:10px;white-space:nowrap}
+  .type-js_error{background:rgba(139,58,58,.15);color:var(--red)}
+  .type-image_error{background:rgba(139,58,58,.1);color:var(--red)}
+  .type-lcp{background:rgba(184,147,79,.1);color:var(--gold-l)}
+  .type-page_load{background:rgba(123,174,127,.1);color:var(--green)}
+  .empty{text-align:center;padding:3rem;color:var(--text-d)}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>🩺 System Health</h1>
+<div class="grid" id="statsGrid"></div>
+<div class="section"><h2>Recent Events</h2><div class="log-list" id="logList"></div></div>
+<script>
+const events=JSON.parse(localStorage.getItem('health_events')||'[]');
+const recent=events.slice(-200).reverse();
+
+// Stats
+const errors=events.filter(e=>e.type==='js_error'||e.type==='image_error');
+const lcps=events.filter(e=>e.type==='lcp');
+const avgLCP=lcps.length?Math.round(lcps.reduce((s,e)=>s+e.data.value,0)/lcps.length):0;
+const loads=events.filter(e=>e.type==='page_load');
+const avgLoad=loads.length?Math.round(loads.reduce((s,e)=>s+e.data.loadTime,0)/loads.length):0;
+
+document.getElementById('statsGrid').innerHTML=`
+  <div class="card"><div class="val ${errors.length?'err':'ok'}">${errors.length}</div><div class="lbl">Errors</div></div>
+  <div class="card"><div class="val ${avgLCP>2500?'warn':'ok'}">${avgLCP}ms</div><div class="lbl">Avg LCP</div></div>
+  <div class="card"><div class="val ${avgLoad>3000?'warn':'ok'}">${avgLoad}ms</div><div class="lbl">Avg Load</div></div>
+  <div class="card"><div class="val ok">${events.length}</div><div class="lbl">Total Events</div></div>`;
+
+document.getElementById('logList').innerHTML=recent.length?recent.map(e=>`
+  <div class="log-item">
+    <span class="log-type type-${e.type}">${e.type}</span>
+    <span style="flex:1;color:var(--text-d)">${e.data?.msg||e.data?.src||e.data?.value||JSON.stringify(e.data||{}).slice(0,80)}</span>
+    <span style="font-size:.55rem;color:var(--text-d)">${new Date(e.time).toLocaleTimeString('zh-CN')}</span>
+  </div>`).join(''):'<div class="empty">No events yet. Health monitor activates on site visit.</div>';
+</script>
+</body>
+</html>
