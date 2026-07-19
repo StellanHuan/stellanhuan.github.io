@@ -1,0 +1,24 @@
+[
+  {
+    "title": "Tokyo Circulation",
+    "year": 2025,
+    "venue": "GALLERY NEGATIVE",
+    "location": "Busan, Korea",
+    "description": "Group exhibition curated by Arimoto Shinya",
+    "cover": "web_009.jpeg",
+    "related_projects": [
+      "tokyo-rain"
+    ],
+    "press_links": []
+  },
+  {
+    "title": "Student Exhibition",
+    "year": 2024,
+    "venue": "Tokyo TVA Gallery",
+    "location": "Tokyo, Japan",
+    "description": "Annual student showcase at Tokyo TVA",
+    "cover": "web_030.jpeg",
+    "related_projects": [],
+    "press_links": []
+  }
+]
