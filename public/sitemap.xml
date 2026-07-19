@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://stellanhuan.github.io/</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/?lang=zh-CN"/>
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/series/</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/series/?lang=zh-CN"/>
@@ -20,7 +20,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/series/#portrait</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/series/#portrait?lang=zh-CN"/>
@@ -29,7 +29,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/series/#street</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/series/#street?lang=zh-CN"/>
@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/series/#landscape</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/series/#landscape?lang=zh-CN"/>
@@ -47,7 +47,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/series/#aerial</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/series/#aerial?lang=zh-CN"/>
@@ -56,7 +56,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/src/pages/Projects/Projects.html#tokyo-rain</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/src/pages/Projects/Projects.html#tokyo-rain?lang=zh-CN"/>
@@ -65,7 +65,7 @@
   </url>
   <url>
     <loc>https://stellanhuan.github.io/src/pages/Journal/Journal.html#rainy-shinjuku</loc>
-    <lastmod>2026-07-19</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://stellanhuan.github.io/src/pages/Journal/Journal.html#rainy-shinjuku?lang=zh-CN"/>
