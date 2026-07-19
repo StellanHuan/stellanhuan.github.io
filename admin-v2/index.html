@@ -218,6 +218,7 @@ function photos(){
         <span id="selectedCount">已选 0 张</span>
         <button onclick="batchTag()">批量标签</button>
         <button onclick="batchSeries()">批量系列</button>
+        <button onclick="batchDelete()" style="color:var(--accent-red)">批量删除</button>
         <button onclick="clearSelection()">取消选择</button>
         <span style="flex:1"></span>
         <button onclick="document.getElementById('uploadInput').click()" style="background:var(--gold-dim);color:var(--bg)">📤 本地上传</button>
@@ -285,6 +286,7 @@ window.setGridSize=function(s){
 };
 window.batchTag=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const tag=prompt('输入标签 (逗号分隔)');if(!tag)return;const tags=tag.split(',').map(t=>t.trim());store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p){p.tags=[...new Set([...(p.tags||[]),...tags])]}});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 标签已添加')};
 window.batchSeries=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');const series=prompt('输入系列 (portrait/street/landscape/aerial)');if(!series)return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p)p.series=series});store.selectedPhotos.clear();renderPhotoGrid();showToast('✅ 系列已更新')};
+window.batchDelete=function(){if(!store.selectedPhotos.size)return showToast('请先选择照片');if(!confirm(`确定删除 ${store.selectedPhotos.size} 张照片？`))return;store.selectedPhotos.forEach(f=>{const p=store.photos.find(pp=>pp.file.split('/').pop()===f);if(p&&p._isUpload)deleteUpload(f)});store.photos=store.photos.filter(p=>!store.selectedPhotos.has(p.file.split('/').pop()));Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>!store.selectedPhotos.has(f))});store.selectedPhotos.clear();saveStore();renderPhotoGrid();showToast('🗑 已删除')};
 
 // ═══ UPLOAD (IndexedDB backed) ═══
 const idb=window.indexedDB.open('stellan-cms',1);
