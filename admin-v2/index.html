@@ -307,15 +307,24 @@ idb.onsuccess=async function(){
 window.handleUpload=function(files){
   if(!files.length)return;
   let processed=0;
+  const newFiles=[];
   Array.from(files).forEach(file=>{
     const reader=new FileReader();
     reader.onload=async function(e){
-      const name='upload_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'_'+file.name.replace(/[^a-zA-Z0-9.]/g,'_');
+      const name='upload_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';
       const dataUrl=e.target.result;
       await saveUpload(name,dataUrl);
       store.photos.push({file:name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_isUpload:true,_dataUrl:dataUrl});
+      newFiles.push({name:name,dataUrl:dataUrl});
       processed++;
-      if(processed===files.length){saveStore();renderPhotoGrid();showToast(`✅ 已添加 ${processed} 张`)}
+      if(processed===files.length){
+        saveStore();renderPhotoGrid();
+        // Auto-download uploaded photos
+        newFiles.forEach(f=>{
+          const a=document.createElement('a');a.href=f.dataUrl;a.download=f.name;a.click();
+        });
+        setTimeout(()=>showToast(`✅ ${processed} 张已添加。照片已自动下载，请保存到 images/ 文件夹`),500);
+      }
     };
     reader.readAsDataURL(file);
   });
