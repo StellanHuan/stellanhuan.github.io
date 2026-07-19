@@ -119,9 +119,12 @@
 <script src="../data.js"></script>
 <script>
 // ═══ STORE ═══
+// Load from LocalStorage first, fallback to data.js
+const savedPhotos=JSON.parse(localStorage.getItem('cms_photos')||'null');
+const savedSections=JSON.parse(localStorage.getItem('cms_sections')||'null');
 const store={
-  photos: SITE_DATA?.photos||[],
-  sections: JSON.parse(JSON.stringify(SITE_DATA?.sections||{})),
+  photos: savedPhotos||SITE_DATA?.photos||[],
+  sections: savedSections||JSON.parse(JSON.stringify(SITE_DATA?.sections||{})),
   selectedPhotos: new Set(),
   filters: {series:[],tags:[],search:''},
   projects: JSON.parse(localStorage.getItem('cms_projects')||'[]'),
@@ -129,8 +132,15 @@ const store={
   exhibitions: JSON.parse(localStorage.getItem('cms_exhibitions')||'[]')
 };
 
-// Persist on unload
+function saveStore(){
+  // Strip data URLs before saving (too big for localStorage)
+  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,...c}=p;return c});
+  localStorage.setItem('cms_photos',JSON.stringify(cleanPhotos));
+  localStorage.setItem('cms_sections',JSON.stringify(store.sections));
+}
+
 window.addEventListener('beforeunload',()=>{
+  saveStore();
   localStorage.setItem('cms_projects',JSON.stringify(store.projects));
   localStorage.setItem('cms_prints',JSON.stringify(store.prints));
   localStorage.setItem('cms_exhibitions',JSON.stringify(store.exhibitions));
@@ -269,7 +279,7 @@ window.toggleFilter=function(type,val){
 
 window.applyFilters=function(q){store.filters.search=q;renderPhotoGrid()};
 window.clearSelection=function(){store.selectedPhotos.clear();renderPhotoGrid()};
-window.deletePhoto=function(file){if(!confirm('确定删除这张照片？'))return;store.photos=store.photos.filter(p=>p.file.split('/').pop()!==file);Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>f!==file)});store.selectedPhotos.delete(file);renderPhotoGrid();showToast('🗑 已删除')};
+window.deletePhoto=function(file){if(!confirm('确定删除这张照片？'))return;store.photos=store.photos.filter(p=>p.file.split('/').pop()!==file);Object.keys(store.sections).forEach(k=>{store.sections[k]=store.sections[k].filter(f=>f!==file)});store.selectedPhotos.delete(file);saveStore();renderPhotoGrid();showToast('🗑 已删除')};
 window.setGridSize=function(s){
   document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active',b.textContent==={s:'小',m:'中',l:'大'}[s]));
   const grid=document.getElementById('photoGrid');grid.className='photo-grid size-'+s;
@@ -287,7 +297,7 @@ window.handleUpload=function(files){
       const name='upload_'+Date.now()+'_'+file.name.replace(/[^a-zA-Z0-9.]/g,'_');
       store.photos.push({file:name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_dataUrl:e.target.result,_size:file.size});
       processed++;
-      if(processed===files.length){renderPhotoGrid();showToast(`✅ 已添加 ${processed} 张照片。导出 data.js 时会一并打包`)}
+      if(processed===files.length){saveStore();renderPhotoGrid();showToast(`✅ 已添加 ${processed} 张照片。导出 data.js 时会一并打包`)}
     };
     reader.readAsDataURL(file);
   });
@@ -462,12 +472,14 @@ window.handleSectionDrop=function(key,e){
   if(!store.sections[key])store.sections[key]=[];
   if(!store.sections[key].includes(file)){
     store.sections[key].push(file);
+    saveStore();
     navigate('sections');
   }
 };
 
 window.removeFromSection=function(key,file){
   store.sections[key]=store.sections[key].filter(f=>f!==file);
+  saveStore();
   navigate('sections');
 };
 </script>
