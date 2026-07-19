@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://stellanhuan.github.io/public/sitemap.xml
+
+# Disallow admin pages from indexing
+Disallow: /admin-v2/
+Disallow: /admin.html
