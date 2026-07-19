@@ -1,0 +1,29 @@
+[
+  {
+    "title": "LensCulture Critics' Choice 2024",
+    "type": "Award",
+    "date": "2024",
+    "publisher": "LensCulture",
+    "description": "Critics' Choice Award for emerging photographers",
+    "cover": "web_001.jpeg",
+    "external_link": "https://www.lensculture.com"
+  },
+  {
+    "title": "Fisheye Magazine Feature",
+    "type": "Magazine",
+    "date": "2025",
+    "publisher": "Fisheye Magazine",
+    "description": "Feature on Tokyo street photography series",
+    "cover": "web_009.jpeg",
+    "external_link": "https://www.fisheyemagazine.fr"
+  },
+  {
+    "title": "Tokyo Circulation - Photo Book",
+    "type": "Book",
+    "date": "2025",
+    "publisher": "Self-published",
+    "description": "A collection of street photographs from Tokyo, 2022-2025",
+    "cover": "web_023.jpeg",
+    "external_link": ""
+  }
+]
