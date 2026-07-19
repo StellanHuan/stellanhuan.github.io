@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leads — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f;--red:#8b3a3a}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.2rem;margin-bottom:1.5rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.7rem;margin-bottom:2rem;display:inline-block}
+  .stats{display:flex;gap:.8rem;margin-bottom:2rem;flex-wrap:wrap}
+  .stat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.8rem 1.2rem;text-align:center}
+  .stat .n{font-size:1.4rem;color:var(--gold-l);font-weight:200}
+  .stat .l{font-size:.6rem;color:var(--text-d);letter-spacing:.1em}
+  .toolbar{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+  .toolbar button,.toolbar select{background:var(--card);border:1px solid var(--border);color:var(--text-d);padding:.4rem .8rem;border-radius:4px;font-family:inherit;font-size:.7rem;cursor:pointer}
+  .toolbar button:hover{color:var(--gold-l)}
+  table{width:100%;border-collapse:collapse;font-size:.75rem}
+  th{text-align:left;padding:.6rem .8rem;color:var(--gold-d);font-size:.65rem;letter-spacing:.1em;border-bottom:1px solid var(--border);font-weight:400}
+  td{padding:.6rem .8rem;border-bottom:1px solid var(--border);color:var(--text-d)}
+  .status{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.6rem}
+  .status-New{background:rgba(184,147,79,.12);color:var(--gold-l)}
+  .status-Contacted{background:rgba(123,174,127,.12);color:var(--green)}
+  .status-Quoted{background:rgba(184,147,79,.2);color:var(--gold-l)}
+  .status-Confirmed{background:rgba(123,174,127,.2);color:var(--green)}
+  .status-Completed{background:rgba(128,128,128,.2);color:var(--text-d)}
+  .empty{text-align:center;padding:3rem;color:var(--text-d)}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📋 Leads CRM</h1>
+<div class="stats" id="statsBar"></div>
+<div class="toolbar">
+  <select id="statusFilter" onchange="renderTable()"><option value="">全部状态</option><option>New</option><option>Contacted</option><option>Quoted</option><option>Confirmed</option><option>Completed</option></select>
+  <select id="typeFilter" onchange="renderTable()"><option value="">全部类型</option><option>inquiry</option><option>print</option></select>
+  <button onclick="exportCSV()">📥 导出 CSV</button>
+</div>
+<table><thead><tr><th>姓名</th><th>类型</th><th>来源</th><th>日期</th><th>状态</th><th>操作</th></tr></thead><tbody id="leadTable"></tbody></table>
+<script>
+const STATUSES=['New','Contacted','Quoted','Confirmed','Completed'];
+let leads=JSON.parse(localStorage.getItem('crm_leads')||'[]');
+
+// Load from inquiries
+const inquiries=JSON.parse(localStorage.getItem('inquiries')||'[]');
+inquiries.forEach(i=>{if(!leads.find(l=>l.name===i.name&&l.time===i.time)){leads.push({...i,type:'inquiry',status:'New',notes:'',source:'website'})}});
+
+// Load from localStorage analytics for print purchases
+const analyticsDays=[];
+for(let i=0;i<90;i++){const d=new Date();d.setDate(d.getDate()-i);const k='analytics_'+d.toISOString().split('T')[0];try{analyticsDays.push(...JSON.parse(localStorage.getItem(k)||'[]'))}catch(e){}}
+analyticsDays.filter(e=>e.event==='purchase_submit').forEach(e=>{
+  if(!leads.find(l=>l.time===e.data?.time)){leads.push({name:e.data?.name||'',type:'print',status:'New',notes:'',source:'prints',time:e.timestamp})}
+});
+
+localStorage.setItem('crm_leads',JSON.stringify(leads));
+
+const counts={};STATUSES.forEach(s=>counts[s]=leads.filter(l=>l.status===s).length);
+document.getElementById('statsBar').innerHTML=STATUSES.map(s=>`<div class="stat"><div class="n">${counts[s]}</div><div class="l">${s}</div></div>`).join('');
+
+function renderTable(){
+  const sf=document.getElementById('statusFilter').value;
+  const tf=document.getElementById('typeFilter').value;
+  let filtered=leads.filter(l=>(!sf||l.status===sf)&&(!tf||l.type===tf));
+  filtered.sort((a,b)=>(b.time||0)-(a.time||0));
+  document.getElementById('leadTable').innerHTML=filtered.length?filtered.map(l=>`
+    <tr>
+      <td>${l.name||'—'}</td>
+      <td>${l.type==='print'?'🖼 Print':'📷 咨询'}</td>
+      <td>${l.source||'—'}</td>
+      <td>${l.time?new Date(l.time).toLocaleDateString('zh-CN'):'—'}</td>
+      <td><span class="status status-${l.status}">${l.status}</span></td>
+      <td><select onchange="updateStatus('${l.time}',this.value)" style="background:var(--card);border:1px solid var(--border);color:var(--text);padding:.2rem;border-radius:3px;font-size:.6rem"><option>—</option>${STATUSES.map(s=>`<option ${l.status===s?'selected':''}>${s}</option>`).join('')}</select></td>
+    </tr>`).join(''):'<tr><td colspan="6" class="empty">暂无线索</td></tr>';
+}
+
+window.updateStatus=function(time,status){
+  const l=leads.find(ll=>ll.time==time);
+  if(l){l.status=status;Analytics?.track&&Analytics.track('lead_status_change',{from:l.status,to:status});localStorage.setItem('crm_leads',JSON.stringify(leads));renderTable();location.reload()}
+};
+window.exportCSV=function(){
+  const csv='Name,Type,Source,Date,Status\n'+leads.map(l=>`${l.name},${l.type},${l.source},${new Date(l.time).toISOString().split('T')[0]},${l.status}`).join('\n');
+  const b=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='leads.csv';a.click();
+};
+renderTable();
+</script>
+</body>
+</html>
