@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "瓛瓛 HuanHuan — Photography",
+    "description": "Nikon Z8 · Between Zhengzhou and Tokyo"
+  },
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "booking": "Book",
+    "contact": "Contact",
+    "lang": "English"
+  },
+  "hero": {
+    "title": "瓛 瓛",
+    "sub": "Stellan",
+    "desc": "The world goes quiet at the shutter's click\nBetween Zhengzhou and Tokyo, the light speaks for me"
+  },
+  "sections": {
+    "featured": "Within Sight",
+    "street": "The Street Breathes",
+    "landscape": "Earth & Sky",
+    "booking": "Book a Session",
+    "about": "About"
+  },
+  "booking": {
+    "portrait": "Solo · Couple · Friends · Retouched · Nikon Z8",
+    "event": "Event · Half Day · Conference · Ceremony",
+    "aerial": "Aerial Add-on · DJI 4K · City Panorama"
+  },
+  "process": [
+    "Contact",
+    "Discuss",
+    "Shoot & Deliver"
+  ],
+  "about_text": "A camera isn't a tool. It's another pair of eyes.\nStrangers on the street, a downward glance, the overlooked corner—\nall come alive again inside the frame.",
+  "timeline": {
+    "1999": "Born in Linying, Henan",
+    "2022": "Tokyo TVA, Japan",
+    "2025": "Freelance photographer",
+    "Now": "Zhengzhou · Luohe"
+  },
+  "contact": {
+    "title": "Contact",
+    "location": "Location",
+    "services": "Services",
+    "wechat": "WeChat",
+    "copy": "Copy WeChat",
+    "copied": "✓ Copied"
+  },
+  "footer": "© 2026 瓛瓛 HuanHuan\nStudent of Arimoto Shinya · Chasing light",
+  "services": {
+    "portrait": "Portrait",
+    "event": "Event",
+    "aerial": "Aerial"
+  },
+  "inquiry": {
+    "title": "Inquiry",
+    "subtitle": "Tell me about your project",
+    "name": "Name *",
+    "email": "Email",
+    "company": "Company",
+    "type": "Project Type *",
+    "budget": "Budget",
+    "date": "Date",
+    "location": "Location",
+    "description": "Description",
+    "submit": "Submit Inquiry",
+    "note": "I'll contact you via WeChat within 24 hours",
+    "success": "Submitted!",
+    "success_msg": "I'll reach out via WeChat soon"
+  },
+  "prints": {
+    "title": "Fine Art Prints",
+    "subtitle": "Archival pigment · Limited edition · Museum-grade paper",
+    "inquire": "Inquire →"
+  },
+  "publications": {
+    "title": "Press & Publications"
+  },
+  "exhibitions": {
+    "title": "Exhibition Archive"
+  }
+}

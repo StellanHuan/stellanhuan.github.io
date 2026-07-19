@@ -37,9 +37,12 @@ for a in journal:
         urls.append((f'/src/pages/Journal/Journal.html#{(a.get("slug") or "")}', '0.7', 'monthly'))
 
 sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
-sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
+sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
 for path, priority, freq in urls:
-    sitemap += f'  <url>\n    <loc>{DOMAIN}{path}</loc>\n    <lastmod>{TODAY}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n  </url>\n'
+    sitemap += f'  <url>\n    <loc>{DOMAIN}{path}</loc>\n    <lastmod>{TODAY}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n'
+    for lang in ['zh-CN', 'ja-JP', 'en-US']:
+        sitemap += f'    <xhtml:link rel="alternate" hreflang="{lang}" href="{DOMAIN}{path}?lang={lang}"/>\n'
+    sitemap += '  </url>\n'
 sitemap += '</urlset>'
 
 with open(f'{BASE}/public/sitemap.xml', 'w') as f:

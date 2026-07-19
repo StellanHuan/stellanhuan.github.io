@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "瓛瓛 HuanHuan — Photography",
+    "description": "Nikon Z8 · 鄭州と東京のあいだで"
+  },
+  "nav": {
+    "work": "作品",
+    "about": "关于",
+    "booking": "予約",
+    "contact": "連絡",
+    "lang": "日本語"
+  },
+  "hero": {
+    "title": "瓛 瓛",
+    "sub": "Stellan",
+    "desc": "シャッターを切る一秒、世界が静まる\n鄭州と東京のあいだで、光が代わりに語る"
+  },
+  "sections": {
+    "featured": "視線の先",
+    "street": "街の呼吸",
+    "landscape": "大地と空",
+    "booking": "写真予約",
+    "about": "について"
+  },
+  "booking": {
+    "portrait": "個人 · カップル · レタッチ込み · Nikon Z8",
+    "event": "イベント · 半日 · 年会 · 開業式",
+    "aerial": "空撮オプション · DJI 4K · 都市"
+  },
+  "process": [
+    "WeChat",
+    "打ち合わせ",
+    "撮影 · 納品"
+  ],
+  "about_text": "カメラは道具じゃなく、もう一つの目。\n街の人、うつむく瞬間、見過ごされた隅——\nすべてがファインダーのなかで息を吹き返す。",
+  "timeline": {
+    "1999": "河南省臨潁県に生まれる",
+    "2022": "来日、東京TVA",
+    "2025": "帰国、フリーランス",
+    "Now": "鄭州 · 漯河"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "location": "地域",
+    "services": "内容",
+    "wechat": "WeChat",
+    "copy": "WeChatをコピー",
+    "copied": "✓ コピー済"
+  },
+  "footer": "© 2026 瓛瓛 HuanHuan\n有元慎也に師事 · 光を追いかけて",
+  "services": {
+    "portrait": "ポートレート",
+    "event": "イベント",
+    "aerial": "空撮"
+  },
+  "inquiry": {
+    "title": "お問い合わせ",
+    "subtitle": "あなたのニーズを教えてください",
+    "name": "名前 *",
+    "email": "Email",
+    "company": "会社",
+    "type": "プロジェクト *",
+    "budget": "予算",
+    "date": "日付",
+    "location": "場所",
+    "description": "詳細",
+    "submit": "送信",
+    "note": "24時間以内にWeChatでご連絡します",
+    "success": "送信完了！",
+    "success_msg": "WeChatでご連絡します"
+  },
+  "prints": {
+    "title": "Fine Art Prints",
+    "subtitle": "芸術印刷 · 限定版 · コレクターズペーパー",
+    "inquire": "購入相談 →"
+  },
+  "publications": {
+    "title": "出版とメディア"
+  },
+  "exhibitions": {
+    "title": "展示アーカイブ"
+  }
+}

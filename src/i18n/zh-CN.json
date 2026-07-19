@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "瓛瓛 HuanHuan — Photography",
+    "description": "Nikon Z8 · 郑州与东京之间的光"
+  },
+  "nav": {
+    "work": "作品",
+    "about": "关于",
+    "booking": "预约",
+    "contact": "联系",
+    "lang": "中文"
+  },
+  "hero": {
+    "title": "瓛 瓛",
+    "sub": "Stellan",
+    "desc": "按下快门的那一秒，世界安静下来\n郑州与东京之间，光替我说话"
+  },
+  "sections": {
+    "featured": "目光所及",
+    "street": "街头的呼吸",
+    "landscape": "大地与天空",
+    "booking": "写真预约",
+    "about": "关于"
+  },
+  "booking": {
+    "portrait": "个人写真 · 情侣 · 闺蜜 · 含精修 · Nikon Z8",
+    "event": "活动跟拍 · 半天4小时 · 年会 · 开业",
+    "aerial": "航拍加购 · DJI 4K · 城市全景"
+  },
+  "process": [
+    "微信联系",
+    "沟通需求",
+    "拍摄交付"
+  ],
+  "about_text": "相机不是工具，是另一双眼睛。\n街上的人、低头的瞬间、被忽略的角落——\n都在取景框里重新活过来。",
+  "timeline": {
+    "1999": "生于河南临颍",
+    "2022": "赴日，东京TVA",
+    "2025": "归国，自由摄影师",
+    "Now": "郑州 · 漯河"
+  },
+  "contact": {
+    "title": "联系",
+    "location": "地区",
+    "services": "服务",
+    "wechat": "微信",
+    "copy": "复制微信号",
+    "copied": "✓ 已复制"
+  },
+  "footer": "© 2026 瓛瓛 HuanHuan\n有元慎也に師事 · 光を追いかけて",
+  "services": {
+    "portrait": "写真拍摄",
+    "event": "活动跟拍",
+    "aerial": "航拍服务"
+  },
+  "inquiry": {
+    "title": "预约咨询",
+    "subtitle": "告诉我你的需求，我来为你定制方案",
+    "name": "姓名 *",
+    "email": "Email",
+    "company": "公司/品牌",
+    "type": "项目类型 *",
+    "budget": "预算范围",
+    "date": "拍摄日期",
+    "location": "拍摄地点",
+    "description": "项目描述",
+    "submit": "提交咨询",
+    "note": "提交后我会在24小时内通过微信联系你",
+    "success": "提交成功！",
+    "success_msg": "我会尽快通过微信联系你"
+  },
+  "prints": {
+    "title": "Fine Art Prints",
+    "subtitle": "艺术微喷 · 限量版 · 收藏级纸张",
+    "inquire": "购买咨询 →"
+  },
+  "publications": {
+    "title": "出版与媒体"
+  },
+  "exhibitions": {
+    "title": "展览档案"
+  }
+}
