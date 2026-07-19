@@ -262,12 +262,8 @@ function renderPhotoGrid(){
 }
 
 window.togglePhoto=function(file,e){
-  if(e.shiftKey||e.metaKey){
-    store.selectedPhotos.has(file)?store.selectedPhotos.delete(file):store.selectedPhotos.add(file);
-  }else{
-    store.selectedPhotos.clear();
-    store.selectedPhotos.add(file);
-  }
+  if(store.selectedPhotos.has(file)){store.selectedPhotos.delete(file)}
+  else{store.selectedPhotos.add(file)}
   renderPhotoGrid();
 };
 
