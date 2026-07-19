@@ -1,0 +1,47 @@
+{
+  "name": {
+    "zh": "瓛瓛",
+    "en": "Stellan Huan"
+  },
+  "bio": {
+    "zh": "1999年生于河南临颍。2022年赴日就读东京TVA。现居郑州，自由摄影师。Nikon Z8 主力机，涵盖人像、航拍、活动、街拍。师从有元慎也。",
+    "en": "Born 1999 in Linying, Henan. Studied at Tokyo TVA. Based in Zhengzhou, freelance photographer. Nikon Z8 primary camera. Student of Arimoto Shinya."
+  },
+  "statement": {
+    "zh": "相机不是工具，是另一双眼睛。街上的人、低头的瞬间、被忽略的角落——都在取景框里重新活过来。",
+    "en": "The camera is not a tool. It is another pair of eyes. Strangers, a downward glance, the overlooked corner — all come alive again inside the frame."
+  },
+  "experience": [
+    {
+      "year": "2025",
+      "zh": "归国，郑州自由摄影师",
+      "en": "Returned to China, freelance in Zhengzhou"
+    },
+    {
+      "year": "2022",
+      "zh": "赴日，东京TVA",
+      "en": "Moved to Japan, Tokyo TVA"
+    },
+    {
+      "year": "2017",
+      "zh": "开始接触摄影",
+      "en": "Started photography"
+    }
+  ],
+  "equipment": [
+    {
+      "name": "Nikon Z8",
+      "desc": "4500万像素全画幅微单 · 主力机"
+    },
+    {
+      "name": "DJI",
+      "desc": "航拍 · 4K"
+    },
+    {
+      "name": "RICOH GXR",
+      "desc": "便携街拍机"
+    }
+  ],
+  "clients": [],
+  "exhibitions": []
+}
