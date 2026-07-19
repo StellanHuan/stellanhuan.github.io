@@ -95,14 +95,6 @@
   .macro-type .ref{margin-top:3rem;font-size:.75rem;color:var(--text-dim);letter-spacing:.3em;text-align:right}
 
   /* ===== FULL IMAGE ===== */
-  /* Full-bleed scroll reveal */
-  .full-img{position:relative;height:85vh;overflow:hidden;margin:4rem 3rem;border-radius:4px}
-  .full-img-inner{width:100%;height:100%;transform:scale(1.08);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
-  .full-img.zoomed .full-img-inner{transform:scale(1)}
-  .full-img-inner img{width:100%;height:100%;object-fit:cover;display:block}
-  .full-img .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.45) 100%);transition:opacity 1s var(--ease-out);pointer-events:none}
-  .full-img.zoomed .vignette{opacity:0}
-  .full-img .cap{position:absolute;bottom:2rem;left:2rem;font-size:.7rem;color:var(--text-bright);letter-spacing:.1em;padding:.5rem 1.2rem;background:rgba(8,6,4,.8);backdrop-filter:blur(10px);border-radius:4px;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 
   /* ===== BLOCK HEADER ===== */
   .block-head{
@@ -295,15 +287,6 @@
   </div>
   <p class="ref reveal reveal-d2">— Arimoto Shinya · 有元慎也</p>
 </section>
-
-<!-- ═══ FULL IMAGE ═══ -->
-<div class="full-img reveal parallax" data-speed=".08" id="fullImgBlock">
-  <div class="full-img-inner">
-    <img alt="" id="media1" loading="lazy" decoding="async" width="1600" height="1067">
-  </div>
-  <div class="vignette"></div>
-  <div class="cap">Nikon Z8 · 2026</div>
-</div>
 
 <!-- ═══ 01 SELECTED ═══ -->
 <div class="block-head" id="work">
@@ -566,7 +549,7 @@ function getTitle(src){const f=src.split('/').pop();const p=photosByFile[f];retu
 function getSeries(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.series:'portrait'}
 
 // Assign photos with data.js sections
-['heroImg','media1'].forEach((id,i)=>document.getElementById(id).src=getPhoto('hero',i));
+['heroImg'].forEach((id,i)=>document.getElementById(id).src=getPhoto('hero',i));
 document.getElementById('duo1a').src=getPhoto('featured',0);
 document.getElementById('duo1b').src=getPhoto('featured',1);
 document.getElementById('duo2a').src=getPhoto('landscape',0);
@@ -605,16 +588,6 @@ langCurrent.addEventListener('click',e=>{e.stopPropagation();langCurrent.classLi
 document.addEventListener('click',()=>{langCurrent.classList.remove('open');langDropdown.classList.remove('open')});
 document.querySelectorAll('.lang-dropdown button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.langSwitch);langCurrent.classList.remove('open');langDropdown.classList.remove('open')}));
 setLang('zh');
-
-// ═══ FULL-IMG ZOOM REVEAL ═══
-const fullImgBlock=document.getElementById('fullImgBlock');
-if(fullImgBlock){
-  new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting)fullImgBlock.classList.add('zoomed');
-    });
-  },{threshold:.3}).observe(fullImgBlock);
-}
 
 // ═══ QUOTE CHAR REVEAL ═══
 (function setupQuoteReveal(){
