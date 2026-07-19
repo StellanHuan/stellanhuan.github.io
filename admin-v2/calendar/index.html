@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar — Stellan CMS</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#0a0806;--card:#110d0a;--gold:#b8934f;--gold-l:#d4b978;--gold-d:#7a6238;--text:#d4cec4;--text-d:#8a8278;--border:rgba(184,147,79,.12);--green:#7bae7f}
+  body{font-family:"PingFang SC",sans-serif;background:var(--bg);color:var(--text);padding:2rem}
+  h1{font-weight:300;letter-spacing:.2em;color:var(--gold-l);font-size:1.2rem;margin-bottom:1.5rem}
+  .back{color:var(--gold-d);text-decoration:none;font-size:.7rem;margin-bottom:2rem;display:inline-block}
+  .toolbar{display:flex;gap:.5rem;margin-bottom:1.5rem}
+  .toolbar button,.toolbar select,.toolbar input{background:var(--card);border:1px solid var(--border);color:var(--text-d);padding:.4rem .8rem;border-radius:4px;font-family:inherit;font-size:.7rem}
+  .toolbar button:hover{color:var(--gold-l)}
+  .board{display:flex;gap:1rem;overflow-x:auto;padding-bottom:1rem}
+  .column{flex:1;min-width:200px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem}
+  .column h2{font-size:.7rem;color:var(--gold-d);letter-spacing:.15em;margin-bottom:.8rem;text-transform:uppercase}
+  .card{background:rgba(184,147,79,.04);border:1px solid var(--border);border-radius:6px;padding:.8rem;margin-bottom:.5rem;cursor:grab;transition:transform .2s}
+  .card:hover{transform:translateY(-1px)}
+  .card .title{font-size:.75rem;color:var(--text);margin-bottom:.3rem}
+  .card .meta{font-size:.6rem;color:var(--text-d)}
+  .card .type{display:inline-block;font-size:.55rem;padding:.1rem .4rem;border-radius:10px;margin-right:.3rem}
+  .type-Project{background:rgba(184,147,79,.15);color:var(--gold-l)}
+  .type-Journal{background:rgba(123,174,127,.15);color:var(--green)}
+  .type-Print{background:rgba(139,58,58,.15);color:#ec8f8d}
+  .add-btn{width:100%;padding:.5rem;background:none;border:1px dashed var(--border);color:var(--text-d);border-radius:4px;font-family:inherit;font-size:.65rem;cursor:pointer;margin-top:.5rem}
+  .add-btn:hover{color:var(--gold-l);border-color:var(--gold-d)}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← Admin</a>
+<h1>📅 Content Calendar</h1>
+<div class="toolbar">
+  <button onclick="addItem()">+ 新建</button>
+  <input type="text" id="searchInput" placeholder="搜索..." oninput="renderBoard()">
+</div>
+<div class="board" id="board"></div>
+
+<script>
+const STATUSES=['Idea','Draft','Review','Scheduled','Published'];
+const TYPES=['Project','Journal','Print','Exhibition','Publication'];
+let items=JSON.parse(localStorage.getItem('cms_calendar')||'[]');
+
+// Seed from existing content
+const seed=()=>{
+  const existing=new Set(items.map(i=>i.title));
+  try{
+    const projects=JSON.parse(localStorage.getItem('cms_projects')||'[]');
+    projects.filter(p=>!existing.has(p.name)).forEach(p=>items.push({title:p.name,type:'Project',status:'Published',date:new Date().toISOString().split('T')[0]}));
+  }catch(e){}
+  localStorage.setItem('cms_calendar',JSON.stringify(items));
+};
+seed();
+
+function renderBoard(){
+  const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+  const filtered=q?items.filter(i=>i.title.toLowerCase().includes(q)):items;
+  document.getElementById('board').innerHTML=STATUSES.map(status=>`
+    <div class="column" ondragover="event.preventDefault()" ondrop="moveItem(event,'${status}')">
+      <h2>${status} (${filtered.filter(i=>i.status===status).length})</h2>
+      ${filtered.filter(i=>i.status===status).map(i=>`
+        <div class="card" draggable="true" ondragstart="event.dataTransfer.setData('text',JSON.stringify({title:'${i.title}',type:'${i.type}'}))">
+          <span class="type type-${i.type}">${i.type}</span>
+          <div class="title">${i.title}</div>
+          <div class="meta">${i.date||''}</div>
+        </div>`).join('')}
+      <button class="add-btn" onclick="addItem('${status}')">+ 添加</button>
+    </div>`).join('');
+}
+
+window.addItem=function(status){
+  const title=prompt('标题');if(!title)return;
+  const type=prompt('类型: '+TYPES.join('/'));if(!TYPES.includes(type))return;
+  items.push({title,type,status:status||'Idea',date:new Date().toISOString().split('T')[0]});
+  localStorage.setItem('cms_calendar',JSON.stringify(items));
+  renderBoard();
+};
+
+window.moveItem=function(e,targetStatus){
+  const data=JSON.parse(e.dataTransfer.getData('text'));
+  const item=items.find(i=>i.title===data.title&&i.type===data.type);
+  if(item){item.status=targetStatus;localStorage.setItem('cms_calendar',JSON.stringify(items));renderBoard()}
+};
+
+renderBoard();
+</script>
+</body>
+</html>
