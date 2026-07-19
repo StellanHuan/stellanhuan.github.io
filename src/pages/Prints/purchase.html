@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>购买咨询 — Print</title>
+<link rel="stylesheet" href="../../src/styles/tokens.css">
+<link rel="stylesheet" href="../../src/styles/base.css">
+<style>
+  .grain{position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;background:rgba(8,6,4,.7);backdrop-filter:blur(16px)}
+  .nav a{color:var(--color-text-dim);text-decoration:none;font-size:.75rem;letter-spacing:.1em}
+  .wrap{max-width:600px;margin:0 auto;padding:10rem 2rem 6rem}
+  h1{font-size:1.4rem;font-weight:300;letter-spacing:.2em;color:var(--color-gold-light);margin-bottom:2rem;text-align:center}
+  .preview{text-align:center;margin-bottom:2rem}
+  .preview img{max-width:300px;border-radius:8px;border:1px solid var(--color-border)}
+  .preview h3{font-size:1rem;color:var(--color-gold-light);margin-top:1rem}
+  .preview .meta{font-size:.7rem;color:var(--color-text-dim);margin-top:.3rem}
+  form{background:var(--color-bg-elevated);border:1px solid var(--color-border);border-radius:8px;padding:2.5rem}
+  .fg{margin-bottom:1.2rem}
+  .fg label{display:block;font-size:.65rem;color:var(--color-gold-dim);letter-spacing:.1em;margin-bottom:.3rem}
+  .fg input,.fg select,.fg textarea{width:100%;background:var(--color-bg);border:1px solid var(--color-border);color:var(--color-text);padding:.6rem;border-radius:4px;font-family:inherit;font-size:.8rem}
+  .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--color-gold-dim)}
+  .row{display:flex;gap:1rem}.row .fg{flex:1}
+  .btn{width:100%;padding:.8rem;background:var(--color-gold-dim);color:var(--color-bg);border:none;border-radius:4px;font-family:inherit;font-size:.85rem;cursor:pointer;letter-spacing:.1em}
+  .btn:hover{background:var(--color-gold)}
+  .success{display:none;text-align:center;padding:3rem}
+  .success h2{font-size:1.2rem;color:var(--color-gold-light)}
+  .success p{color:var(--color-text-dim);margin-top:1rem;font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav class="nav"><a href="Prints.html">← 返回</a><a href="../../index.html">Stellan</a></nav>
+<div class="wrap">
+  <h1>购买咨询</h1>
+  <div class="preview" id="preview"></div>
+  <form id="form" action="https://formsubmit.co/965946974@qq.com" method="POST">
+    <input type="hidden" name="_subject" value="Print Purchase Inquiry">
+    <input type="hidden" name="_template" value="table">
+    <input type="text" name="_honey" style="display:none">
+    <input type="hidden" name="print_id" id="printId">
+    <div class="row"><div class="fg"><label>姓名 *</label><input name="name" required></div><div class="fg"><label>Email</label><input type="email" name="email"></div></div>
+    <div class="row"><div class="fg"><label>尺寸</label><select name="size" id="sizeSelect"><option>A4</option><option>A3</option><option>A2</option></select></div><div class="fg"><label>数量</label><input type="number" name="quantity" value="1" min="1"></div></div>
+    <div class="fg"><label>留言</label><textarea name="message" rows="3" placeholder="如有特殊要求请说明"></textarea></div>
+    <button type="submit" class="btn">提交咨询</button>
+    <p style="text-align:center;font-size:.65rem;color:var(--color-text-dim);margin-top:.8rem">提交后24小时内通过微信联系</p>
+  </form>
+  <div class="success" id="success"><h2>✓ 提交成功</h2><p>我会尽快联系你</p><p style="color:var(--color-gold-light);margin-top:.5rem">微信：S0688888860</p></div>
+</div>
+<script src="../../src/analytics/config.js"></script>
+<script src="../../src/analytics/analytics.js"></script>
+<script>
+const params=new URLSearchParams(window.location.search);
+const id=params.get('id')||'';
+if(id){
+  fetch('../../content/prints/index.json').then(r=>r.json()).then(prints=>{
+    const p=prints.find(pp=>String(pp.title)===decodeURIComponent(id))||prints[0];
+    if(p){
+      document.getElementById('preview').innerHTML=`<img src="../../images/${p.photo}" alt=""><h3>${p.title}</h3><div class="meta">${p.size} · ¥${p.price} · ${p.edition||''}</div>`;
+      document.getElementById('printId').value=p.title;
+      document.getElementById('sizeSelect').value=p.size||'A4';
+    }
+  });
+}
+Analytics?.track('purchase_start',{print:id});
+document.getElementById('form').addEventListener('submit',()=>{
+  Analytics?.track('purchase_submit',{print:id});
+  setTimeout(()=>{document.getElementById('form').style.display='none';document.getElementById('success').style.display='block'},100);
+});
+</script>
+</body>
+</html>
