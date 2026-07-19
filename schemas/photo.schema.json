@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stellanhuan.github.io/schemas/photo.schema.json",
+  "title": "Photo",
+  "description": "A photograph in the Stellan Photography collection",
+  "type": "object",
+  "required": ["file", "title", "series"],
+  "properties": {
+    "file": {
+      "type": "string",
+      "pattern": "^images/web_\\d{3}\\.jpeg$",
+      "description": "Relative path from website root"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 50,
+      "description": "Display title, supports CJK characters"
+    },
+    "series": {
+      "type": "string",
+      "enum": ["portrait", "street", "landscape", "aerial"],
+      "description": "Primary series classification"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 10,
+      "description": "Searchable tags (e.g. 东京, 郑州, Nikon Z8)"
+    },
+    "camera": {
+      "type": "string",
+      "description": "Camera model (e.g. Nikon Z8, DJI, RICOH GXR)"
+    },
+    "lens": {
+      "type": "string",
+      "description": "Lens information"
+    },
+    "location": {
+      "type": "string",
+      "description": "Shooting location"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Capture date (YYYY-MM-DD)"
+    },
+    "exif": {
+      "type": "object",
+      "description": "Full EXIF metadata",
+      "properties": {
+        "aperture": { "type": "string" },
+        "shutter": { "type": "string" },
+        "iso": { "type": "number" },
+        "focalLength": { "type": "string" }
+      }
+    },
+    "favorite": {
+      "type": "boolean",
+      "default": false,
+      "description": "Marked as favorite"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Apple AI aesthetic score"
+    },
+    "_isUpload": {
+      "type": "boolean",
+      "description": "INTERNAL: uploaded via Admin V2 (not in images/)"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stellanhuan.github.io/schemas/site.schema.json",
+  "title": "Site Configuration",
+  "description": "Global site settings for Stellan Photography",
+  "type": "object",
+  "required": ["name", "title", "domain", "language"],
+  "properties": {
+    "name": {
+      "type": "object",
+      "required": ["zh"],
+      "properties": {
+        "zh": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "description": "Photographer name"
+    },
+    "title": {
+      "type": "string",
+      "description": "HTML <title> and og:title"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Meta description for SEO"
+    },
+    "domain": {
+      "type": "string",
+      "format": "hostname",
+      "description": "Primary domain"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["zh", "ja", "en"],
+      "default": "zh",
+      "description": "Default language"
+    },
+    "languages": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["zh", "ja", "en"] },
+      "description": "Supported languages"
+    },
+    "social": {
+      "type": "object",
+      "properties": {
+        "wechat": { "type": "string" },
+        "github": { "type": "string" },
+        "instagram": { "type": "string" },
+        "xiaohongshu": { "type": "string" },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "sections": {
+      "type": "object",
+      "description": "Homepage section photo assignments",
+      "properties": {
+        "hero": { "type": "array", "items": { "type": "string" } },
+        "featured": { "type": "array", "items": { "type": "string" } },
+        "hscroll": { "type": "array", "items": { "type": "string" } },
+        "landscape": { "type": "array", "items": { "type": "string" } },
+        "aerial": { "type": "array", "items": { "type": "string" } },
+        "about": { "type": "array", "items": { "type": "string" } },
+        "booking_portrait": { "type": "array", "items": { "type": "string" } },
+        "booking_event": { "type": "array", "items": { "type": "string" } },
+        "booking_aerial": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "booking": {
+      "type": "object",
+      "properties": {
+        "portrait": {
+          "type": "object",
+          "properties": {
+            "price": { "type": "number" },
+            "currency": { "type": "string", "default": "CNY" }
+          }
+        },
+        "event": {
+          "type": "object",
+          "properties": {
+            "price": { "type": "number" },
+            "unit": { "type": "string" }
+          }
+        },
+        "aerial": {
+          "type": "object",
+          "properties": {
+            "price": { "type": "number" },
+            "addon": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "copyright": {
+      "type": "string",
+      "description": "Footer copyright text"
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "googleAnalyticsId": { "type": "string" },
+        "robotsTxt": { "type": "string" }
+      }
+    }
+  }
+}

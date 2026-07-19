@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stellanhuan.github.io/schemas/journal.schema.json",
+  "title": "Journal Entry",
+  "description": "A photography journal / blog post",
+  "type": "object",
+  "required": ["title", "date"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Entry title"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL-friendly identifier"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Publication date (YYYY-MM-DD)"
+    },
+    "cover": {
+      "type": "string",
+      "description": "Cover photo filename"
+    },
+    "body": {
+      "type": "string",
+      "description": "Full Markdown content"
+    },
+    "excerpt": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Short preview text for listings"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "maxItems": 10,
+      "description": "Categorization tags"
+    },
+    "photos": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Referenced photo filenames"
+    },
+    "draft": {
+      "type": "boolean",
+      "default": true,
+      "description": "Draft entries are hidden from website"
+    },
+    "language": {
+      "type": "string",
+      "enum": ["zh", "ja", "en"],
+      "default": "zh",
+      "description": "Primary language of the entry"
+    }
+  }
+}

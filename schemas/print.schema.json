@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stellanhuan.github.io/schemas/print.schema.json",
+  "title": "Print",
+  "description": "A fine art print available for purchase",
+  "type": "object",
+  "required": ["title", "size", "price"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Print title"
+    },
+    "photo": {
+      "type": "string",
+      "description": "Source photo filename"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["A4", "A3", "A2"],
+      "description": "Paper size"
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Price in CNY"
+    },
+    "stock": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Available inventory"
+    },
+    "public": {
+      "type": "boolean",
+      "default": false,
+      "description": "Visible in print store"
+    },
+    "paperType": {
+      "type": "string",
+      "description": "Paper material (e.g. Hahnemühle Photo Rag)"
+    },
+    "edition": {
+      "type": "string",
+      "description": "Edition info (e.g. 'Limited 1/50')"
+    }
+  }
+}

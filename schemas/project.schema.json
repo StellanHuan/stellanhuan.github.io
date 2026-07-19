@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stellanhuan.github.io/schemas/project.schema.json",
+  "title": "Project",
+  "description": "A photography project with narrative context",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Project title"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL-friendly identifier"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Short project summary"
+    },
+    "cover": {
+      "type": "string",
+      "description": "Cover photo filename"
+    },
+    "photos": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Project photo filenames"
+    },
+    "location": {
+      "type": "string",
+      "description": "Primary location name"
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": { "type": "number" },
+        "lng": { "type": "number" }
+      },
+      "description": "GPS coordinates"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Project date (YYYY-MM-DD)"
+    },
+    "exif": {
+      "type": "string",
+      "description": "Camera/equipment notes"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Creative notes (Markdown)"
+    },
+    "published": {
+      "type": "boolean",
+      "default": false,
+      "description": "Visible on website"
+    }
+  }
+}

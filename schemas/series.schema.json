@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stellanhuan.github.io/schemas/series.schema.json",
+  "title": "Series",
+  "description": "A curated series of photographs",
+  "type": "object",
+  "required": ["id", "name", "photos"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "enum": ["portrait", "street", "landscape", "aerial"],
+      "description": "Unique series identifier"
+    },
+    "name": {
+      "type": "object",
+      "required": ["zh"],
+      "properties": {
+        "zh": { "type": "string", "minLength": 1 },
+        "ja": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "description": "Localized series name"
+    },
+    "description": {
+      "type": "object",
+      "properties": {
+        "zh": { "type": "string" },
+        "ja": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "description": "Localized description"
+    },
+    "cover": {
+      "type": "string",
+      "pattern": "^web_\\d{3}\\.\\w+$",
+      "description": "Cover photo filename"
+    },
+    "photos": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^web_\\d{3}\\.\\w+$" },
+      "minItems": 1,
+      "description": "Ordered list of photo filenames in this series"
+    },
+    "order": {
+      "type": "number",
+      "description": "Display order on series listing page"
+    },
+    "hidden": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hide from public navigation"
+    }
+  }
+}
