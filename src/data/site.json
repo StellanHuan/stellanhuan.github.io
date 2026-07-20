@@ -52,9 +52,8 @@
       "web_117.jpeg"
     ],
     "about": [
-      "web_010.jpeg",
-      "web_020.jpeg",
-      "web_030.jpeg"
+      "web_147.jpeg",
+      "web_139.jpeg"
     ],
     "booking_portrait": [
       "web_128.jpeg",
@@ -109,13 +108,9 @@
   },
   "footer": {
     "social": {
-      "instagram": "@stellanhuan_test",
-      "xiaohongshu": "@stellanhuan_test",
-      "email": "test@test.com"
-    },
-    "tags": [
-      "Test1",
-      "Test2"
-    ]
+      "instagram": "",
+      "xiaohongshu": "",
+      "email": "965946974@qq.com"
+    }
   }
 }

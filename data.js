@@ -1199,9 +1199,8 @@ const SITE_DATA = {
       "web_117.jpeg"
     ],
     "about": [
-      "web_010.jpeg",
-      "web_020.jpeg",
-      "web_030.jpeg"
+      "web_147.jpeg",
+      "web_139.jpeg"
     ],
     "booking_portrait": [
       "web_128.jpeg",
