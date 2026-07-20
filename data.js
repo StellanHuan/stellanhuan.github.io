@@ -1199,8 +1199,9 @@ const SITE_DATA = {
       "web_117.jpeg"
     ],
     "about": [
-      "web_147.jpeg",
-      "web_139.jpeg"
+      "web_010.jpeg",
+      "web_020.jpeg",
+      "web_030.jpeg"
     ],
     "booking_portrait": [
       "web_128.jpeg",
@@ -1217,37 +1218,15 @@ const SITE_DATA = {
   },
   "site": {
     "footer": {
-      "tags": [
-        "Portrait",
-        "Street",
-        "Aerial",
-        "Landscape",
-        "Tokyo",
-        "Zhengzhou"
-      ],
       "social": {
-        "instagram": "",
-        "xiaohongshu": "",
-        "email": "965946974@qq.com"
-      }
-    },
-    "contact": {
-      "brand_text": {
-        "zh": "用镜头记录光与时间",
-        "ja": "レンズで光と時間を記録する",
-        "en": "Capturing light and time through the lens"
+        "instagram": "@stellanhuan_test",
+        "xiaohongshu": "@stellanhuan_test",
+        "email": "test@test.com"
       },
-      "services": [
-        "写真拍摄",
-        "活动跟拍",
-        "航拍服务"
-      ],
-      "cta_text": {
-        "zh": "预约咨询 →",
-        "ja": "相談予約 →",
-        "en": "Book a Session →"
-      },
-      "cta_link": "src/pages/Inquiry/Inquiry.html"
+      "tags": [
+        "Test1",
+        "Test2"
+      ]
     }
   }
 };
