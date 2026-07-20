@@ -228,7 +228,23 @@
   /* Scroll progress bar */
   .scroll-progress{position:fixed;top:0;left:0;height:1px;background:var(--gold);z-index:9995;transition:width .15s linear}
 
+
+  .menu-btn{display:none;background:none;border:none;color:var(--gold-light);font-size:1.3rem;cursor:pointer;padding:.3rem}
   @media(max-width:768px){
+    .menu-btn{display:block;position:absolute;right:1rem;top:.8rem;z-index:101}
+    .nav-inner{display:none;flex-direction:column;position:absolute;top:3rem;left:0;right:0;background:rgba(8,6,4,.95);padding:1rem;gap:.8rem}
+    .nav.menu-open .nav-inner{display:flex}
+    .nav-links{flex-direction:column;gap:.5rem}
+    .hero{padding:0 0 4rem 5%}
+    .hero h1{font-size:2rem;letter-spacing:.2em}
+    .hero .intro{font-size:.7rem}
+    .about-section{flex-direction:column!important;padding:3rem 1rem}
+    .about-visual{flex:auto!important;max-height:50vh}
+    .contact-grid{grid-template-columns:1fr!important}
+    .bk-card{min-width:100%!important}
+    .hscroll-card{width:85vw!important}
+  }
+
     .nav{padding:.8rem 1rem}
     .nav-links{gap:1rem}
     .nav-links a{font-size:.65rem}
@@ -250,7 +266,7 @@
     .masonry>:first-child{grid-column:1;grid-row:span 1}
     .masonry>:nth-child(2),.masonry>:nth-child(3),.masonry>:nth-child(4){grid-column:1;grid-row:span 1}
 
-    .about-section{flex-direction:column;padding:4rem 1rem;gap:3rem}
+    .about-section{flex-direction:column!important;padding:3rem 1rem;gap:2rem}.about-visual{flex:auto!important;max-height:60vh}
     .about-visual{max-height:40vh}
     .about-text .timeline{grid-template-columns:1fr}
     .contact{padding:5rem 1rem}
@@ -264,6 +280,7 @@
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <nav class="nav" id="nav">
+  <button class="menu-btn" id="menuBtn" aria-label="菜单" onclick="document.getElementById('nav').classList.toggle('menu-open')">☰</button>
   <div class="nav-inner">
     <a href="#" class="nav-logo">Stellan</a>
     <div class="nav-links">
