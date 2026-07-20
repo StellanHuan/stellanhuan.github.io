@@ -231,56 +231,83 @@
 
   .menu-btn{display:none;background:none;border:none;color:var(--gold-light);font-size:1.3rem;cursor:pointer;padding:.3rem}
   @media(max-width:768px){
+    /* ── Mobile Magazine Layout ── */
+    
     /* Nav */
     .menu-btn{display:block;position:absolute;right:1rem;top:.8rem;z-index:101;background:none;border:none;color:var(--gold-light);font-size:1.3rem;cursor:pointer;padding:.3rem}
     .nav-inner{display:none;flex-direction:column;position:absolute;top:3rem;left:0;right:0;background:rgba(8,6,4,.95);padding:1rem;gap:.8rem}
     .nav.menu-open .nav-inner{display:flex}
     .nav-links{flex-direction:column;gap:.5rem}
-    /* Hero - keep photo dominant */
-    .hero{padding:0 0 3rem 1rem}
-    .hero h1{font-size:1.8rem;letter-spacing:.15em}
-    .hero .intro{font-size:.65rem;max-width:250px}
-    .hero-content{max-width:280px}
-    /* 01 Masonry → editorial single column with varied ratios */
-    .masonry{display:flex!important;flex-direction:column;gap:1.5rem;padding:2rem 1rem}
-    .masonry .duo-item{width:100%;border-radius:4px;overflow:hidden}
-    .masonry .duo-item:nth-child(1) img{aspect-ratio:4/5}
-    .masonry .duo-item:nth-child(2) img,.masonry .duo-item:nth-child(5) img,.masonry .duo-item:nth-child(8) img{aspect-ratio:1/1}
-    .masonry .duo-item:nth-child(3) img,.masonry .duo-item:nth-child(6) img{aspect-ratio:3/2}
-    .masonry .duo-item:nth-child(4) img,.masonry .duo-item:nth-child(7) img,.masonry .duo-item:nth-child(9) img{aspect-ratio:4/3}
-    .masonry .duo-item img{width:100%;height:auto;object-fit:cover}
-    /* Remove grid rules on mobile */
-    .masonry>:first-child,.masonry>:nth-child(2),.masonry>:nth-child(3),.masonry>:nth-child(4),.masonry>:nth-child(5),.masonry>:nth-child(6),.masonry>:nth-child(7),.masonry>:nth-child(8),.masonry>:nth-child(9){grid-column:auto;grid-row:auto}
-    /* 02 Hscroll */
-    .hscroll-card{width:85vw}
-    .hscroll-head{padding:0 1rem 1rem;flex-direction:column;align-items:flex-start;gap:.5rem}
-    /* 03 Landscape - same editorial treatment */
-    /* About - image top, text bottom */
-    .about-section{flex-direction:column!important;padding:3rem 1rem;gap:2rem}
-    .about-visual{flex:auto!important;width:100%}
-    .about-visual img{max-height:70vh;aspect-ratio:4/5;object-fit:cover}
+
+    /* Hero — magazine cover */
+    .hero{padding:0;align-items:flex-end}
+    .hero-content{max-width:100%;padding:0 1.5rem 3rem}
+    .hero h1{font-size:2.5rem;letter-spacing:.3em}
+    .hero .intro{font-size:.7rem;line-height:1.8;max-width:260px}
+
+    /* Macro type — large breathing space */
+    .macro-type{padding:5rem 1.5rem}
+    .macro-type .big{font-size:1.5rem;line-height:1.8}
+
+    /* Sections — magazine editorial */
+    .block-head,.section-header{padding:4rem 1.5rem 1rem;flex-direction:column;align-items:flex-start;gap:.5rem}
+    .block-head .left h2,.section-header h2{font-size:1.6rem}
+    .more-link{margin-top:.5rem}
+
+    /* 01 + 03 MASONRY → Magazine full-bleed cards */
+    .masonry{display:flex!important;flex-direction:column;gap:4rem;padding:2rem 0}
+    .masonry .duo-item{width:100%;border-radius:0;margin:0}
+    .masonry .duo-item img{width:100%;height:auto;object-fit:cover;border-radius:0}
+    /* Varied aspect ratios for editorial rhythm */
+    .masonry .duo-item:nth-child(odd) img{aspect-ratio:3/4}
+    .masonry .duo-item:nth-child(even) img{aspect-ratio:4/3}
+    .masonry .duo-item:first-child img{aspect-ratio:4/5}
+    /* Full-bleed: remove padding on image containers */
+    .masonry .duo-item{overflow:visible}
+    .masonry .duo-item img{width:100vw;margin-left:50%;transform:translateX(-50%)}
+    /* Reset grid positioning */
+    .masonry>*{grid-column:auto!important;grid-row:auto!important}
+    /* Overlay — magazine caption style */
+    .duo-overlay{position:relative;opacity:1;transform:none;background:none;padding:.8rem 1.5rem 0}
+    .duo-overlay .duo-title{font-size:.9rem;color:var(--text-bright)}
+    .duo-overlay .duo-meta{font-size:.65rem}
+    .duo-label{display:none}
+
+    /* 02 HScroll — vertical stack with full bleed images */
+    .hscroll-wrap{border:none;padding:2rem 0}
+    .hscroll-track{flex-direction:column;gap:3rem;overflow-x:visible;padding:0}
+    .hscroll-card{width:100%!important;scroll-snap-align:none;border-radius:0}
+    .hscroll-card img{width:100vw;margin-left:50%;transform:translateX(-50%);aspect-ratio:3/2}
+    .hscroll-head{padding:0 1.5rem 1rem}
+    .hscroll-dots{display:none}
+
+    /* Booking — full width editorial */
+    .booking-section{padding:3rem 1.5rem}
+    .booking-cards{flex-direction:column;gap:2rem}
+    .bk-card{min-width:100%!important;flex:auto!important;border-radius:0}
+    .bk-photo{min-height:300px!important}
+    .bk-photo img{width:100vw;margin-left:50%;transform:translateX(-50%)}
+
+    /* About — magazine portrait */
+    .about-section{flex-direction:column!important;padding:3rem 1.5rem;gap:2rem}
+    .about-visual{flex:auto!important;width:100%;max-height:none}
+    .about-visual img{aspect-ratio:4/5;object-fit:cover;max-height:80vh}
     .about-text .timeline{grid-template-columns:1fr}
-    /* Booking */
-    .booking-cards{flex-direction:column}
-    .bk-card{min-width:100%!important;flex:auto!important}
-    .bk-photo{min-height:250px!important}
-    /* Contact - full page */
-    .contact-grid{grid-template-columns:1fr!important;gap:1rem}
-    .contact-col{padding:1.2rem}
+
+    /* Contact — magazine page */
+    .contact{padding:5rem 1.5rem}
     .contact-inner{max-width:100%}
-    .contact{padding:3rem 1rem}
+    .contact-grid{grid-template-columns:1fr!important;gap:1.5rem}
+    .contact-col{padding:2rem 1.5rem;text-align:left}
+    .contact-brand{font-size:.9rem;line-height:1.8}
+
     /* Footer */
-    .footer-tags{gap:.3rem}
-    .footer-tags span{font-size:.55rem;padding:.15rem .5rem}
-    .footer-links{flex-wrap:wrap;gap:.8rem}
-    /* Section headers */
-    .section-header,.block-head{padding:3rem 1rem 1rem;flex-direction:column;align-items:flex-start;gap:.8rem}
-    .more-link{align-self:flex-start}
-    /* Macro type */
-    .macro-type{padding:3rem 1rem}
-    .macro-type .big{font-size:1.2rem}
-    /* General */
-    .reveal{transform:translateY(16px)}
+    .footer-tags{gap:.4rem;padding:0 1rem}
+    .footer-links{flex-wrap:wrap;gap:1rem}
+    footer{padding:3rem 1.5rem 2rem}
+
+    /* Reveal animation — quicker for mobile */
+    .reveal{transform:translateY(20px)}
   }
 
     .nav{padding:.8rem 1rem}
