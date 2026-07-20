@@ -83,5 +83,43 @@
       "addon": true
     }
   },
-  "copyright": "© 2026 瓛瓛 HuanHuan"
+  "copyright": "© 2026 瓛瓛 HuanHuan",
+  "about": {
+    "image_ratio": "4/5",
+    "max_height": "650px",
+    "object_fit": "contain"
+  },
+  "contact": {
+    "brand_text": {
+      "zh": "用镜头记录光与时间",
+      "ja": "レンズで光と時間を記録する",
+      "en": "Capturing light and time through the lens"
+    },
+    "services": [
+      "写真拍摄",
+      "活动跟拍",
+      "航拍服务"
+    ],
+    "cta_text": {
+      "zh": "预约咨询 →",
+      "ja": "相談予約 →",
+      "en": "Book a Session →"
+    },
+    "cta_link": "src/pages/Inquiry/Inquiry.html"
+  },
+  "footer": {
+    "tags": [
+      "Portrait",
+      "Street",
+      "Aerial",
+      "Landscape",
+      "Tokyo",
+      "Zhengzhou"
+    ],
+    "social": {
+      "instagram": "",
+      "xiaohongshu": "",
+      "email": "965946974@qq.com"
+    }
+  }
 }
