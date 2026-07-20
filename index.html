@@ -116,7 +116,7 @@
 
 
   /* Masonry Editorial Grid */
-  .masonry{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:340px;gap:1rem;padding:3rem 2.5rem;max-width:1100px;margin:0 auto}
+  .masonry{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:340px;gap:1rem;padding:3rem 2.5rem;max-width:1400px;margin:0 auto}
   .masonry>:first-child{grid-column:1;grid-row:span 2}
   .masonry>:nth-child(2){grid-column:2;grid-row:1}
   .masonry>:nth-child(3){grid-column:3;grid-row:1}
@@ -133,7 +133,7 @@
   .masonry .duo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease,filter .5s ease}
   .masonry .duo-item:hover img{transform:scale(1.03)}
   /* ===== DUO ===== */
-  .duo{display:flex;gap:1rem;padding:3rem 2.5rem;max-width:1100px;margin:0 auto}
+  .duo{display:flex;gap:1rem;padding:3rem 2.5rem;max-width:1400px;margin:0 auto}
   .duo-item{position:relative;overflow:hidden;border-radius:4px}
   .duo-item:nth-child(1){flex:1.5}.duo-item:nth-child(2){flex:1}
   .duo-item img{width:100%;height:100%;object-fit:cover;display:block;
@@ -255,7 +255,7 @@
     .more-link{margin-top:.5rem}
 
     /* 01 + 03 MASONRY → Magazine full-bleed cards */
-    .masonry{display:flex!important;flex-direction:column;gap:4rem;padding:2rem 0}
+    .masonry{display:flex!important;flex-direction:column;gap:2.5rem;padding:2rem 0}
     .masonry .duo-item{width:100%;border-radius:0;margin:0}
     .masonry .duo-item img{width:100%;height:auto;object-fit:cover;border-radius:0}
     /* Varied aspect ratios for editorial rhythm */
@@ -264,7 +264,7 @@
     .masonry .duo-item:first-child img{aspect-ratio:4/5}
     /* Full-bleed: remove padding on image containers */
     .masonry .duo-item{overflow:visible}
-    .masonry .duo-item img{width:100vw;margin-left:50%;transform:translateX(-50%)}
+    .masonry .duo-item img{width:100vw;margin-left:50%;transform:translateX(-50%);max-width:100vw}
     /* Reset grid positioning */
     .masonry>*{grid-column:auto!important;grid-row:auto!important}
     /* Overlay — magazine caption style */
