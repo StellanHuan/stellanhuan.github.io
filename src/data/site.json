@@ -52,9 +52,8 @@
       "web_117.jpeg"
     ],
     "about": [
-      "web_050.jpeg",
-      "web_080.jpeg",
-      "web_100.jpeg"
+      "web_147.jpeg",
+      "web_139.jpeg"
     ],
     "booking_portrait": [
       "web_128.jpeg",
@@ -92,15 +91,18 @@
   "contact": {
     "brand_text": {
       "zh": "用镜头记录光与时间",
-      "en": "Capturing light"
+      "ja": "レンズで光と時間を記録する",
+      "en": "Capturing light and time through the lens"
     },
     "services": [
-      "写真",
-      "跟拍",
-      "航拍"
+      "写真拍摄",
+      "活动跟拍",
+      "航拍服务"
     ],
     "cta_text": {
-      "zh": "预约→"
+      "zh": "预约咨询 →",
+      "ja": "相談予約 →",
+      "en": "Book a Session →"
     },
     "cta_link": "src/pages/Inquiry/Inquiry.html"
   },
@@ -109,12 +111,13 @@
       "Portrait",
       "Street",
       "Aerial",
+      "Landscape",
       "Tokyo",
-      "Zhengzhou",
-      "Luohe"
+      "Zhengzhou"
     ],
     "social": {
-      "instagram": "@stellanhuan",
+      "instagram": "",
+      "xiaohongshu": "",
       "email": "965946974@qq.com"
     }
   }
