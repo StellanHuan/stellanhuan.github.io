@@ -1214,18 +1214,5 @@
       "web_004.jpeg",
       "web_010.jpeg"
     ]
-  },
-  "site": {
-    "footer": {
-      "social": {
-        "instagram": "@stellanhuan_test",
-        "xiaohongshu": "@stellanhuan_test",
-        "email": "test@test.com"
-      },
-      "tags": [
-        "Test1",
-        "Test2"
-      ]
-    }
   }
 }
