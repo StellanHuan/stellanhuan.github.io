@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Stellan Huan · Nikon Z8 · 郑州与东京之间的光 · 摄影作品集">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Stellan HuanHuan — Photography</title>
-<meta property="og:title" content="藏魄">
+<meta property="og:title" content="Stellan HuanHuan">
 <meta property="og:description" content="Nikon Z8 · 郑州·东京">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
@@ -186,25 +189,17 @@
 
   /* ===== CONTACT ===== */
   .contact{padding:5rem 3rem;text-align:center;border-top:1px solid var(--border)}
-  .contact-inner{max-width:700px;margin:0 auto}
-  .contact h3{font-size:1rem;font-weight:400;letter-spacing:.25em;color:var(--gold-light);margin-bottom:1rem}
-  .contact-brand{font-size:.8rem;color:var(--text-dim);letter-spacing:.1em;margin-bottom:2.5rem}
-  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem}
-  .contact-col{text-align:center;padding:1.5rem;border:1px solid var(--border);border-radius:6px}
-  .contact-label{display:block;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;margin-bottom:.5rem}
-  .contact-val{display:block;font-size:.8rem;color:var(--text-bright);margin-bottom:.8rem}
-  .contact-btn{background:none;border:1px solid var(--gold-dim);color:var(--gold-light);padding:.3rem 1rem;border-radius:4px;font-size:.65rem;cursor:pointer;font-family:inherit;letter-spacing:.1em}
-  .contact-btn:hover{background:var(--gold-dim);color:var(--bg)}
-  .contact-cta-link{display:inline-block;padding:.6rem 2rem;border:1px solid var(--gold-dim);color:var(--gold-light);text-decoration:none;border-radius:4px;font-size:.75rem;letter-spacing:.1em;transition:all .3s}
-  .contact-cta-link:hover{background:var(--gold-dim);color:var(--bg)}
-  footer{padding:3rem 3rem 2rem;text-align:center;border-top:1px solid var(--border)}
-  .footer-tags{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
-  .footer-tags span{font-size:.6rem;color:var(--text-dim);padding:.2rem .8rem;border:1px solid var(--border);border-radius:20px;letter-spacing:.08em}
-  .footer-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;font-size:.6rem}
-  .footer-links a{color:var(--gold-dim);text-decoration:none;letter-spacing:.08em}
-  .footer-links a:hover{color:var(--gold-light)}
-  .footer-social{display:flex;justify-content:center;gap:1.5rem;margin-bottom:1.5rem;font-size:.6rem;color:var(--text-dim);letter-spacing:.08em}
-  footer span{display:block;font-size:.55rem;color:var(--text-dim);letter-spacing:.08em;line-height:1.8}
+  .contact-inner{max-width:520px;margin:0 auto}
+  .contact h3{font-size:1rem;font-weight:400;letter-spacing:.25em;color:var(--gold-light);margin-bottom:2.5rem}
+  .contact-card{background:rgba(14,11,8,.5);border:1px solid var(--border);border-radius:6px;padding:2.5rem;text-align:left}
+  .contact-row{display:flex;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:1px solid rgba(184,147,79,.06);font-size:.8rem;color:var(--text-dim)}
+  .contact-row:last-child{border-bottom:none}
+  .contact-row .label{color:var(--gold-dim);font-size:.65rem;letter-spacing:.15em;width:55px;flex-shrink:0}
+  .contact-row .value{color:var(--text-bright)}
+  .contact-cta{margin-top:2rem;text-align:center}
+  .contact-cta button{background:none;padding:.8rem 2.5rem;border:1px solid var(--gold-dim);color:var(--gold-light);font-family:inherit;border-radius:4px;font-size:.75rem;letter-spacing:.15em;cursor:pointer;transition:all .3s var(--ease-out)}
+  .contact-cta button:hover{background:var(--gold-dim);color:var(--bg)}
+  footer{padding:2rem 3rem;text-align:center;border-top:1px solid var(--border);font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;line-height:1.8}
 
   /* ===== BOOKING CARDS ===== */
   .bk-card{transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1)}
@@ -228,94 +223,42 @@
   /* Scroll progress bar */
   .scroll-progress{position:fixed;top:0;left:0;height:1px;background:var(--gold);z-index:9995;transition:width .15s linear}
 
-
-  .menu-btn{display:none;background:none;border:none;color:var(--gold-light);font-size:1.3rem;cursor:pointer;padding:.3rem}
   @media(max-width:768px){
-    /* ── Mobile Magazine Layout ── */
-    
-    /* Nav */
-    .menu-btn{display:block;position:absolute;right:1rem;top:.8rem;z-index:101;background:none;border:none;color:var(--gold-light);font-size:1.3rem;cursor:pointer;padding:.3rem}
-    .nav-inner{display:none;flex-direction:column;position:absolute;top:3rem;left:0;right:0;background:rgba(8,6,4,.95);padding:1rem;gap:.8rem}
-    .nav.menu-open .nav-inner{display:flex}
-    .nav-links{flex-direction:column;gap:.5rem}
+    .nav{padding:.8rem 1rem}
+    .nav-links{gap:1rem}
+    .nav-links a{font-size:.65rem}
+    .nav-logo{font-size:.75rem}
+    .hero{padding:0 0 6rem 1.5rem}
+    .hero{padding:0 0 4rem 5%}.hero h1{letter-spacing:.2em}
+    .block-head{padding:5rem 1rem 1rem;flex-direction:column;align-items:flex-start;gap:1rem}
+    .macro-type{padding:5rem 1rem}
+    .macro-type .big{font-size:1.4rem}
+    .duo{flex-direction:column;padding:2rem 1rem}
+    .duo-overlay{padding:1.5rem}
+    .duo-overlay .duo-title{font-size:.85rem}
+    .full-img{margin:2rem 1rem;height:55vh}
+    .full-img .cap{bottom:1rem;left:1rem;font-size:.65rem}
+    .hscroll-head{padding:0 1rem 1.5rem;flex-direction:column;align-items:flex-start;gap:.8rem}
+    .hscroll-card{width:82vw}
 
-    /* Hero — magazine cover */
-    .hero{padding:0;align-items:flex-end}
-    .hero-content{max-width:100%;padding:0 1.5rem 3rem}
-    .hero h1{font-size:2.5rem;letter-spacing:.3em}
-    .hero .intro{font-size:.7rem;line-height:1.8;max-width:260px}
+    .masonry{grid-template-columns:1fr;grid-auto-rows:280px;padding:2rem 1rem}
+    .masonry>:first-child{grid-column:1;grid-row:span 1}
+    .masonry>:nth-child(2),.masonry>:nth-child(3),.masonry>:nth-child(4){grid-column:1;grid-row:span 1}
 
-    /* Macro type — large breathing space */
-    .macro-type{padding:5rem 1.5rem}
-    .macro-type .big{font-size:1.5rem;line-height:1.8}
-
-    /* Sections — magazine editorial */
-    .block-head,.section-header{padding:4rem 1.5rem 1rem;flex-direction:column;align-items:flex-start;gap:.5rem}
-    .block-head .left h2,.section-header h2{font-size:1.6rem}
-    .more-link{margin-top:.5rem}
-
-    /* 01 + 03 MASONRY → Magazine full-bleed cards */
-    .masonry{display:flex!important;flex-direction:column;gap:2.5rem;padding:2rem 0}
-    .masonry .duo-item{width:100%;border-radius:0;margin:0}
-    .masonry .duo-item img{width:100%;height:auto;object-fit:cover;border-radius:0}
-    /* Varied aspect ratios for editorial rhythm */
-    .masonry .duo-item:nth-child(odd) img{aspect-ratio:3/4}
-    .masonry .duo-item:nth-child(even) img{aspect-ratio:4/3}
-    .masonry .duo-item:first-child img{aspect-ratio:4/5}
-    /* Full-bleed: remove padding on image containers */
-    .masonry .duo-item{overflow:visible}
-    .masonry .duo-item img{width:100vw;margin-left:50%;transform:translateX(-50%);max-width:100vw}
-    /* Reset grid positioning */
-    .masonry>*{grid-column:auto!important;grid-row:auto!important}
-    /* Overlay — magazine caption style */
-    .duo-overlay{position:relative;opacity:1;transform:none;background:none;padding:.8rem 1.5rem 0}
-    .duo-overlay .duo-title{font-size:.9rem;color:var(--text-bright)}
-    .duo-overlay .duo-meta{font-size:.65rem}
-    .duo-label{display:none}
-
-    /* 02 HScroll — vertical stack with full bleed images */
-    .hscroll-wrap{border:none;padding:2rem 0}
-    .hscroll-track{flex-direction:column;gap:3rem;overflow-x:visible;padding:0}
-    .hscroll-card{width:100%!important;scroll-snap-align:none;border-radius:0}
-    .hscroll-card img{width:100vw;margin-left:50%;transform:translateX(-50%);aspect-ratio:3/2}
-    .hscroll-head{padding:0 1.5rem 1rem}
-    .hscroll-dots{display:none}
-
-    /* Booking — full width editorial */
-    .booking-section{padding:3rem 1.5rem}
-    .booking-cards{flex-direction:column;gap:2rem}
-    .bk-card{min-width:100%!important;flex:auto!important;border-radius:0}
-    .bk-photo{min-height:300px!important}
-    .bk-photo img{width:100vw;margin-left:50%;transform:translateX(-50%)}
-
-    /* About — magazine portrait */
-    .about-section{flex-direction:column!important;padding:3rem 1.5rem;gap:2rem}
-    .about-visual{flex:auto!important;width:100%;max-height:none}
-    .about-visual img{aspect-ratio:4/5;object-fit:cover;max-height:80vh}
+    .about-section{flex-direction:column;padding:4rem 1rem;gap:3rem}
+    .about-visual{max-height:40vh}
     .about-text .timeline{grid-template-columns:1fr}
-
-    /* Contact — magazine page */
-    .contact{padding:5rem 1.5rem}
-    .contact-inner{max-width:100%}
-    .contact-grid{grid-template-columns:1fr!important;gap:1.5rem}
-    .contact-col{padding:2rem 1.5rem;text-align:left}
-    .contact-brand{font-size:.9rem;line-height:1.8}
-
-    /* Footer */
-    .footer-tags{gap:.4rem;padding:0 1rem}
-    .footer-links{flex-wrap:wrap;gap:1rem}
-    footer{padding:3rem 1.5rem 2rem}
-
-    /* Reveal animation — quicker for mobile */
-    .reveal{transform:translateY(20px)}
-  }</style>
+    .contact{padding:5rem 1rem}
+    .contact-card{padding:1.5rem}
+    footer{padding:2rem 1rem}
+  }
+</style>
 </head>
 <body>
 <div class="grain"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <nav class="nav" id="nav">
-  <button class="menu-btn" id="menuBtn" aria-label="菜单" onclick="document.getElementById('nav').classList.toggle('menu-open')">☰</button>
   <div class="nav-inner">
     <a href="#" class="nav-logo">Stellan</a>
     <div class="nav-links">
@@ -580,30 +523,32 @@
 <!-- ═══ CONTACT ═══ -->
 <div class="contact" id="contact">
   <div class="contact-inner">
-    <h3 data-lang="zh">联系</h3><h3 data-lang="ja">お問い合わせ</h3><h3 data-lang="en">Contact</h3>
-    <p class="contact-brand" data-lang="zh">用镜头记录光与时间</p>
-    <p class="contact-brand" data-lang="ja">レンズで光と時間を記録する</p>
-    <p class="contact-brand" data-lang="en">Capturing light and time through the lens</p>
-    <div class="contact-grid">
-      <div class="contact-col">
-        <span class="contact-label">微信</span>
-        <span class="contact-val">S0688888860</span>
-        <button id="copyWechat" class="contact-btn"><span data-lang="zh">复制</span><span data-lang="ja">コピー</span><span data-lang="en">Copy</span></button>
+    <h3 data-lang="zh">联系</h3>
+    <h3 data-lang="ja">お問い合わせ</h3>
+    <h3 data-lang="en">Contact</h3>
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="label">微信</span>
+        <span class="value">S0688888860</span>
       </div>
-      <div class="contact-col">
-        <span class="contact-label" data-lang="zh">地区</span><span class="contact-label" data-lang="ja">地域</span><span class="contact-label" data-lang="en">Location</span>
-        <span class="contact-val">郑州 · 漯河</span>
+      <div class="contact-row">
+        <span class="label" data-lang="zh">地区</span>
+        <span class="label" data-lang="ja">地域</span>
+        <span class="label" data-lang="en">Location</span>
+        <span class="value">郑州 · 漯河</span>
       </div>
-      <div class="contact-col">
-        <span class="contact-label" data-lang="zh">服务</span><span class="contact-label" data-lang="ja">内容</span><span class="contact-label" data-lang="en">Services</span>
-        <span class="contact-val" data-lang="zh">写真 · 跟拍 · 航拍</span>
-        <span class="contact-val" data-lang="ja">ポートレート · イベント · 空撮</span>
-        <span class="contact-val" data-lang="en">Portrait · Event · Aerial</span>
+      <div class="contact-row">
+        <span class="label" data-lang="zh">服务</span>
+        <span class="label" data-lang="ja">内容</span>
+        <span class="label" data-lang="en">Services</span>
+        <span class="value" data-lang="zh">写真 · 跟拍 · 航拍</span>
+        <span class="value" data-lang="ja">ポートレート · イベント · 空撮</span>
+        <span class="value" data-lang="en">Portrait · Event · Aerial</span>
       </div>
     </div>
-    <a href="src/pages/Inquiry/Inquiry.html" class="contact-cta-link" data-lang="zh">预约咨询 →</a>
-    <a href="src/pages/Inquiry/Inquiry.html" class="contact-cta-link" data-lang="ja">相談予約 →</a>
-    <a href="src/pages/Inquiry/Inquiry.html" class="contact-cta-link" data-lang="en">Book a Session →</a>
+    <div class="contact-cta">
+      <button id="copyWechat"><span data-lang="zh">复制微信号</span><span data-lang="ja">WeChatをコピー</span><span data-lang="en">Copy WeChat</span></button>
+    </div>
   </div>
 </div>
 
@@ -616,15 +561,15 @@
     <a href="src/pages/About/About.html" style="color:var(--gold-dim);text-decoration:none">About</a>
     <a href="src/pages/Inquiry/Inquiry.html" style="color:var(--gold-dim);text-decoration:none">Contact</a>
   </div>
-  <span data-lang="zh">© 2026 藏魄<br>有元慎也に師事 · 光を追いかけて</span>
-  <span data-lang="ja">© 2026 藏魄<br>有元慎也に師事 · 光を追いかけて</span>
-  <span data-lang="en">© 2026 藏魄<br>Student of Arimoto Shinya · Chasing light</span>
+  <span data-lang="zh">© 2026 Stellan HuanHuan<br>有元慎也に師事 · 光を追いかけて</span>
+  <span data-lang="ja">© 2026 Stellan HuanHuan<br>有元慎也に師事 · 光を追いかけて</span>
+  <span data-lang="en">© 2026 Stellan HuanHuan<br>Student of Arimoto Shinya · Chasing light</span>
 </footer>
 
-<script src="data.js?v=6"></script>
+<script src="data.js?v=7?v=6"></script>
 <script src="src/analytics/health-monitor.js"></script>
 <script>
-// ═══ PHOTOS (from data.js) ═══
+// ═══ PHOTOS (from data.js?v=7) ═══
 const P=SITE_DATA.photos.map(p=>p.file);
 const photosByFile={};
 SITE_DATA.photos.forEach(p=>{photosByFile[p.file]=p});
