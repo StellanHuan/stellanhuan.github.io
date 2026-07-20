@@ -5,7 +5,8 @@
     "series": "landscape",
     "tags": [
       "精选"
-    ]
+    ],
+    "_touched": 1784502599.235022
   },
   {
     "file": "images/web_002.jpeg",
@@ -394,14 +395,6 @@
   {
     "file": "images/web_050.jpeg",
     "title": "浮遊",
-    "series": "landscape",
-    "tags": [
-      "备用"
-    ]
-  },
-  {
-    "file": "images/web_051.jpeg",
-    "title": "瞬き",
     "series": "landscape",
     "tags": [
       "备用"
@@ -1072,22 +1065,6 @@
     ]
   },
   {
-    "file": "images/web_135.jpeg",
-    "title": "都市の脈絡",
-    "series": "portrait",
-    "tags": [
-      "备用"
-    ]
-  },
-  {
-    "file": "images/web_136.jpeg",
-    "title": "時の層",
-    "series": "portrait",
-    "tags": [
-      "备用"
-    ]
-  },
-  {
     "file": "images/web_137.jpeg",
     "title": "空と大地",
     "series": "portrait",
@@ -1138,22 +1115,6 @@
   {
     "file": "images/web_143.jpeg",
     "title": "東京の隙間",
-    "series": "portrait",
-    "tags": [
-      "备用"
-    ]
-  },
-  {
-    "file": "images/web_144.jpeg",
-    "title": "遠くの灯",
-    "series": "portrait",
-    "tags": [
-      "备用"
-    ]
-  },
-  {
-    "file": "images/web_145.jpeg",
-    "title": "静寂の朝",
     "series": "portrait",
     "tags": [
       "备用"
