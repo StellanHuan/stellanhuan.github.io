@@ -309,3 +309,549 @@
     /* Reveal animation — quicker for mobile */
     .reveal{transform:translateY(20px)}
   }
+
+    .nav{padding:.8rem 1rem}
+    .nav-links{gap:1rem}
+    .nav-links a{font-size:.65rem}
+    .nav-logo{font-size:.75rem}
+    .hero{padding:0 0 6rem 1.5rem}
+    .hero{padding:0 0 4rem 5%}.hero h1{letter-spacing:.2em}
+    .block-head{padding:5rem 1rem 1rem;flex-direction:column;align-items:flex-start;gap:1rem}
+    .macro-type{padding:5rem 1rem}
+    .macro-type .big{font-size:1.4rem}
+    .duo{flex-direction:column;padding:2rem 1rem}
+    .duo-overlay{padding:1.5rem}
+    .duo-overlay .duo-title{font-size:.85rem}
+    .full-img{margin:2rem 1rem;height:55vh}
+    .full-img .cap{bottom:1rem;left:1rem;font-size:.65rem}
+    .hscroll-head{padding:0 1rem 1.5rem;flex-direction:column;align-items:flex-start;gap:.8rem}
+    .hscroll-card{width:82vw}
+
+    .masonry{grid-template-columns:1fr;grid-auto-rows:280px;padding:2rem 1rem}
+    .masonry>:first-child{grid-column:1;grid-row:span 1}
+    .masonry>:nth-child(2),.masonry>:nth-child(3),.masonry>:nth-child(4){grid-column:1;grid-row:span 1}
+
+    .about-section{flex-direction:column!important;padding:3rem 1rem;gap:2rem}.about-visual{flex:auto!important;max-height:60vh}
+    .about-visual{max-height:40vh}
+    .about-text .timeline{grid-template-columns:1fr}
+    .contact{padding:5rem 1rem}
+    .contact-card{padding:1.5rem}
+    footer{padding:2rem 1rem}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="nav" id="nav">
+  <button class="menu-btn" id="menuBtn" aria-label="菜单" onclick="document.getElementById('nav').classList.toggle('menu-open')">☰</button>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Stellan</a>
+    <div class="nav-links">
+      <a href="#work" data-lang="zh">作品</a>
+      <a href="#work" data-lang="ja">作品</a>
+      <a href="#work" data-lang="en">Work</a>
+      <a href="#about" data-lang="zh">关于</a>
+      <a href="#about" data-lang="ja">关于</a>
+      <a href="#about" data-lang="en">About</a>
+      <a href="#booking" data-lang="zh">预约</a>
+      <a href="#booking" data-lang="ja">予約</a>
+      <a href="#booking" data-lang="en">Book</a>
+      <a href="src/pages/Prints/Prints.html" data-lang="zh">商店</a>
+      <a href="src/pages/Prints/Prints.html" data-lang="ja">商店</a>
+      <a href="src/pages/Prints/Prints.html" data-lang="en">Prints</a>
+      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="zh">展览</a>
+      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="ja">展示</a>
+      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="en">Exhibitions</a>
+      <a href="#contact" data-lang="zh">联系</a>
+      <a href="#contact" data-lang="ja">連絡</a>
+      <a href="#contact" data-lang="en">Contact</a>
+      <div class="lang-dot">
+        <button class="lang-current" id="langCurrent">中</button>
+        <div class="lang-dropdown" id="langDropdown">
+          <button data-lang-switch="zh" class="active">中文</button>
+          <button data-lang-switch="ja">日本語</button>
+          <button data-lang-switch="en">English</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <img class="hero-img" alt="" id="heroImg" data-speed=".25" fetchpriority="high" loading="eager" width="1600" height="1067">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>瓛 瓛</h1>
+    <p class="ja" data-lang="ja">Stellan · フォトグラフィー</p>
+    <p class="ja" data-lang="zh">Stellan</p>
+    <p class="ja" data-lang="en">Stellan</p>
+    
+    <div class="intro" data-lang="zh">按下快门的那一秒，世界安静下来<br>郑州与东京之间，光替我说话</div>
+    <div class="intro" data-lang="ja">シャッターを切る一秒、世界が静まる<br>鄭州と東京のあいだで、光が代わりに語る</div>
+    <div class="intro" data-lang="en">The world goes quiet at the shutter's click<br>Between Zhengzhou and Tokyo, the light speaks for me</div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE ═══ -->
+<section class="macro-type">
+  <div class="big reveal">
+    <span data-lang="zh">拍照走路时<br><span class="hl">不看地图。</span><br>本来就没有目的地<br>看了也没用。</span>
+    <span data-lang="ja">写真を撮りながら街を歩く時は<br><span class="hl">地図を見ない。</span><br>そもそも目的地などないわけなので<br>地図を見たところで仕方がない。</span>
+    <span data-lang="en">When walking the streets with a camera,<br><span class="hl">I never look at a map.</span><br>Since I have no destination,<br>there's no point.</span>
+  </div>
+  <p class="ref reveal reveal-d2">— Arimoto Shinya · 有元慎也</p>
+</section>
+
+<!-- ═══ 01 SELECTED ═══ -->
+<div class="block-head" id="work">
+  <div class="left">
+    <span class="num">01</span>
+    <h2 data-lang="zh">目光所及</h2>
+    <h2 data-lang="ja">視線の先</h2>
+    <h2 data-lang="en">Within Sight</h2>
+  </div>
+  <a href="series/#portrait" class="more-link" data-lang="zh">阅读更多 →</a>
+  <a href="series/#portrait" class="more-link" data-lang="ja">もっと見る →</a>
+  <a href="series/#portrait" class="more-link" data-lang="en">View More →</a>
+</div>
+
+<div class="masonry" id="featuredDuo">
+  <div class="duo-item reveal"><img alt="" id="duo1a" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">PORTRAIT</div><div class="duo-overlay"><span class="duo-title">肖像</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
+  <div class="duo-item reveal reveal-d1"><img alt="" id="duo1b" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">STREET</div><div class="duo-overlay"><span class="duo-title">街头</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
+</div>
+
+<!-- ═══ 02 STREET ═══ -->
+<div class="hscroll-wrap">
+  <div class="hscroll-head">
+    <div class="left">
+      <span class="tag">02</span>
+      <h3 data-lang="zh">街头的呼吸</h3>
+      <h3 data-lang="ja">街の呼吸</h3>
+      <h3 data-lang="en">The Street Breathes</h3>
+    </div>
+    <a href="series/#street" class="more-link" data-lang="zh">阅读更多 →</a>
+    <a href="series/#street" class="more-link" data-lang="ja">もっと見る →</a>
+    <a href="series/#street" class="more-link" data-lang="en">View More →</a>
+  </div>
+  <div class="hscroll-track" id="hscroll"></div>
+  <div class="hscroll-dots" id="hscrollDots"></div>
+</div>
+
+<!-- ═══ 03 LANDSCAPE ═══ -->
+<div class="block-head" style="border-bottom:none">
+  <div class="left">
+    <span class="num">03</span>
+    <h2 data-lang="zh">大地与天空</h2>
+    <h2 data-lang="ja">大地と空</h2>
+    <h2 data-lang="en">Earth & Sky</h2>
+  </div>
+  <a href="series/#landscape" class="more-link" data-lang="zh">阅读更多 →</a>
+  <a href="series/#landscape" class="more-link" data-lang="ja">もっと見る →</a>
+  <a href="series/#landscape" class="more-link" data-lang="en">View More →</a>
+</div>
+
+<div class="masonry" id="landscapeDuo">
+  <div class="duo-item reveal" style="flex:1"><img alt="" id="duo2a" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">LANDSCAPE</div><div class="duo-overlay"><span class="duo-title">风光</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
+  <div class="duo-item reveal reveal-d1" style="flex:1.7"><img alt="" id="duo2b" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">AERIAL</div><div class="duo-overlay"><span class="duo-title">俯瞰</span><span class="duo-meta">DJI · 2026</span></div></div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<!-- ═══ BOOKING: Immersive Photo Cards ═══ -->
+<div class="booking-section" id="booking" style="padding:6rem 3rem;max-width:1100px;margin:0 auto;border-top:1px solid var(--border)">
+  <div style="text-align:center;margin-bottom:4rem;">
+    <span style="font-size:.65rem;letter-spacing:.5em;color:var(--gold-dim);display:block;margin-bottom:1rem;">04</span>
+    <h2 style="font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light);" data-lang="zh">写真预约</h2>
+    <h2 style="font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light);" data-lang="ja">写真予約</h2>
+    <h2 style="font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light);" data-lang="en">Book a Session</h2>
+  </div>
+
+  <div class="booking-cards" style="display:flex;gap:1.2rem;flex-wrap:wrap;">
+    <!-- Portrait -->
+    <a href="series/#portrait" class="bk-card reveal" style="flex:1.3;min-width:300px;position:relative;overflow:hidden;border-radius:8px;text-decoration:none;display:flex;flex-direction:column;background:#0a0704;">
+      <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:380px;aspect-ratio:4/3;">
+        <img loading="lazy" decoding="async" width="1600" height="1067" alt="Portrait" id="bkImg1" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
+        <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);transition:opacity .5s cubic-bezier(.16,1,.3,1);"></div>
+        
+        
+      </div>
+      <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);transition:background .4s;">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
+          <span style="font-size:.7rem;color:var(--gold-dim);letter-spacing:.2em;">PORTRAIT</span>
+          <span style="font-size:1.8rem;color:var(--gold-light);font-weight:200;">¥398</span>
+        </div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="zh">个人写真 · 情侣 · 闺蜜 · 含精修 · Nikon Z8</div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="ja">個人 · カップル · レタッチ込み · Nikon Z8</div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="en">Solo · Couple · Friends · Retouched · Nikon Z8</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="zh">点击查看作品 →</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="ja">タップして作品を見る →</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="en">Tap to view work →</div>
+      </div>
+    </a>
+
+    <!-- Event -->
+    <a href="series/#street" class="bk-card reveal reveal-d1" style="flex:1;min-width:260px;position:relative;overflow:hidden;border-radius:8px;text-decoration:none;display:flex;flex-direction:column;background:#0a0704;">
+      <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:300px;aspect-ratio:4/3;">
+        <img loading="lazy" decoding="async" width="1600" height="1067" alt="Event" id="bkImg2" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
+        <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);"></div>
+      </div>
+      <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
+          <span style="font-size:.7rem;color:var(--gold-dim);letter-spacing:.2em;">EVENT</span>
+          <span style="font-size:1.8rem;color:var(--gold-light);font-weight:200;">¥1500</span>
+        </div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="zh">活动跟拍 · 半天4小时 · 年会 · 开业</div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="ja">イベント · 半日 · 年会 · 開業式</div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="en">Event · Half Day · Conference · Ceremony</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="zh">点击查看作品 →</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="ja">タップして作品を見る →</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="en">Tap to view work →</div>
+      </div>
+    </a>
+
+    <!-- Aerial -->
+    <a href="series/#aerial" class="bk-card reveal reveal-d2" style="flex:1;min-width:260px;position:relative;overflow:hidden;border-radius:8px;text-decoration:none;display:flex;flex-direction:column;background:#0a0704;">
+      <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:300px;aspect-ratio:4/3;">
+        <img loading="lazy" decoding="async" width="1600" height="1067" alt="Aerial" id="bkImg3" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
+        <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);"></div>
+      </div>
+      <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
+          <span style="font-size:.7rem;color:var(--gold-dim);letter-spacing:.2em;">AERIAL</span>
+          <span style="font-size:1.8rem;color:var(--gold-light);font-weight:200;">+¥500</span>
+        </div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="zh">航拍加购 · DJI 4K · 城市全景</div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="ja">空撮オプション · DJI 4K · 都市</div>
+        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="en">Aerial Add-on · DJI 4K · City Panorama</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="zh">点击查看作品 →</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="ja">タップして作品を見る →</div>
+        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="en">Tap to view work →</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Process line -->
+  <div style="display:flex;gap:2rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:5rem;max-width:600px;margin-left:auto;margin-right:auto;">
+    <div class="reveal" style="text-align:center;">
+      <div style="width:36px;height:36px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;color:var(--gold-light);font-size:.7rem;">1</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="zh">微信联系</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="ja">WeChat</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="en">Contact</div>
+    </div>
+    <div style="color:var(--gold-dim);font-size:1rem;display:flex;align-items:center;padding-bottom:20px;">→</div>
+    <div class="reveal reveal-d1" style="text-align:center;">
+      <div style="width:36px;height:36px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;color:var(--gold-light);font-size:.7rem;">2</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="zh">沟通需求</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="ja">打ち合わせ</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="en">Discuss</div>
+    </div>
+    <div style="color:var(--gold-dim);font-size:1rem;display:flex;align-items:center;padding-bottom:20px;">→</div>
+    <div class="reveal reveal-d2" style="text-align:center;">
+      <div style="width:36px;height:36px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;color:var(--gold-light);font-size:.7rem;">3</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="zh">拍摄交付</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="ja">撮影 · 納品</div>
+      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="en">Shoot & Deliver</div>
+    </div>
+  </div>
+</div>
+
+<div class="about-section" id="about">
+  <div class="about-visual reveal"><img alt="" id="aboutImg" loading="lazy" decoding="async" width="1600" height="1067"></div>
+  <div class="about-text">
+    <span class="about-num">05</span>
+    <h3 data-lang="zh">关于</h3>
+    <h3 data-lang="ja">について</h3>
+    <h3 data-lang="en">About</h3>
+    <div class="about-lead" data-lang="zh">相机不是工具，是另一双眼睛。<br>街上的人、低头的瞬间、被忽略的角落——<br>都在取景框里重新活过来。</div>
+    <div class="about-lead" data-lang="ja">カメラは道具じゃなく、もう一つの目。<br>街の人、うつむく瞬間、見過ごされた隅——<br>すべてがファインダーのなかで息を吹き返す。</div>
+    <div class="about-lead" data-lang="en">A camera isn't a tool. It's another pair of eyes.<br>Strangers on the street, a downward glance, the overlooked corner—<br>all come alive again inside the frame.</div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <span class="year">1999</span>
+        <span class="event" data-lang="zh">生于河南临颍</span>
+        <span class="event" data-lang="ja">河南省臨潁県に生まれる</span>
+        <span class="event" data-lang="en">Born in Linying, Henan</span>
+      </div>
+      <div class="timeline-item reveal reveal-d1">
+        <span class="year">2022</span>
+        <span class="event" data-lang="zh">赴日，东京TVA</span>
+        <span class="event" data-lang="ja">来日、東京TVA</span>
+        <span class="event" data-lang="en">Tokyo TVA, Japan</span>
+      </div>
+      <div class="timeline-item reveal reveal-d2">
+        <span class="year">2025</span>
+        <span class="event" data-lang="zh">归国，自由摄影师</span>
+        <span class="event" data-lang="ja">帰国、フリーランス</span>
+        <span class="event" data-lang="en">Freelance photographer</span>
+      </div>
+      <div class="timeline-item reveal reveal-d3">
+        <span class="year">Now</span>
+        <span class="event" data-lang="zh">郑州 · 漯河</span>
+        <span class="event" data-lang="ja">鄭州 · 漯河</span>
+        <span class="event" data-lang="en">Zhengzhou · Luohe</span>
+      </div>
+    </div>
+    <div class="pills">
+      <span>Nikon Z8</span><span>DJI</span><span>RICOH GXR</span>
+      <span>郑州</span><span>东京</span><span>漯河</span>
+      <span>Portrait</span><span>Street</span><span>Aerial</span>
+    </div>
+    <div class="currently" style="margin-top:2rem;padding:1.2rem 1.5rem;border:1px solid var(--border);border-radius:4px;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;line-height:2;">
+      <span style="color:var(--gold-dim);font-size:.65rem;letter-spacing:.2em;display:block;margin-bottom:.5rem;">CURRENTLY</span>
+      <span data-lang="zh">📍 郑州 · 自由摄影师<br>📷 Nikon Z8 为主力机<br>🎓 师从有元慎也</span>
+      <span data-lang="ja">📍 鄭州 · フリーランス<br>📷 Nikon Z8 メイン<br>🎓 有元慎也に師事</span>
+      <span data-lang="en">📍 Zhengzhou · Freelance<br>📷 Main: Nikon Z8<br>🎓 Student of Arimoto Shinya</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="contact" id="contact">
+  <div class="contact-inner">
+    <h3 data-lang="zh">联系</h3><h3 data-lang="ja">お問い合わせ</h3><h3 data-lang="en">Contact</h3>
+    <p class="contact-brand" data-lang="zh">用镜头记录光与时间</p>
+    <p class="contact-brand" data-lang="ja">レンズで光と時間を記録する</p>
+    <p class="contact-brand" data-lang="en">Capturing light and time through the lens</p>
+    <div class="contact-grid">
+      <div class="contact-col">
+        <span class="contact-label">微信</span>
+        <span class="contact-val">S0688888860</span>
+        <button id="copyWechat" class="contact-btn"><span data-lang="zh">复制</span><span data-lang="ja">コピー</span><span data-lang="en">Copy</span></button>
+      </div>
+      <div class="contact-col">
+        <span class="contact-label" data-lang="zh">地区</span><span class="contact-label" data-lang="ja">地域</span><span class="contact-label" data-lang="en">Location</span>
+        <span class="contact-val">郑州 · 漯河</span>
+      </div>
+      <div class="contact-col">
+        <span class="contact-label" data-lang="zh">服务</span><span class="contact-label" data-lang="ja">内容</span><span class="contact-label" data-lang="en">Services</span>
+        <span class="contact-val" data-lang="zh">写真 · 跟拍 · 航拍</span>
+        <span class="contact-val" data-lang="ja">ポートレート · イベント · 空撮</span>
+        <span class="contact-val" data-lang="en">Portrait · Event · Aerial</span>
+      </div>
+    </div>
+    <a href="src/pages/Inquiry/Inquiry.html" class="contact-cta-link" data-lang="zh">预约咨询 →</a>
+    <a href="src/pages/Inquiry/Inquiry.html" class="contact-cta-link" data-lang="ja">相談予約 →</a>
+    <a href="src/pages/Inquiry/Inquiry.html" class="contact-cta-link" data-lang="en">Book a Session →</a>
+  </div>
+</div>
+
+<footer>
+  <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:.8rem;font-size:.65rem">
+    <a href="src/pages/Services/Services.html" style="color:var(--gold-dim);text-decoration:none">Services</a>
+    <a href="src/pages/Prints/Prints.html" style="color:var(--gold-dim);text-decoration:none">Prints</a>
+    <a href="src/pages/Exhibitions/Exhibitions.html" style="color:var(--gold-dim);text-decoration:none">Exhibitions</a>
+    <a href="src/pages/Publications/Publications.html" style="color:var(--gold-dim);text-decoration:none">Press</a>
+    <a href="src/pages/About/About.html" style="color:var(--gold-dim);text-decoration:none">About</a>
+    <a href="src/pages/Inquiry/Inquiry.html" style="color:var(--gold-dim);text-decoration:none">Contact</a>
+  </div>
+  <span data-lang="zh">© 2026 藏魄<br>有元慎也に師事 · 光を追いかけて</span>
+  <span data-lang="ja">© 2026 藏魄<br>有元慎也に師事 · 光を追いかけて</span>
+  <span data-lang="en">© 2026 藏魄<br>Student of Arimoto Shinya · Chasing light</span>
+</footer>
+
+<script src="data.js?v=6"></script>
+<script src="src/analytics/health-monitor.js"></script>
+<script>
+// ═══ PHOTOS (from data.js) ═══
+const P=SITE_DATA.photos.map(p=>p.file);
+const photosByFile={};
+SITE_DATA.photos.forEach(p=>{photosByFile[p.file]=p});
+const sec=SITE_DATA.sections;
+function getPhoto(key,i){const a=sec[key];return a?`images/${a[i%a.length]}`:P[i%P.length]}
+function getTitle(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.title:''}
+function getSeries(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.series:'portrait'}
+
+// Assign hero + about + booking
+['heroImg'].forEach((id,i)=>document.getElementById(id).src=getPhoto('hero',i));
+document.getElementById('aboutImg').src=getPhoto('about',0);
+document.getElementById('bkImg1').src=getPhoto('booking_portrait',0);
+document.getElementById('bkImg2').src=getPhoto('booking_event',0);
+document.getElementById('bkImg3').src=getPhoto('booking_aerial',0);
+
+// Dynamic Featured Duo (from sections data)
+const featuredPhotos=sec['featured']||[];
+const featDuo=document.getElementById('featuredDuo');
+if(featDuo&&featuredPhotos.length){
+  let html='';
+  for(let i=0;i<featuredPhotos.length;i+=2){
+    const a=featuredPhotos[i],b=featuredPhotos[i+1];
+    html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
+      <img src="images/${a}" alt=""><div class="duo-label">${i===0?'PORTRAIT':'STREET'}</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
+    </div>`;
+    if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
+      <img src="images/${b}" alt=""><div class="duo-label">STREET</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
+    </div>`;
+  }
+  featDuo.innerHTML=html;featDuo.querySelectorAll(".reveal").forEach(el=>new IntersectionObserver(e=>e.forEach(ee=>{if(ee.isIntersecting)ee.target.classList.add("visible")}),{threshold:.12}).observe(el));
+}
+
+// Dynamic Landscape Duo
+const landPhotos=sec['landscape']||[];
+const aerPhotos=sec['aerial']||[];
+const landDuo=document.getElementById('landscapeDuo');
+if(landDuo){
+  let html='';
+  const allLand=[...landPhotos,...aerPhotos];
+  for(let i=0;i<allLand.length;i+=2){
+    const a=allLand[i],b=allLand[i+1];
+    html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
+      <img src="images/${a}" alt=""><div class="duo-label">${i<landPhotos.length?'LANDSCAPE':'AERIAL'}</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
+    </div>`;
+    if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
+      <img src="images/${b}" alt=""><div class="duo-label">AERIAL</div>
+      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">DJI · 2026</span></div>
+    </div>`;
+  }
+  landDuo.innerHTML=html;landDuo.querySelectorAll(".reveal").forEach(el=>new IntersectionObserver(e=>e.forEach(ee=>{if(ee.isIntersecting)ee.target.classList.add("visible")}),{threshold:.12}).observe(el));
+}
+
+// Hscroll
+const hscroll=document.getElementById('hscroll');
+const hscrollPhotos=sec['hscroll']||[];
+for(let i=0;i<hscrollPhotos.length;i++){
+  const src=`images/${hscrollPhotos[i]}`;
+  const card=document.createElement('div');
+  card.className='hscroll-card';
+  card.innerHTML=`<img src="${src}" alt="Street" loading="lazy" width="1600" height="900"><div class="info"><span class="t">街头 ${i+1}</span><span class="m">Nikon Z8</span></div>`;
+  hscroll.appendChild(card);
+}
+// Dots (dynamic count)
+const dots=document.getElementById('hscrollDots');
+for(let i=0;i<hscrollPhotos.length;i++){const d=document.createElement('div');d.className='hscroll-dot';dots.appendChild(d)}
+hscroll.addEventListener('scroll',()=>{
+  const idx=Math.round(hscroll.scrollLeft/(hscroll.scrollWidth/Math.max(1,hscrollPhotos.length)));
+  dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+});
+// Dot click to scroll
+dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>{
+  d.style.cursor='pointer';
+  d.addEventListener('click',()=>{
+    hscroll.scrollTo({left:(hscroll.scrollWidth/hscrollPhotos.length)*i,behavior:'smooth'});
+  });
+});
+
+// ═══ LANGUAGE (dropdown) ═══
+function setLang(lang){
+  document.documentElement.setAttribute('data-current-lang',lang);
+  const names={zh:'中文',ja:'日本語',en:'English'};
+  document.getElementById('langCurrent').childNodes[0].textContent=names[lang];
+  document.querySelectorAll('.lang-dropdown button').forEach(b=>b.classList.toggle('active',b.dataset.langSwitch===lang));
+}
+const langCurrent=document.getElementById('langCurrent'),langDropdown=document.getElementById('langDropdown');
+langCurrent.addEventListener('click',e=>{e.stopPropagation();langCurrent.classList.toggle('open');langDropdown.classList.toggle('open')});
+document.addEventListener('click',()=>{langCurrent.classList.remove('open');langDropdown.classList.remove('open')});
+document.querySelectorAll('.lang-dropdown button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.langSwitch);langCurrent.classList.remove('open');langDropdown.classList.remove('open')}));
+setLang('zh');
+
+// ═══ QUOTE CHAR REVEAL ═══
+(function setupQuoteReveal(){
+  const quoteEl=document.querySelector('.macro-type .big [data-lang="zh"]');
+  if(!quoteEl)return;
+  const text=quoteEl.innerHTML;
+  // Split into chars, preserving HTML tags
+  const chars=[];
+  let i=0;
+  while(i<text.length){
+    if(text[i]==='<'){const end=text.indexOf('>',i);chars.push(text.slice(i,end+1));i=end+1}
+    else if(text[i]==='\n'){chars.push('<br>');i++}
+    else{chars.push(text[i]);i++}
+  }
+  quoteEl.innerHTML=chars.map((c,idx)=>`<span class="qr-char" style="opacity:0;transition:opacity .04s ease;transition-delay:${idx*.03}s">${c}</span>`).join('');
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        quoteEl.querySelectorAll('.qr-char').forEach(c=>c.style.opacity='1');
+      }
+    });
+  },{threshold:.4,once:true}).observe(quoteEl);
+})();
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ═══ CONTACT COPY ═══
+document.getElementById('copyWechat')?.addEventListener('click',async()=>{
+  const btn=document.getElementById('copyWechat');
+  try{await navigator.clipboard.writeText('S0688888860');btn.textContent='✓ 已复制'}catch(e){btn.textContent='微信: S0688888860'}
+  setTimeout(()=>{location.reload()},1500);
+});
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(link.getAttribute('href'));
+    if(target)target.scrollIntoView({behavior:'smooth'});
+  });
+});
+
+// ═══ PARALLAX (multi-speed depth) ═══
+(function loop(){
+  const sy=window.scrollY;
+  document.querySelectorAll('.parallax').forEach(el=>{
+    const speed=parseFloat(el.dataset.speed)||.15;
+    const rect=el.getBoundingClientRect();
+    const center=rect.top+rect.height/2;
+    const viewCenter=window.innerHeight/2;
+    const offset=(center-viewCenter)*speed;
+    el.style.transform=`translate3d(0,${offset*.4}px,0)`;
+  });
+  // Scroll-driven hero fade
+  const hero=document.querySelector('.hero');
+  if(hero){
+    const heroBottom=hero.getBoundingClientRect().bottom;
+    const progress=Math.max(0,Math.min(1,1-heroBottom/window.innerHeight));
+    hero.style.opacity=1-progress*.4;
+  }
+  requestAnimationFrame(loop);
+})();
+
+// ═══ NAV HIDE + SCROLL PROGRESS ═══
+let last=0;const nav=document.getElementById('nav'),prog=document.getElementById('scrollProgress');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  nav.classList.toggle('hidden',y>last&&y>400);
+  last=y;
+  const docH=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=docH>0?(y/docH*100)+'%':'0%';
+},{passive:true});
+
+// ═══ IMAGE FADE + PERF ═══
+document.querySelectorAll('img').forEach((img,i)=>{
+  img.style.transition='opacity .6s var(--ease-out)';
+  img.style.opacity='0';
+  img.addEventListener('load',function(){this.style.opacity='1'});
+  if(img.complete)img.style.opacity='1';
+  if(i>2){img.decoding='async';img.fetchPriority='low'}
+});
+
+// ═══ H-SCROLL MOMENTUM ═══
+let isDown=false,startX,scrollLeft,velocity=0,rafId;
+hscroll.addEventListener('mousedown',e=>{isDown=true;hscroll.style.cursor='grabbing';startX=e.pageX-hscroll.offsetLeft;scrollLeft=hscroll.scrollLeft;cancelAnimationFrame(rafId)});
+hscroll.addEventListener('mouseleave',()=>{isDown=false;hscroll.style.cursor='grab';applyMomentum()});
+hscroll.addEventListener('mouseup',()=>{isDown=false;hscroll.style.cursor='grab';applyMomentum()});
+hscroll.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-hscroll.offsetLeft;const walk=(x-startX)*1.5;velocity=(x-startX);hscroll.scrollLeft=scrollLeft-walk});
+function applyMomentum(){
+  let v=velocity*.95;
+  function step(){
+    if(Math.abs(v)<.5){velocity=0;return}
+    hscroll.scrollLeft-=v;v*=.92;rafId=requestAnimationFrame(step);
+  }
+  if(Math.abs(velocity)>2)step();else velocity=0;
+}
+
+// ═══ ABOUT PHOTO CYCLE ═══
+let aboutIdx=0;
+setInterval(()=>{aboutIdx=(aboutIdx+1)%P.length;document.getElementById('aboutImg').src=P[aboutIdx]},6000);
+
+// ═══ HERO LOAD ═══
+window.addEventListener('load',()=>{
+  setTimeout(()=>document.querySelector('.hero').classList.add('loaded'),300);
+});
+</script>
+</body>
+</html>
