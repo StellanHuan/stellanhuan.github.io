@@ -48,7 +48,7 @@
         <span data-lang="ja">写真を撮りながら街を歩く時は<br><span class="hl">地図を見ない。</span><br>そもそも目的地などないわけなので<br>地図を見たところで仕方がない。</span>
         <span data-lang="en">When walking the streets with a camera,<br><span class="hl">I never look at a map.</span><br>Since I have no destination,<br>there's no point.</span>
       </div>
-      <p class="ref reveal" style="transition-delay:.2s">— Arimoto Shinya · 有元慎也</p>`;
+      <p class="ref reveal" style="transition-delay:.2s">— Arimoto Shinya · 有元伸也</p>`;
   })();
 
   // ═══ FULL IMAGE ═══
