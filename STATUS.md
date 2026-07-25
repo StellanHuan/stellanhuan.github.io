@@ -17,7 +17,7 @@
 ## 网站（V1，已完成，线上运行）
 - 单文件 708 行 index.html，纯 HTML/CSS/JS，零依赖
 - 三语切换（中/日/EN），html data-current-lang 属性驱动 + 下拉菜单
-- 页面结构：Hero → 引文（有元慎也）→ 全屏大图 → 01 目光所及 → 02 街头的呼吸 → 03 大地与天空 → 04 写真预约 → 05 关于 → 联系
+- 页面结构：Hero → 引文（有元伸也）→ 全屏大图 → 01 目光所及 → 02 街头的呼吸 → 03 大地与天空 → 04 写真预约 → 05 关于 → 联系
 - Apple Fluid 动画体系：spring easing、视差、clip-path reveal、滚动进度条
 - 写真预约区：三张沉浸式照片卡（¥398 / ¥1500 / +¥500）+ 三步流程
 - 系列子页：series/index.html，hash 路由（#portrait/#street/#landscape/#aerial）
