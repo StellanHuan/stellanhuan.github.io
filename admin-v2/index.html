@@ -175,7 +175,7 @@ function p(n){return `<div class="page-placeholder">${n} — 开发中</div>`}
 
 // ═══ TOAST + DEPLOY ═══
 function showToast(msg){let t=document.getElementById('adminToast');if(!t){t=document.createElement('div');t.id='adminToast';t.style.cssText='position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#b8934f;color:#0d0a06;padding:.7rem 2rem;border-radius:8px;font-size:.8rem;z-index:999;transition:opacity .3s';document.body.appendChild(t)}t.textContent=msg;t.style.opacity='1';setTimeout(()=>t.style.opacity='0',2500)}
-function deploy(){const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||'{}');const data={photos:store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...c}=p;return c}),sections:store.sections,seriesMeta};const js='const SITE_DATA = '+JSON.stringify(data,null,2)+';';const token=localStorage.getItem('github_token');if(token){publishToGitHub(js,token)}else{const blob=new Blob([js],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();showToast('💾 已下载。⚙ Settings 里设置 GitHub Token 可一键发布')}}
+function deploy(){const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||'{}');const data={photos:store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...c}=p;return c}),sections:store.sections,seriesMeta};const js='const SITE_DATA = '+JSON.stringify(data,null,2)+';';const token=localStorage.getItem('github_token');if(token&&token.length>10){deployStatusEl=document.getElementById('deployStatus');showToast('🚀 正在发布到 GitHub...');publishToGitHub(js,token);return}const blob=new Blob([js],{type:'text/javascript'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();showToast('💾 已下载 data.js。设置 GitHub Token 后可一键发布')}
 async function publishToGitHub(content,token){showToast('🚀 发布中...');const statusEl=document.getElementById('deployStatus');if(statusEl)statusEl.innerHTML='⏳ 发布中...';
   try{
   const series={portrait:{photos:[...(store.sections.featured||[]),...(store.sections.booking_portrait||[])],name:{zh:'目光所及'}},street:{photos:store.sections.hscroll||[],name:{zh:'街头的呼吸'}},landscape:{photos:[...(store.sections.landscape||[]),...(store.sections.aerial||[])],name:{zh:'大地与天空'}},aerial:{photos:store.sections.aerial||[],name:{zh:'俯瞰'}}};
@@ -373,29 +373,12 @@ window.handleUpload=function(files){
   });
 };
 
-// Override deploy to include uploaded photos
-const origDeploy=deploy;
-deploy=function(){
-  const cleanPhotos=store.photos.map(p=>{const{_dataUrl,_size,_isUpload,...clean}=p;return clean});
-  const data={photos:cleanPhotos,sections:store.sections};
-  const js='// Stellan CMS export\nconst SITE_DATA = '+JSON.stringify(data,null,2)+';';
-  const blob=new Blob([js],{type:'text/javascript'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='data.js';a.click();
-  // Also offer zip of new images if any
-  const newPhotos=store.photos.filter(p=>p._dataUrl);
-  if(newPhotos.length){
-    setTimeout(()=>{
-      const msg='你有 '+newPhotos.length+' 张新上传的照片需要手动放到 images/ 文件夹。\n文件名已列在下载的 data.js 中。';
-      showToast('📤 '+msg);
-    },500);
-  }
-  showToast('💾 data.js 已下载！有新照片请手动放到 images/ 文件夹');
-};
 
-// Override photos page to render grid after HTML is injected
-const origNavigate=navigate;
+
+// Render grid after HTML is injected for photos/sections pages
+const _origNavigate=navigate;
 navigate=function(route){
-  origNavigate(route);
+  _origNavigate(route);
   if(route==='photos'||route==='sections') setTimeout(()=>{if(route==='photos')renderPhotoGrid();if(route==='sections')renderAddPhotoGrid()},100);
 };
 
@@ -516,6 +499,8 @@ window.exportAll=function(){
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='stellan-cms-export.json';a.click();
   showToast('📦 全部数据已导出');
 }
+window.syncFromGitHub=async function(){const st=document.getElementById('syncStatus');st.textContent='⏳ 加载中...';try{const r=await fetch('https://raw.githubusercontent.com/StellanHuan/stellanhuan.github.io/main/data.js');const t=await r.text();const m=t.match(/const SITE_DATA = (\{.*?\});/s);if(!m)throw new Error('parse failed');const d=JSON.parse(m[1]);store.photos=d.photos;store.sections=d.sections;saveStore();st.textContent='✅ 同步完成';showToast('✅ 已从 GitHub 同步 '+d.photos.length+' 张照片');setTimeout(()=>{st.textContent='';navigate('dashboard')},1500)}catch(e){st.textContent='❌ 同步失败';showToast('❌ '+e.message)}};
+
 function renderSections(){
   const names={hero:'🎬 Hero',featured:'01 目光所及',hscroll:'02 街头的呼吸',landscape:'03 大地(左)',aerial:'03 天空(右)',about:'05 关于',booking_portrait:'04 预约·人像',booking_event:'04 预约·活动',booking_aerial:'04 预约·航拍'};
   const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||JSON.stringify({featured:{title:'目光所及',desc:'精选作品',link:'portrait'},hscroll:{title:'街头的呼吸',desc:'街头偶遇',link:'street'},landscape:{title:'大地与天空',desc:'风光与航拍',link:'landscape'}}));

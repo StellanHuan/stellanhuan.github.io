@@ -189,24 +189,28 @@
   .about-text h3{font-size:1.2rem;font-weight:400;letter-spacing:.18em;color:var(--gold-light);margin-bottom:1.5rem}
   .about-text .about-lead{font-size:.95rem;color:var(--text-bright);line-height:2;letter-spacing:.04em;margin-bottom:2rem}
   .about-text .timeline{display:grid;grid-template-columns:1fr 1fr;gap:.8rem 2rem;margin-bottom:2rem}
-  .about-text .timeline-item{font-size:.78rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+  .about-text .timeline-item{font-size:.78rem;padding:.6rem 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+  .about-text .timeline-item.visible{opacity:1;transform:translateY(0)}
   .about-text .timeline-item .year{color:var(--gold-dim);font-size:.65rem;letter-spacing:.15em;display:block;margin-bottom:.3rem}
   .about-text .timeline-item .event{color:var(--text-dim);line-height:1.6}
   .about-text .pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.5rem}
-  .about-text .pills span{font-size:.65rem;color:var(--text-dim);padding:.35rem 1rem;border:1px solid var(--border);border-radius:20px;letter-spacing:.08em;transition:all .35s var(--spring);cursor:default}
+  .about-text .pills span{font-size:.65rem;color:var(--text-dim);padding:.35rem 1rem;border:1px solid var(--border);border-radius:20px;letter-spacing:.08em;transition:transform .2s ease-out,border-color .2s,color .2s,box-shadow .2s;cursor:default}
+  .about-text .pills span:active{transform:scale(.95)}
   .about-text .pills span:hover{color:var(--gold-light);border-color:var(--gold-dim);transform:translateY(-2px);box-shadow:0 4px 12px rgba(184,147,79,.1)}
 
   /* ===== CONTACT ===== */
   .contact{padding:5rem 3rem;text-align:center;border-top:1px solid var(--border)}
   .contact-inner{max-width:520px;margin:0 auto}
   .contact h3{font-size:1rem;font-weight:400;letter-spacing:.25em;color:var(--gold-light);margin-bottom:2.5rem}
-  .contact-card{background:rgba(14,11,8,.5);border:1px solid var(--border);border-radius:6px;padding:2.5rem;text-align:left}
+  .contact-card{background:rgba(14,11,8,.5);border:1px solid var(--border);border-radius:6px;padding:2.5rem;text-align:left;transition:border-color .3s}
+  .contact-card:hover{border-color:rgba(184,147,79,.2)}
   .contact-row{display:flex;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:1px solid rgba(184,147,79,.06);font-size:.8rem;color:var(--text-dim)}
   .contact-row:last-child{border-bottom:none}
   .contact-row .label{color:var(--gold-dim);font-size:.65rem;letter-spacing:.15em;width:55px;flex-shrink:0}
   .contact-row .value{color:var(--text-bright)}
   .contact-cta{margin-top:2rem;text-align:center}
-  .contact-cta button{background:none;padding:.8rem 2.5rem;border:1px solid var(--gold-dim);color:var(--gold-light);font-family:inherit;border-radius:4px;font-size:.75rem;letter-spacing:.15em;cursor:pointer;transition:all .3s var(--ease-out)}
+  .contact-cta button{background:none;padding:.8rem 2.5rem;border:1px solid var(--gold-dim);color:var(--gold-light);font-family:inherit;border-radius:4px;font-size:.75rem;letter-spacing:.15em;cursor:pointer;transition:transform .16s ease-out,background .25s,color .25s,border-color .25s}
+  .contact-cta button:active{transform:scale(.97)}
   .contact-cta button:hover{background:var(--gold-dim);color:var(--bg)}
   footer{padding:2rem 3rem;text-align:center;border-top:1px solid var(--border);font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;line-height:1.8}
 
@@ -490,25 +494,25 @@
     <div class="about-lead" data-lang="ja">カメラは道具じゃなく、もう一つの目。<br>街の人、うつむく瞬間、見過ごされた隅——<br>すべてがファインダーのなかで息を吹き返す。</div>
     <div class="about-lead" data-lang="en">A camera isn't a tool. It's another pair of eyes.<br>Strangers on the street, a downward glance, the overlooked corner—<br>all come alive again inside the frame.</div>
     <div class="timeline">
-      <div class="timeline-item reveal">
+      <div class="timeline-item reveal reveal-d1" style="transition-delay:.1s">
         <span class="year">1999</span>
         <span class="event" data-lang="zh">生于河南临颍</span>
         <span class="event" data-lang="ja">河南省臨潁県に生まれる</span>
         <span class="event" data-lang="en">Born in Linying, Henan</span>
       </div>
-      <div class="timeline-item reveal reveal-d1">
+      <div class="timeline-item reveal reveal-d1" style="transition-delay:.15s">
         <span class="year">2022</span>
         <span class="event" data-lang="zh">赴日，东京TVA</span>
         <span class="event" data-lang="ja">来日、東京TVA</span>
         <span class="event" data-lang="en">Tokyo TVA, Japan</span>
       </div>
-      <div class="timeline-item reveal reveal-d2">
+      <div class="timeline-item reveal reveal-d2" style="transition-delay:.2s">
         <span class="year">2025</span>
         <span class="event" data-lang="zh">归国，自由摄影师</span>
         <span class="event" data-lang="ja">帰国、フリーランス</span>
         <span class="event" data-lang="en">Freelance photographer</span>
       </div>
-      <div class="timeline-item reveal reveal-d3">
+      <div class="timeline-item reveal reveal-d3" style="transition-delay:.25s">
         <span class="year">Now</span>
         <span class="event" data-lang="zh">郑州 · 漯河</span>
         <span class="event" data-lang="ja">鄭州 · 漯河</span>
@@ -702,8 +706,9 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 // ═══ CONTACT COPY ═══
 document.getElementById('copyWechat')?.addEventListener('click',async()=>{
   const btn=document.getElementById('copyWechat');
-  try{await navigator.clipboard.writeText('S0688888860');btn.textContent='✓ 已复制'}catch(e){btn.textContent='微信: S0688888860'}
-  setTimeout(()=>{location.reload()},1500);
+  const origHTML=btn.innerHTML;
+  try{await navigator.clipboard.writeText('S0688888860');btn.innerHTML='<span data-lang="zh">✓ 已复制</span><span data-lang="ja">✓ コピー済み</span><span data-lang="en">✓ Copied</span>';btn.style.background='var(--gold-dim)';btn.style.color='var(--bg)'}catch(e){btn.innerHTML=origHTML}
+  setTimeout(()=>{btn.innerHTML=origHTML;btn.style.background='none';btn.style.color='var(--gold-light)'},2000);
 });
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
   link.addEventListener('click',e=>{
