@@ -1,4 +1,3 @@
-Updated 21 photo series assignments
 const SITE_DATA = {
   "photos": [
     {
