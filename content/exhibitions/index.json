@@ -1,24 +1,18 @@
 [
   {
-    "title": "Tokyo Circulation",
-    "year": 2025,
-    "venue": "GALLERY NEGATIVE",
-    "location": "Busan, Korea",
-    "description": "Group exhibition curated by Arimoto Shinya",
-    "cover": "web_009.jpeg",
-    "related_projects": [
-      "tokyo-rain"
-    ],
-    "press_links": []
+    "year": 2026,
+    "title": "街头的呼吸",
+    "venue": "郑州美术馆",
+    "location": "郑州",
+    "description": "首个个人摄影展，聚焦郑州与东京的街头瞬间。",
+    "cover": "web_016.jpeg"
   },
   {
-    "title": "Student Exhibition",
-    "year": 2024,
-    "venue": "Tokyo TVA Gallery",
-    "location": "Tokyo, Japan",
-    "description": "Annual student showcase at Tokyo TVA",
-    "cover": "web_030.jpeg",
-    "related_projects": [],
-    "press_links": []
+    "year": 2025,
+    "title": "光の粒子",
+    "venue": "东京TVA Gallery",
+    "location": "东京",
+    "description": "在学期间个展，探索光线与城市的对话。",
+    "cover": "web_001.jpeg"
   }
 ]

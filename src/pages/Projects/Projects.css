@@ -44,3 +44,17 @@
   .project-hero-img{height:35vh}
   .project-meta{gap:var(--space-4)}
 }
+
+/* ══ Interaction Polish (auto-generated) ══ */
+button, .btn, a.btn, [role="button"], .nav a, .print-inquire, .svc-cta button, .contact-cta button {
+  transition: transform 160ms var(--ease-out), opacity 200ms var(--ease-out), background 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out) !important;
+}
+button:active, .btn:active, a.btn:active, [role="button"]:active, .print-inquire:active, .svc-cta button:active, .contact-cta button:active {
+  transform: scale(0.97) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,29 +1,18 @@
 [
   {
-    "title": "LensCulture Critics' Choice 2024",
-    "type": "Award",
-    "date": "2024",
+    "type": "杂志",
+    "title": "摄影之友 2026年3月号",
+    "date": "2026.03",
+    "publisher": "摄影之友杂志社",
+    "description": "专题：新生代摄影师的视角",
+    "cover": "web_016.jpeg"
+  },
+  {
+    "type": "线上",
+    "title": "LensCulture 编辑精选",
+    "date": "2025.12",
     "publisher": "LensCulture",
-    "description": "Critics' Choice Award for emerging photographers",
-    "cover": "web_001.jpeg",
+    "description": "街头摄影系列获编辑精选推荐",
     "external_link": "https://www.lensculture.com"
-  },
-  {
-    "title": "Fisheye Magazine Feature",
-    "type": "Magazine",
-    "date": "2025",
-    "publisher": "Fisheye Magazine",
-    "description": "Feature on Tokyo street photography series",
-    "cover": "web_009.jpeg",
-    "external_link": "https://www.fisheyemagazine.fr"
-  },
-  {
-    "title": "Tokyo Circulation - Photo Book",
-    "type": "Book",
-    "date": "2025",
-    "publisher": "Self-published",
-    "description": "A collection of street photographs from Tokyo, 2022-2025",
-    "cover": "web_023.jpeg",
-    "external_link": ""
   }
 ]

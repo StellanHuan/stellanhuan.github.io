@@ -349,9 +349,11 @@ idb.onsuccess=async function(){
 
 window.handleUpload=function(files){
   if(!files.length)return;
+  const token=localStorage.getItem('github_token');
   let processed=0;
   const newFiles=[];
-  Array.from(files).forEach(file=>{
+
+  async function processFile(file,idx){
     const reader=new FileReader();
     reader.onload=async function(e){
       const name='upload_'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.jpg';
@@ -360,19 +362,60 @@ window.handleUpload=function(files){
       store.photos.push({file:'images/'+name,title:file.name.replace(/\.[^.]+$/,''),series:'portrait',tags:['上传'],_isUpload:true,_dataUrl:dataUrl});
       newFiles.push({name:name,dataUrl:dataUrl});
       processed++;
+
       if(processed===files.length){
         saveStore();renderPhotoGrid();
-        // Auto-download uploaded photos
-        newFiles.forEach(f=>{
-          const a=document.createElement('a');a.href=f.dataUrl;a.download=f.name;a.click();
-        });
-        setTimeout(()=>showToast(`✅ ${processed} 张已添加。照片已自动下载，请保存到 images/ 文件夹`),500);
+
+        if(token&&token.length>10){
+          showToast(`📤 正在上传 ${newFiles.length} 张照片到 GitHub...`);
+          for(const f of newFiles){
+            try{
+              const base64=f.dataUrl.split(',')[1];
+              const blobRes=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/git/blobs',{
+                method:'POST',headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+                body:JSON.stringify({content:base64,encoding:'base64'})
+              });
+              if(!blobRes.ok)throw new Error('blob fail');
+              const blobData=await blobRes.json();
+              const refRes=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/git/ref/heads/main',{headers:{'Authorization':'token '+token}});
+              const refData=await refRes.json();
+              const commitRes=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/git/commits/'+refData.object.sha,{headers:{'Authorization':'token '+token}});
+              const commitData=await commitRes.json();
+              const treeRes=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/git/trees',{
+                method:'POST',headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+                body:JSON.stringify({base_tree:commitData.tree.sha,tree:[{path:'images/'+f.name,mode:'100644',type:'blob',sha:blobData.sha}]})
+              });
+              if(!treeRes.ok)throw new Error('tree fail');
+              const treeData=await treeRes.json();
+              const newCommitRes=await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/git/commits',{
+                method:'POST',headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+                body:JSON.stringify({message:'Upload: '+f.name,tree:treeData.sha,parents:[refData.object.sha]})
+              });
+              if(!newCommitRes.ok)throw new Error('commit fail');
+              const newCommitData=await newCommitRes.json();
+              await fetch('https://api.github.com/repos/StellanHuan/stellanhuan.github.io/git/refs/heads/main',{
+                method:'PATCH',headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+                body:JSON.stringify({sha:newCommitData.sha,force:false})
+              });
+              f._pushed=true;
+            }catch(e){f._pushed=false}
+          }
+          const ok=newFiles.filter(f=>f._pushed).length;
+          showToast(`✅ ${ok}/${newFiles.length} 张已推送到 GitHub。发布 data.js 完成同步`);
+          if(ok===newFiles.length) setTimeout(()=>deploy(),1000);
+        } else {
+          newFiles.forEach(f=>{
+            const a=document.createElement('a');a.href=f.dataUrl;a.download=f.name;a.click();
+          });
+          setTimeout(()=>showToast(`✅ ${processed} 张已添加。Token 未设置，请手动保存图片到 images/ 文件夹`),500);
+        }
       }
     };
     reader.readAsDataURL(file);
-  });
-};
+  }
 
+  Array.from(files).forEach((f,i)=>processFile(f,i));
+};
 
 
 // Render grid after HTML is injected for photos/sections pages

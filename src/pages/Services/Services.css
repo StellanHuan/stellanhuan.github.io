@@ -29,3 +29,17 @@
 .svc-cta .btn{display:inline-block;padding:var(--space-3) var(--space-6);border:1px solid var(--color-gold-dim);color:var(--color-gold-light);border-radius:var(--radius-sm);font-size:var(--text-small);letter-spacing:var(--tracking-normal);cursor:pointer;transition:all var(--duration-normal) var(--ease-out)}
 .svc-cta .btn:hover{background:var(--color-gold-dim);color:var(--color-bg)}
 @media(max-width:768px){.nav{padding:var(--space-4)}.svc-hero{padding:var(--space-12) var(--space-4) var(--space-4)}.svc-cards{padding:0 var(--space-4) var(--space-8)}.svc-process{padding:var(--space-8) var(--space-4)}}
+
+/* ══ Interaction Polish (auto-generated) ══ */
+button, .btn, a.btn, [role="button"], .nav a, .print-inquire, .svc-cta button, .contact-cta button {
+  transition: transform 160ms var(--ease-out), opacity 200ms var(--ease-out), background 200ms var(--ease-out), color 200ms var(--ease-out), border-color 200ms var(--ease-out) !important;
+}
+button:active, .btn:active, a.btn:active, [role="button"]:active, .print-inquire:active, .svc-cta button:active, .contact-cta button:active {
+  transform: scale(0.97) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
