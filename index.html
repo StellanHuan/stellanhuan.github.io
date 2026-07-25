@@ -336,9 +336,9 @@
 <div class="block-head" id="work">
   <div class="left">
     <span class="num">01</span>
-    <h2 data-lang="zh">${SECTION_TITLES.featured.zh}</h2>
-    <h2 data-lang="ja">${SECTION_TITLES.featured.ja}</h2>
-    <h2 data-lang="en">${SECTION_TITLES.featured.en}</h2>
+    <h2 data-lang="zh">目光所及</h2>
+    <h2 data-lang="ja">視線の先</h2>
+    <h2 data-lang="en">Within Sight</h2>
   </div>
   <a href="series/#portrait" class="more-link" data-lang="zh">阅读更多 →</a>
   <a href="series/#portrait" class="more-link" data-lang="ja">もっと見る →</a>
@@ -355,9 +355,9 @@
   <div class="hscroll-head">
     <div class="left">
       <span class="tag">02</span>
-      <h3 data-lang="zh">${SECTION_TITLES.hscroll.zh}</h3>
-      <h3 data-lang="ja">${SECTION_TITLES.hscroll.ja}</h3>
-      <h3 data-lang="en">${SECTION_TITLES.hscroll.en}</h3>
+      <h3 data-lang="zh">街头的呼吸</h3>
+      <h3 data-lang="ja">街の呼吸</h3>
+      <h3 data-lang="en">The Street Breathes</h3>
     </div>
     <a href="series/#street" class="more-link" data-lang="zh">阅读更多 →</a>
     <a href="series/#street" class="more-link" data-lang="ja">もっと見る →</a>
@@ -371,9 +371,9 @@
 <div class="block-head" style="border-bottom:none">
   <div class="left">
     <span class="num">03</span>
-    <h2 data-lang="zh">${SECTION_TITLES.landscape.zh}</h2>
-    <h2 data-lang="ja">${SECTION_TITLES.landscape.ja}</h2>
-    <h2 data-lang="en">${SECTION_TITLES.landscape.en}</h2>
+    <h2 data-lang="zh">大地与天空</h2>
+    <h2 data-lang="ja">大地と空</h2>
+    <h2 data-lang="en">Earth & Sky</h2>
   </div>
   <a href="series/#landscape" class="more-link" data-lang="zh">阅读更多 →</a>
   <a href="series/#landscape" class="more-link" data-lang="ja">もっと見る →</a>
@@ -581,9 +581,29 @@
 </footer>
 
 
-// ═══ Section Titles (editable via CMS) ═══
-const SECTION_TITLES=JSON.parse(localStorage.getItem('cms_section_titles')||'{"featured":{"zh":"目光所及","ja":"視線の先","en":"Within Sight"},"hscroll":{"zh":"街头的呼吸","ja":"街の呼吸","en":"The Street Breathes"},"landscape":{"zh":"大地与天空","ja":"大地と空","en":"Earth & Sky"},"aerial":{"zh":"俯瞰","ja":"俯瞰","en":"Aerial"},"about":{"zh":"关于","ja":"について","en":"About"},"booking":{"zh":"写真预约","ja":"写真予約","en":"Book a Session"},"contact":{"zh":"联系","ja":"お問い合わせ","en":"Contact"}}');
-<script src="data.js?v=7?v=6"></script>
+(localStorage.getItem('cms_section_titles')||'{"featured":{"zh":"目光所及","ja":"視線の先","en":"Within Sight"},"hscroll":{"zh":"街头的呼吸","ja":"街の呼吸","en":"The Street Breathes"},"landscape":{"zh":"大地与天空","ja":"大地と空","en":"Earth & Sky"},"aerial":{"zh":"俯瞰","ja":"俯瞰","en":"Aerial"},"about":{"zh":"关于","ja":"について","en":"About"},"booking":{"zh":"写真预约","ja":"写真予約","en":"Book a Session"},"contact":{"zh":"联系","ja":"お問い合わせ","en":"Contact"}}');
+<script src="data.js?v=7?v=6">
+// ═══ Section Titles (editable via CMS Content tab) ═══
+(function(){
+  const titles=JSON.parse(localStorage.getItem('cms_section_titles')||'{}');
+  if(!Object.keys(titles).length)return;
+  const map={featured:{sel:'.block-head h2',idx:0},hscroll:{sel:'.hscroll-head h3',idx:0},landscape:{sel:'.block-head h2',idx:2}};
+  const allH2=document.querySelectorAll('.block-head h2,.hscroll-head h3');
+  const lang=document.documentElement.getAttribute('data-current-lang')||'zh';
+  // featured = first block-head h2 (index 0-2)
+  // hscroll = hscroll-head h3 (index 0-2)
+  // landscape = second block-head h2 (index 3-5)
+  const langIdx={zh:0,ja:1,en:2};
+  [['featured',0],['hscroll',0],['landscape',0]].forEach(([key,base])=>{
+    if(titles[key]&&titles[key][lang]){
+      const els=document.querySelectorAll(key==='hscroll'?'.hscroll-head h3':'.block-head h2');
+      const idx=key==='featured'?0:key==='hscroll'?0:2;
+      const target=Array.from(els).filter(el=>el.closest(key==='hscroll'?'.hscroll-head':'.block-head'));
+      if(target.length>=3)target[langIdx[lang]].textContent=titles[key][lang];
+    }
+  });
+})();
+</script>
 <script src="src/analytics/health-monitor.js"></script>
 <script>
 // ═══ PHOTOS (from data.js?v=7) ═══
