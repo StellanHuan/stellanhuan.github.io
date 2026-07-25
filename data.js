@@ -1,3 +1,4 @@
+Updated 21 photo series assignments
 const SITE_DATA = {
   "photos": [
     {
@@ -28,7 +29,7 @@ const SITE_DATA = {
     {
       "file": "images/web_004.jpeg",
       "title": "俯瞰",
-      "series": "landscape",
+      "series": "aerial",
       "tags": [
         "精选"
       ]
@@ -52,7 +53,7 @@ const SITE_DATA = {
     {
       "file": "images/web_007.jpeg",
       "title": "都市の影",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "精选"
       ]
@@ -68,7 +69,7 @@ const SITE_DATA = {
     {
       "file": "images/web_009.jpeg",
       "title": "路地裏",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "精选"
       ]
@@ -76,7 +77,7 @@ const SITE_DATA = {
     {
       "file": "images/web_010.jpeg",
       "title": "空からの視点",
-      "series": "landscape",
+      "series": "aerial",
       "tags": [
         "精选"
       ]
@@ -124,7 +125,7 @@ const SITE_DATA = {
     {
       "file": "images/web_016.jpeg",
       "title": "時の層",
-      "series": "landscape",
+      "series": "portrait",
       "tags": [
         "精选"
       ]
@@ -164,7 +165,7 @@ const SITE_DATA = {
     {
       "file": "images/web_021.jpeg",
       "title": "暮色",
-      "series": "landscape",
+      "series": "aerial",
       "tags": [
         "精选"
       ]
@@ -196,7 +197,7 @@ const SITE_DATA = {
     {
       "file": "images/web_025.jpeg",
       "title": "静寂の朝",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "精选"
       ]
@@ -204,7 +205,7 @@ const SITE_DATA = {
     {
       "file": "images/web_026.jpeg",
       "title": "交差点",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "精选"
       ]
@@ -220,7 +221,7 @@ const SITE_DATA = {
     {
       "file": "images/web_028.jpeg",
       "title": "光と影",
-      "series": "landscape",
+      "series": "aerial",
       "tags": [
         "精选"
       ]
@@ -284,7 +285,7 @@ const SITE_DATA = {
     {
       "file": "images/web_036.jpeg",
       "title": "層",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -316,7 +317,7 @@ const SITE_DATA = {
     {
       "file": "images/web_040.jpeg",
       "title": "気配",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -356,7 +357,7 @@ const SITE_DATA = {
     {
       "file": "images/web_045.jpeg",
       "title": "明暗",
-      "series": "landscape",
+      "series": "aerial",
       "tags": [
         "备用"
       ]
@@ -444,7 +445,7 @@ const SITE_DATA = {
     {
       "file": "images/web_057.jpeg",
       "title": "路傍",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -524,7 +525,7 @@ const SITE_DATA = {
     {
       "file": "images/web_067.jpeg",
       "title": "静寂",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -540,7 +541,7 @@ const SITE_DATA = {
     {
       "file": "images/web_069.jpeg",
       "title": "雪解け",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -564,7 +565,7 @@ const SITE_DATA = {
     {
       "file": "images/web_072.jpeg",
       "title": "水平線",
-      "series": "landscape",
+      "series": "portrait",
       "tags": [
         "备用"
       ]
@@ -588,7 +589,7 @@ const SITE_DATA = {
     {
       "file": "images/web_075.jpeg",
       "title": "潮風",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -604,7 +605,7 @@ const SITE_DATA = {
     {
       "file": "images/web_077.jpeg",
       "title": "追憶",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -740,7 +741,7 @@ const SITE_DATA = {
     {
       "file": "images/web_094.jpeg",
       "title": "間奏",
-      "series": "landscape",
+      "series": "street",
       "tags": [
         "备用"
       ]
@@ -868,7 +869,7 @@ const SITE_DATA = {
     {
       "file": "images/web_110.jpeg",
       "title": "残心",
-      "series": "landscape",
+      "series": "portrait",
       "tags": [
         "备用"
       ]
@@ -924,7 +925,7 @@ const SITE_DATA = {
     {
       "file": "images/web_117.jpeg",
       "title": "探求",
-      "series": "landscape",
+      "series": "aerial",
       "tags": [
         "备用"
       ]

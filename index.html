@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-current-lang="zh">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Stellan Huan · Nikon Z8 · 郑州与东京之间的光 · 摄影作品集">
+<meta name="description" content="Stellan Huan — Freelance photographer between Zhengzhou and Tokyo. Nikon Z8. Portraits, street photography, aerial views. Student of Arimoto Shinya. 自由摄影师 · 郑州与东京之间">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -13,6 +13,15 @@
 <title>Stellan HuanHuan — Photography</title>
 <meta property="og:title" content="Stellan HuanHuan">
 <meta property="og:description" content="Nikon Z8 · 郑州·东京">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stellanhuan.github.io/">
+<meta property="og:image" content="https://stellanhuan.github.io/images/web_055.jpeg">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1067">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stellan HuanHuan — Photography">
+<meta name="twitter:description" content="Nikon Z8 · 郑州·东京">
+<meta name="twitter:image" content="https://stellanhuan.github.io/images/web_055.jpeg">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
   html[data-current-lang="zh"] [data-lang="ja"],
@@ -593,11 +602,11 @@ if(featDuo&&featuredPhotos.length){
   for(let i=0;i<featuredPhotos.length;i+=2){
     const a=featuredPhotos[i],b=featuredPhotos[i+1];
     html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
-      <img src="images/${a}" alt=""><div class="duo-label">${i===0?'PORTRAIT':'STREET'}</div>
+      <img src="images/${a}" alt=""><div class="duo-label">${getSeries('images/'+a).toUpperCase()}</div>
       <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
     </div>`;
     if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
-      <img src="images/${b}" alt=""><div class="duo-label">STREET</div>
+      <img src="images/${b}" alt=""><div class="duo-label">${getSeries('images/'+b).toUpperCase()}</div>
       <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
     </div>`;
   }
@@ -614,11 +623,11 @@ if(landDuo){
   for(let i=0;i<allLand.length;i+=2){
     const a=allLand[i],b=allLand[i+1];
     html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
-      <img src="images/${a}" alt=""><div class="duo-label">${i<landPhotos.length?'LANDSCAPE':'AERIAL'}</div>
+      <img src="images/${a}" alt=""><div class="duo-label">${getSeries('images/'+a).toUpperCase()}</div>
       <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
     </div>`;
     if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
-      <img src="images/${b}" alt=""><div class="duo-label">AERIAL</div>
+      <img src="images/${b}" alt=""><div class="duo-label">${getSeries('images/'+b).toUpperCase()}</div>
       <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">DJI · 2026</span></div>
     </div>`;
   }
