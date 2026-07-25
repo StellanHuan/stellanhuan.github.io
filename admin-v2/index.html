@@ -130,6 +130,8 @@
     <a href="#projects" data-route="projects"><span class="icon">🗂</span> Projects</a>
     <a href="#prints" data-route="prints"><span class="icon">🖼</span> Prints</a>
     <a href="#exhibitions" data-route="exhibitions"><span class="icon">🏛</span> Exhibitions</a>
+    <a href="#series" data-route="series"><span class="icon">📚</span> Series</a>
+    <a href="#content" data-route="content"><span class="icon">📝</span> Content</a>
     <a href="#settings" data-route="settings"><span class="icon">⚙</span> Settings</a>
   </nav>
   <div class="sidebar-footer">
@@ -170,7 +172,7 @@ window.addEventListener('beforeunload',()=>{
 });
 
 // ═══ ROUTER ═══
-const pages={dashboard,photos,sections:renderSections,journal:renderJournal,projects:renderProjects,prints:renderPrints,exhibitions:renderExhibitions,settings:renderSettings};
+const pages={dashboard,photos,sections:renderSections,journal:renderJournal,projects:renderProjects,prints:renderPrints,exhibitions:renderExhibitions,series:renderSeries,content:renderContent,settings:renderSettings};
 function p(n){return `<div class="page-placeholder">${n} — 开发中</div>`}
 
 // ═══ TOAST + DEPLOY ═══
@@ -509,6 +511,104 @@ window.editExhibition=function(i){
 
 // ═══ SETTINGS ═══
 function updateSiteTitle(v){store.siteTitle=v;localStorage.setItem("cms_site_title",v);showToast("✅ 标题已更新，发布后生效")}
+
+// ═══ SERIES PAGE MANAGEMENT ═══
+
+// ═══ CONTENT MANAGEMENT ═══
+function renderContent(){
+  const content=JSON.parse(localStorage.getItem('cms_content')||JSON.stringify({
+    section_titles:{"featured":{"zh":"目光所及","ja":"視線の先","en":"Within Sight"},"hscroll":{"zh":"街头的呼吸","ja":"街の呼吸","en":"The Street Breathes"},"landscape":{"zh":"大地与天空","ja":"大地と空","en":"Earth & Sky"},"booking":{"zh":"写真预约","ja":"写真予約","en":"Book a Session"},"about":{"zh":"关于","ja":"について","en":"About"},"contact":{"zh":"联系","ja":"お問い合わせ","en":"Contact"}},
+    hero_intro:{"zh":"按下快门的那一秒，世界安静下来\n郑州与东京之间，光替我说话","ja":"シャッターを切る一秒、世界が静まる\n鄭州と東京のあいだで、光が代わりに語る","en":"The world goes quiet at the shutter\'s click\nBetween Zhengzhou and Tokyo, the light speaks for me"},
+    about_bio:{"zh":"相机不是工具，是另一双眼睛。\n街上的人、低头的瞬间、被忽略的角落——\n都在取景框里重新活过来。","ja":"カメラは道具じゃなく、もう一つの目。\n街の人、うつむく瞬間、見過ごされた隅——\nすべてがファインダーのなかで息を吹き返す。","en":"A camera isn\'t a tool. It\'s another pair of eyes.\nStrangers on the street, a downward glance, the overlooked corner—\nall come alive again inside the frame."},
+    booking_prices:{portrait:"1200",event:"1500",aerial:"500"},
+    wechat:"S0688888860"
+  }));
+  window._content=content;
+  
+  let html='<div class="sec-title">📝 Content 内容管理</div>';
+  html+='<p style="font-size:.65rem;color:var(--text-dim);margin-bottom:1rem">编辑网站文本内容。保存后发布生效。</p>';
+  
+  // Section titles
+  html+='<div class="sec-title" style="margin-top:.5rem">板块标题</div>';
+  for(const [key,val] of Object.entries(content.section_titles)){
+    html+=`<div class="info-row" style="margin-bottom:.4rem"><span class="key">${key}</span><span class="val" style="display:flex;gap:.3rem">`;
+    for(const lang of ['zh','ja','en']){
+      html+=`<input value="${val[lang]}" onchange="_content.section_titles['${key}']['${lang}']=this.value;localStorage.setItem('cms_content',JSON.stringify(_content))" placeholder="${lang}" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.2rem .4rem;border-radius:3px;font-size:.65rem;font-family:inherit;width:120px">`;
+    }
+    html+=`</span></div>`;
+  }
+  
+  // Hero intro
+  html+='<div class="sec-title" style="margin-top:1.5rem">Hero 简介文字</div>';
+  for(const lang of ['zh','ja','en']){
+    html+=`<div class="info-row" style="margin-bottom:.4rem"><span class="key">${lang}</span><span class="val"><textarea onchange="_content.hero_intro['${lang}']=this.value;localStorage.setItem('cms_content',JSON.stringify(_content))" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.4rem;border-radius:4px;font-size:.65rem;font-family:inherit;width:100%;height:50px;resize:vertical">${content.hero_intro[lang]}</textarea></span></div>`;
+  }
+  
+  // About bio
+  html+='<div class="sec-title" style="margin-top:1.5rem">About 引文</div>';
+  for(const lang of ['zh','ja','en']){
+    html+=`<div class="info-row" style="margin-bottom:.4rem"><span class="key">${lang}</span><span class="val"><textarea onchange="_content.about_bio['${lang}']=this.value;localStorage.setItem('cms_content',JSON.stringify(_content))" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.4rem;border-radius:4px;font-size:.65rem;font-family:inherit;width:100%;height:60px;resize:vertical">${content.about_bio[lang]}</textarea></span></div>`;
+  }
+  
+  // Booking prices
+  html+='<div class="sec-title" style="margin-top:1.5rem">预约价格</div>';
+  for(const [key,val] of Object.entries(content.booking_prices)){
+    html+=`<div class="info-row" style="margin-bottom:.4rem"><span class="key">${key}</span><span class="val">¥<input type="number" value="${val}" onchange="_content.booking_prices['${key}']=this.value;localStorage.setItem('cms_content',JSON.stringify(_content))" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.2rem .4rem;border-radius:3px;font-size:.65rem;font-family:inherit;width:80px"></span></div>`;
+  }
+  
+  // WeChat
+  html+='<div class="sec-title" style="margin-top:1.5rem">联系方式</div>';
+  html+=`<div class="info-row"><span class="key">微信</span><span class="val"><input value="${content.wechat}" onchange="_content.wechat=this.value;localStorage.setItem('cms_content',JSON.stringify(_content))" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.2rem .4rem;border-radius:3px;font-size:.65rem;font-family:inherit;width:200px"></span></div>`;
+  
+  html+=`<div style="margin-top:1.5rem"><button onclick="localStorage.setItem('cms_content',JSON.stringify(_content));deploy()" style="background:var(--gold-dim);color:var(--bg);border:none;padding:.6rem 1.5rem;border-radius:4px;cursor:pointer;font-size:.7rem;font-family:inherit">💾 保存并发布</button> <span id="deployStatus" style="font-size:.6rem;color:var(--gold-dim)"></span></div>`;
+  
+  return html;
+}
+
+function renderSeries(){
+  const seriesMeta=JSON.parse(localStorage.getItem('cms_series_meta')||JSON.stringify({
+    portrait:{title:'目光所及',desc:'精选人像作品',link:'portrait'},
+    street:{title:'街头的呼吸',desc:'街头偶遇的瞬间',link:'street'},
+    landscape:{title:'大地与天空',desc:'风光与航拍',link:'landscape'},
+    aerial:{title:'俯瞰',desc:'从天空看世界',link:'aerial'}
+  }));
+  window._seriesMeta=seriesMeta;
+  
+  const names={portrait:'👤 Portrait 肖像',street:'🚶 Street 街头',landscape:'🏔 Landscape 风光',aerial:'🛸 Aerial 航拍'};
+  const sectionMap={portrait:'featured',street:'hscroll',landscape:'landscape',aerial:'aerial'};
+  
+  let html='<div class="sec-title">📚 Series 系列页管理</div>';
+  html+='<p style="font-size:.65rem;color:var(--text-dim);margin-bottom:1rem">管理每个系列页的标题、描述和展示照片。保存后发布生效。</p>';
+  
+  for(const [key,name] of Object.entries(names)){
+    const sm=seriesMeta[key]||{};
+    const sectionKey=sectionMap[key];
+    const sectionPhotos=store.sections[sectionKey]||[];
+    
+    html+=`<div class="section-block" style="margin-bottom:1.5rem">
+      <div class="section-head">${name} <span class="count">${sectionPhotos.length}张</span></div>
+      <div style="padding:1rem;display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <input value="${sm.title||''}" onchange="_seriesMeta['${key}'].title=this.value;localStorage.setItem('cms_series_meta',JSON.stringify(_seriesMeta))" placeholder="系列标题" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.4rem .6rem;border-radius:4px;font-size:.7rem;font-family:inherit;flex:1;min-width:150px">
+          <input value="${sm.desc||''}" onchange="_seriesMeta['${key}'].desc=this.value;localStorage.setItem('cms_series_meta',JSON.stringify(_seriesMeta))" placeholder="系列描述" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);padding:.4rem .6rem;border-radius:4px;font-size:.7rem;font-family:inherit;flex:2">
+          <span style="font-size:.6rem;color:var(--text-dim);display:flex;align-items:center">→ /series/#${sm.link||key}</span>
+        </div>
+        <div style="font-size:.6rem;color:var(--text-dim)">此系列照片来自 Sections → ${name} 区块。去 Sections 拖拽调整。</div>
+        <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+          ${sectionPhotos.map(f=>{
+            const p=store.photos.find(pp=>pp.file.split('/').pop()===f);
+            return p?`<div style="width:60px;text-align:center"><img src="${p._dataUrl||'../'+p.file}" style="width:60px;height:45px;object-fit:cover;border-radius:3px;border:1px solid var(--border)"><span style="font-size:.5rem;color:var(--text-dim);display:block">${p.title}</span></div>`:'';
+          }).join('')||'<span style="font-size:.6rem;color:var(--text-dim)">无照片，去 Sections 添加</span>'}
+        </div>
+      </div>
+    </div>`;
+  }
+  
+  html+=`<div style="margin-top:1rem"><button onclick="saveStore();deploy()" style="background:var(--gold-dim);color:var(--bg);border:none;padding:.6rem 1.5rem;border-radius:4px;cursor:pointer;font-size:.7rem;font-family:inherit">💾 保存并发布</button> <span id="deployStatus" style="font-size:.6rem;color:var(--gold-dim)"></span></div>`;
+  
+  return html;
+}
+
 function renderSettings(){
   return `<div class="sec-title">⚙ Settings</div><div style="background:rgba(184,147,79,.06);border:1px solid var(--border);border-radius:4px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.65rem;color:var(--text-dim);line-height:1.8"><b style="color:var(--gold-light)">🔐 Token 安全提示</b><br>GitHub Token 已从代码中移除。发布前请点击下方「设置 GitHub Token」输入你的 Personal Access Token。Token 仅保存在浏览器 localStorage，不会被提交到仓库。<br>创建 Token: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens (需要 Contents 读写权限)</div>
     <div class="dash-info">
