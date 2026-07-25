@@ -1,300 +1,298 @@
-<!-- v2026-07-25-hotfix -->
 <!DOCTYPE html>
 <html lang="zh-CN" data-current-lang="zh">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Stellan Huan — Freelance photographer between Zhengzhou and Tokyo. Nikon Z8. Portraits, street photography, aerial views. Student of Arimoto Shinya. 自由摄影师 · 郑州与东京之间">
+<meta name="description" content="Stellan Huan — Portrait & Editorial photographer between Zhengzhou and Tokyo. Nikon Z8. Student of Arimoto Shinya. 人像摄影师 · 郑州与东京之间">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>Stellan HuanHuan — Photography</title>
-<meta property="og:title" content="Stellan HuanHuan">
-<meta property="og:description" content="Nikon Z8 · 郑州·东京">
+<title>Stellan Huan — Portrait & Editorial Photographer</title>
+<meta property="og:title" content="Stellan Huan — Portrait & Editorial Photographer">
+<meta property="og:description" content="Portrait, fashion, and editorial photography between Zhengzhou and Tokyo. Student of Arimoto Shinya.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://stellanhuan.github.io/">
 <meta property="og:image" content="https://stellanhuan.github.io/images/web_055.jpeg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="1067">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Stellan HuanHuan — Photography">
-<meta name="twitter:description" content="Nikon Z8 · 郑州·东京">
+<meta name="twitter:title" content="Stellan Huan — Portrait & Editorial Photographer">
+<meta name="twitter:description" content="Portrait & editorial photography. Zhengzhou · Tokyo.">
 <meta name="twitter:image" content="https://stellanhuan.github.io/images/web_055.jpeg">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400&family=Noto+Sans+SC:wght@200;300;400&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-  html[data-current-lang="zh"] [data-lang="ja"],
-  html[data-current-lang="zh"] [data-lang="en"],
-  html[data-current-lang="ja"] [data-lang="zh"],
-  html[data-current-lang="ja"] [data-lang="en"],
-  html[data-current-lang="en"] [data-lang="zh"],
-  html[data-current-lang="en"] [data-lang="ja"]{display:none!important}
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-  :root{
-    --bg:#080604;--gold:#b8934f;--gold-light:#d4b978;--gold-dim:#7a6238;
-    --text:#d4cec4;--text-dim:#9a9288;--text-bright:#e8e0d4;--border:rgba(184,147,79,.12);
-    --spring: cubic-bezier(.34,1.56,.64,1);
-    --ease-out: cubic-bezier(.16,1,.3,1);
-    --ease-in-out: cubic-bezier(.65,0,.35,1);
-  }
+/* ═══════════════════════════════════════════
+   Stellan Huan — Visual Artist Portfolio V17
+   Design: Apple narrative · Editorial · 80/15/5
+   ═══════════════════════════════════════════ */
 
-  body{
-    font-family:"PingFang SC","Hiragino Sans GB","Noto Serif SC","Songti SC",serif;
-    background:var(--bg);color:var(--text);line-height:1.7;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
-  }
+html[data-current-lang="zh"] [data-lang="ja"],
+html[data-current-lang="zh"] [data-lang="en"],
+html[data-current-lang="ja"] [data-lang="zh"],
+html[data-current-lang="ja"] [data-lang="en"],
+html[data-current-lang="en"] [data-lang="zh"],
+html[data-current-lang="en"] [data-lang="ja"]{display:none!important}
 
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050505;
+  --bg-alt:#0a0a0a;
+  --gold:#b8934f;
+  --gold-dim:#7a6238;
+  --gold-subtle:rgba(184,147,79,.05);
+  --text:#c8c0b4;
+  --text-dim:#8a8278;
+  --text-bright:#e8e0d4;
+  --border:rgba(255,255,255,.05);
+  --border-gold:rgba(184,147,79,.12);
+  --spring: cubic-bezier(0.22,1.12,0.25,1);
+  --ease-out: cubic-bezier(0.16,1,0.3,1);
+  --ease-in-out: cubic-bezier(0.65,0,0.35,1);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","PingFang SC","Hiragino Sans GB","Songti SC",serif;
+  background:var(--bg);color:var(--text);line-height:1.7;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
 
+/* Grain */
+.grain{position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:256px}
+.scroll-progress{position:fixed;top:0;left:0;height:1px;background:var(--gold);z-index:9995;transform-origin:left;width:100%;transform:scaleX(0);transition:transform .15s linear}
 
-  /* ===== NAV (language switch inside) ===== */
-  .nav{
-    position:fixed;top:0;left:0;right:0;z-index:100;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:1.4rem 3rem;
-    background:rgba(8,6,4,.7);backdrop-filter:blur(16px) saturate(.8);
-    -webkit-backdrop-filter:blur(16px) saturate(.8);
-    transition:transform .4s var(--ease-in-out),opacity .4s var(--ease-in-out);
-  }
-  .nav.hidden{transform:translateY(-100%);opacity:0}
-  .nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%}
-  .nav-logo{color:var(--gold-light);text-decoration:none;font-size:1.1rem;letter-spacing:.35em;font-weight:300;font-style:italic;text-shadow:0 0 20px rgba(184,147,79,.25)}
-  .nav-links{display:flex;align-items:center;gap:2rem}
-  .nav-links a{color:var(--text-dim);text-decoration:none;font-size:.7rem;letter-spacing:.12em;transition:color .25s}
-  .nav-links a:hover{color:var(--gold-light)}
-  .lang-dot{position:relative;display:flex;align-items:center}
-  .lang-current{background:none;border:1px solid var(--border);color:var(--gold-light);font-size:.65rem;padding:.3rem .6rem;border-radius:4px;font-family:inherit;letter-spacing:.1em;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:.3rem}
-  .lang-current::after{content:'▾';font-size:.5rem;transition:transform .25s}
-  .lang-current.open::after{transform:rotate(180deg)}
-  .lang-dropdown{position:absolute;top:100%;right:0;margin-top:.3rem;background:rgba(14,11,8,.95);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:4px;padding:.3rem;display:none;flex-direction:column;gap:.1rem;z-index:300}
-  .lang-dropdown.open{display:flex}
-  .lang-dropdown button{background:none;border:none;color:var(--text-dim);font-size:.65rem;padding:.4rem .8rem;font-family:inherit;letter-spacing:.1em;border-radius:3px;text-align:center;transition:all .2s}
-  .lang-dropdown button:hover{color:var(--gold-light);background:rgba(184,147,79,.08)}
-  .lang-dropdown button.active{color:var(--gold-light)}
+/* ═══ NAV ═══ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 2.5rem;
+  mix-blend-mode:difference;
+  transition:transform .5s var(--ease-in-out),opacity .5s var(--ease-in-out);
+}
+.nav.hidden{transform:translateY(-100%);opacity:0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1400px;margin:0 auto}
+.nav-logo{color:#fff;text-decoration:none;font-size:.95rem;font-weight:300;letter-spacing:.4em;font-style:italic}
+.nav-links{display:flex;align-items:center;gap:2.2rem}
+.nav-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.62rem;letter-spacing:.15em;font-family:"Noto Sans SC","PingFang SC",sans-serif;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:rgba(255,255,255,.4);transition:width .3s var(--ease-out)}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.lang-dot{position:relative}
+.lang-current{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7);font-size:.55rem;padding:.2rem .45rem;border-radius:3px;font-family:inherit;letter-spacing:.1em;cursor:pointer;display:flex;align-items:center;gap:.2rem;transition:all .25s}
+.lang-current::after{content:'▾';font-size:.4rem;transition:transform .25s}
+.lang-current.open::after{transform:rotate(180deg)}
+.lang-dropdown{position:absolute;top:100%;right:0;margin-top:.3rem;background:rgba(20,20,20,.95);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:.2rem;display:none;flex-direction:column;z-index:300}
+.lang-dropdown.open{display:flex}
+.lang-dropdown button{background:none;border:none;color:var(--text-dim);font-size:.55rem;padding:.3rem .6rem;font-family:inherit;letter-spacing:.1em;border-radius:3px;text-align:center;transition:all .2s}
+.lang-dropdown button:hover{color:#fff;background:rgba(255,255,255,.04)}
+.lang-dropdown button.active{color:#fff}
 
-  /* ===== HERO ===== */
-  .hero{
-    height:100vh;display:flex;align-items:flex-end;justify-content:flex-start;
-    position:relative;overflow:hidden;padding:0 0 4rem 2.5rem;
-  }
-  .hero-bg{
-    position:absolute;inset:0;z-index:1;
-    background:linear-gradient(to top,rgba(8,6,4,.25) 0%,rgba(8,6,4,.05) 60%,rgba(8,6,4,0) 100%);
-  }
-  .hero-img{
-    position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;
-    will-change:transform;
-  }
-  .hero-content{position:absolute;left:5%;bottom:8%;z-index:2;max-width:500px}
-  .hero h1{font-size:clamp(2rem,4vw,3.5rem);font-weight:200;letter-spacing:.3em;color:var(--gold-light);margin-bottom:.2rem;opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity 1.2s var(--ease-out),transform 1.2s var(--ease-out),filter 1.2s var(--ease-out)}
-  .hero.loaded h1{opacity:1;transform:translateY(0);filter:blur(0)}
-  .hero .ja{font-size:.7rem;letter-spacing:.4em;color:var(--gold-dim);margin-bottom:.8rem;opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease-out) .4s,transform 1s var(--ease-out) .4s}
-  .hero.loaded .ja{opacity:1;transform:translateY(0)}
-  
-  
-  .hero .intro{font-size:.8rem;color:#f0e8d8;letter-spacing:.08em;line-height:1.8;opacity:0;transform:translateY(12px);transition:opacity 1s var(--ease-out) .9s,transform 1s var(--ease-out) .9s}
-  .hero.loaded .intro{opacity:1;transform:translateY(0)}
+/* ═══ HERO ═══ */
+.hero{height:100vh;height:100dvh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+.hero-img-wrap{position:absolute;inset:-10%;z-index:0}
+.hero-img{width:100%;height:100%;object-fit:cover;will-change:transform;transform:scale(1.06);transition:transform 3s var(--ease-out)}
+.hero.loaded .hero-img{transform:scale(1)}
+.hero-vignette{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,transparent 40%,rgba(5,5,5,.5) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 8% 5%;max-width:900px}
+.hero h1{font-size:clamp(3rem,7vw,6.5rem);font-weight:200;letter-spacing:.18em;color:#fff;line-height:1.08;opacity:0;transform:translateY(30px);transition:opacity 1.2s var(--ease-out) .15s,transform 1.2s var(--ease-out) .15s}
+.hero.loaded h1{opacity:1;transform:translateY(0)}
+.hero .scroll-hint{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.35rem;opacity:0;animation:fadeInUp .8s var(--ease-out) 2s forwards}
+.hero .scroll-hint span{font-size:.48rem;letter-spacing:.25em;color:rgba(255,255,255,.2)}
+.hero .scroll-hint .line{width:1px;height:24px;background:rgba(255,255,255,.15);animation:scrollPulse 2.5s ease-in-out infinite}
+@keyframes fadeInUp{to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes scrollPulse{0%,100%{transform:scaleY(1);opacity:.2}50%{transform:scaleY(1.4);opacity:.5}}
 
-  /* ===== REVEAL (spring scale + fade) ===== */
-  .reveal{
-    opacity:0;transform:translateY(36px) scale(.97);
-    transition:opacity 1s var(--ease-out),transform 1s var(--ease-out);
-  }
-  .reveal.visible{opacity:1;transform:translateY(0) scale(1)}
-  .reveal-d1{transition-delay:.15s}.reveal-d2{transition-delay:.3s}.reveal-d3{transition-delay:.45s}
+/* ═══ IDENTITY BAR ═══ */
+.identity-bar{padding:2.5rem 8%;display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;border-bottom:1px solid var(--border)}
+.identity-bar .id-tagline{font-size:.7rem;letter-spacing:.2em;color:var(--text-dim);font-family:"Noto Sans SC",sans-serif;font-weight:300}
+.identity-bar .id-location{font-size:.58rem;letter-spacing:.18em;color:var(--text-dim);font-family:"Noto Sans SC",sans-serif;text-align:right}
 
-  /* ===== MACRO TYPE ===== */
-  .macro-type{padding:5rem 3rem;max-width:800px;margin:0 auto}
-  .macro-type .big{font-size:clamp(1.8rem,4vw,3rem);line-height:1.8;letter-spacing:.04em;color:var(--text-bright);font-weight:200}
-  .macro-type .big .hl{color:var(--gold-light)}
-  .macro-type .ref{margin-top:2rem;font-size:.7rem;color:var(--text-dim);letter-spacing:.2em;text-align:right}
+/* ═══ COMMONS ═══ */
+.section{padding:8rem 5%}
+.section-label{font-size:.58rem;letter-spacing:.45em;color:var(--gold-dim);font-family:"Noto Sans SC",sans-serif;display:block;margin-bottom:2rem}
+.section-title{font-size:clamp(2.4rem,5vw,4.5rem);font-weight:200;letter-spacing:.06em;color:var(--text-bright);margin-bottom:3rem;line-height:1.12}
 
-  /* ===== FULL IMAGE ===== */
+/* ═══ REVEAL ═══ */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.08s}.reveal-d2{transition-delay:.16s}.reveal-d3{transition-delay:.24s}
 
-  /* ===== BLOCK HEADER ===== */
-  .block-head{
-    padding:8rem 3rem 1.5rem;max-width:1200px;margin:0 auto;
-    display:flex;justify-content:space-between;align-items:flex-end;
-    border-bottom:1px solid var(--border);
-  }
-  .block-head .left .num{font-size:.6rem;letter-spacing:.4em;color:var(--gold-dim);display:block;margin-bottom:.6rem}
-  .block-head .left h2{font-size:1.3rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light)}
-  .block-head .more-link{
-    font-size:.75rem;color:var(--gold-light);letter-spacing:.1em;text-decoration:none;
-    border:1px solid var(--gold-dim);padding:.7rem 1.6rem;border-radius:4px;
-    transition:all .3s var(--ease-out);flex-shrink:0;
-  }
-  .block-head .more-link:hover{background:var(--gold-dim);color:var(--bg)}
+/* ═══ STATEMENT ═══ */
+.statement{padding:8rem 5% 5rem;text-align:center;max-width:680px;margin:0 auto}
+.statement .quote{font-size:clamp(1.5rem,3.2vw,2.4rem);font-weight:200;line-height:1.85;letter-spacing:.02em;color:var(--text-bright)}
+.statement .quote .hl{color:#fff;font-weight:300}
+.statement .attr{margin-top:2rem;font-size:.58rem;letter-spacing:.25em;color:var(--text-dim)}
 
+/* ═══ PROJECT STORY ═══ */
+.story-section{padding:6rem 5%;max-width:1200px;margin:0 auto;border-top:1px solid var(--border)}
+.story-head{display:flex;align-items:baseline;gap:2rem;margin-bottom:3rem}
+.story-head .story-year{font-size:.6rem;color:var(--gold-dim);letter-spacing:.35em;font-family:"Noto Sans SC",sans-serif}
+.story-head .story-title{font-size:clamp(1.5rem,2.8vw,2rem);font-weight:200;color:var(--text-bright);letter-spacing:.08em}
+.story-body{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.story-body .story-text{font-size:.8rem;color:var(--text-dim);line-height:2.3;letter-spacing:.04em}
+.story-body .story-text .story-quote{font-size:1.05rem;color:var(--text-bright);display:block;margin-bottom:1.5rem;line-height:1.8}
+.story-body .story-visual{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:2px}
+.story-body .story-visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-out)}
+.story-body .story-visual:hover img{transform:scale(1.03)}
 
-  /* Masonry Editorial Grid */
-  .masonry{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:340px;gap:1rem;padding:3rem 2.5rem;max-width:1100px;margin:0 auto}
-  .masonry>:first-child{grid-column:1;grid-row:span 2}
-  .masonry>:nth-child(2){grid-column:2;grid-row:1}
-  .masonry>:nth-child(3){grid-column:3;grid-row:1}
-  .masonry>:nth-child(4){grid-column:2/4;grid-row:2}
-  .masonry .duo-item{border-radius:4px;overflow:hidden;position:relative}
-  .masonry .duo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s var(--ease-spring)}
-  
-  .masonry>:nth-child(5){grid-column:1/3;grid-row:span 1}
-  .masonry>:nth-child(6){grid-column:3;grid-row:span 1}
-  .masonry>:nth-child(7){grid-column:1;grid-row:span 1}
-  .masonry>:nth-child(8){grid-column:2/4;grid-row:span 1}
-  .masonry>:nth-child(9){grid-column:1/3;grid-row:span 1}
-  .masonry .duo-item{border-radius:4px;overflow:hidden;position:relative}
-  .masonry .duo-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease,filter .5s ease}
-  .masonry .duo-item:hover img{transform:scale(1.03)}
-  /* ===== DUO ===== */
-  .duo{display:flex;gap:1rem;padding:3rem 2.5rem;max-width:1100px;margin:0 auto}
-  .duo-item{position:relative;overflow:hidden;border-radius:4px}
-  .duo-item:nth-child(1){flex:1.5}.duo-item:nth-child(2){flex:1}
-  .duo-item img{width:100%;height:100%;object-fit:cover;display:block;
-    transition:transform .55s var(--spring);}
-  .duo-item:hover img{transform:scale(1.03)}
-  .duo-overlay{position:absolute;inset:0;
-    background:linear-gradient(to top,rgba(8,6,4,.9) 0%,rgba(8,6,4,0) 60%);
-    display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;
-    opacity:0;transform:translateY(12px);
-    transition:opacity .4s var(--ease-out),transform .5s var(--ease-out)}
-  .duo-item:hover .duo-overlay{opacity:1;transform:translateY(0)}
-  .duo-overlay .duo-title{font-size:1rem;color:var(--gold-light);letter-spacing:.15em;margin-bottom:.3rem}
-  .duo-overlay .duo-meta{font-size:.7rem;color:var(--text-dim);letter-spacing:.08em}
-  .duo-label{position:absolute;top:1.5rem;left:1.5rem;font-size:.65rem;letter-spacing:.3em;color:var(--text-bright);padding:.4rem 1rem;background:rgba(8,6,4,.8);backdrop-filter:blur(10px);border-radius:4px;text-shadow:0 1px 3px rgba(0,0,0,.6);transition:opacity .3s}
-  .duo-item:hover .duo-label{opacity:.5}
+/* ═══ GALLERY FULL ═══ */
+.gallery-full{position:relative;margin:0;overflow:hidden}
+.gallery-full img{width:100%;height:75vh;height:75dvh;object-fit:cover;display:block;transition:transform .6s var(--ease-out)}
+.gallery-full:hover img{transform:scale(1.02)}
+.gallery-full .cap{position:absolute;bottom:2rem;left:5%;font-size:.6rem;letter-spacing:.15em;color:rgba(255,255,255,.5);font-family:"Noto Sans SC",sans-serif;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,.5)}
 
-  /* ===== H-SCROLL ===== */
-  .hscroll-wrap{padding:4rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-  .hscroll-head{padding:0 2.5rem 1.5rem;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end}
-  .hscroll-head .left .tag{font-size:.65rem;letter-spacing:.5em;color:var(--gold-dim);display:block;margin-bottom:.8rem}
-  .hscroll-head .left h3{font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light)}
-  .hscroll-head .more-link{font-size:.75rem;color:var(--gold-light);letter-spacing:.1em;text-decoration:none;border:1px solid var(--gold-dim);padding:.7rem 1.6rem;border-radius:4px;transition:all .3s var(--ease-out);flex-shrink:0}
-  .hscroll-head .more-link:hover{background:var(--gold-dim);color:var(--bg)}
-  .hscroll-track{display:flex;gap:1.5rem;padding:0 2.5rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
-  .hscroll-track::-webkit-scrollbar{display:none}
-  .hscroll-dots{display:flex;justify-content:center;gap:.5rem;padding:1.5rem 0 0}
-  .hscroll-dot{width:6px;height:6px;border-radius:50%;background:var(--border);transition:background .3s}
-  .hscroll-dot.active{background:var(--gold-dim)}
-  .hscroll-card{flex:0 0 auto;width:clamp(280px,85vw,650px);scroll-snap-align:center;border-radius:4px;overflow:hidden;background:#0e0b08}
-  .hscroll-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
-    transition:transform .45s var(--spring)}
-  .hscroll-card .info{padding:1rem 1.2rem;display:flex;justify-content:space-between;font-size:.7rem;background:#0e0b08}
-  .hscroll-card .info .t{color:var(--text-bright)}.hscroll-card .info .m{color:var(--text-dim)}
+/* ═══ EDITORIAL GRID (12-col) ═══ */
+.gallery-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:.75rem;padding:0 .75rem;max-width:1400px;margin:0 auto}
+.gallery-grid .gi{position:relative;overflow:hidden;border-radius:2px;transition:transform .4s var(--ease-out)}
+.gallery-grid .gi:hover{transform:scale(1.01);z-index:1}
+.gallery-grid .gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-out),filter .6s var(--ease-out)}
+.gallery-grid .gi:hover img{transform:scale(1.04);filter:brightness(1.06)}
+.gallery-grid .gi .gi-cap{position:absolute;bottom:0;left:0;right:0;padding:2rem 1.2rem 1.2rem;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);opacity:0;transform:translateY(8px);transition:opacity .35s var(--ease-out),transform .35s var(--ease-out)}
+.gallery-grid .gi:hover .gi-cap{opacity:1;transform:translateY(0)}
+.gallery-grid .gi .gi-cap .t{font-size:.62rem;color:var(--text-bright);letter-spacing:.1em;display:block}
+.gallery-grid .gi .gi-cap .s{font-size:.52rem;color:var(--text-dim);letter-spacing:.08em}
+.gi-c3{grid-column:span 3}.gi-c4{grid-column:span 4}.gi-c5{grid-column:span 5}.gi-c6{grid-column:span 6}.gi-c7{grid-column:span 7}.gi-c8{grid-column:span 8}
 
-  /* ===== ABOUT ===== */
-  .about-section{padding:5rem 3rem 5rem;max-width:1000px;margin:0 auto;display:flex;gap:4rem;align-items:center;border-top:1px solid var(--border)}
-  .about-visual{flex:1;border-radius:4px;overflow:hidden}
-  .about-visual img{width:100%;display:block;object-fit:contain;max-height:600px}
-  .about-text{flex:1.15}
-  .about-text .about-num{font-size:.65rem;letter-spacing:.5em;color:var(--gold-dim);margin-bottom:1.5rem;display:block}
-  .about-text h3{font-size:1.2rem;font-weight:400;letter-spacing:.18em;color:var(--gold-light);margin-bottom:1.5rem}
-  .about-text .about-lead{font-size:.95rem;color:var(--text-bright);line-height:2;letter-spacing:.04em;margin-bottom:2rem}
-  .about-text .timeline{display:grid;grid-template-columns:1fr 1fr;gap:.8rem 2rem;margin-bottom:2rem}
-  .about-text .timeline-item{font-size:.78rem;padding:.6rem 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
-  .about-text .timeline-item.visible{opacity:1;transform:translateY(0)}
-  .about-text .timeline-item .year{color:var(--gold-dim);font-size:.65rem;letter-spacing:.15em;display:block;margin-bottom:.3rem}
-  .about-text .timeline-item .event{color:var(--text-dim);line-height:1.6}
-  .about-text .pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2.5rem}
-  .about-text .pills span{font-size:.65rem;color:var(--text-dim);padding:.35rem 1rem;border:1px solid var(--border);border-radius:20px;letter-spacing:.08em;transition:transform .2s ease-out,border-color .2s,color .2s,box-shadow .2s;cursor:default}
-  .about-text .pills span:active{transform:scale(.95)}
-  .about-text .pills span:hover{color:var(--gold-light);border-color:var(--gold-dim);transform:translateY(-2px);box-shadow:0 4px 12px rgba(184,147,79,.1)}
+/* ═══ DUO ═══ */
+.duo-wrap{max-width:1400px;margin:0 auto;padding:0 .75rem}
+.duo{display:grid;grid-template-columns:1.5fr 1fr;gap:.75rem}
+.duo.reverse{grid-template-columns:1fr 1.5fr}
+.duo .di{position:relative;overflow:hidden;border-radius:2px;aspect-ratio:4/3}
+.duo .di img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-out)}
+.duo .di:hover img{transform:scale(1.03)}
+.duo .di .di-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease-out),transform .4s var(--ease-out)}
+.duo .di:hover .di-overlay{opacity:1;transform:translateY(0)}
+.duo .di .di-title{font-size:.8rem;color:var(--text-bright);letter-spacing:.1em;margin-bottom:.2rem}
+.duo .di .di-meta{font-size:.55rem;color:var(--text-dim);letter-spacing:.08em}
 
-  /* ===== CONTACT ===== */
-  .contact{padding:5rem 3rem;text-align:center;border-top:1px solid var(--border)}
-  .contact-inner{max-width:520px;margin:0 auto}
-  .contact h3{font-size:1rem;font-weight:400;letter-spacing:.25em;color:var(--gold-light);margin-bottom:2.5rem}
-  .contact-card{background:rgba(14,11,8,.5);border:1px solid var(--border);border-radius:6px;padding:2.5rem;text-align:left;transition:border-color .3s}
-  .contact-card:hover{border-color:rgba(184,147,79,.2)}
-  .contact-row{display:flex;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:1px solid rgba(184,147,79,.06);font-size:.8rem;color:var(--text-dim)}
-  .contact-row:last-child{border-bottom:none}
-  .contact-row .label{color:var(--gold-dim);font-size:.65rem;letter-spacing:.15em;width:55px;flex-shrink:0}
-  .contact-row .value{color:var(--text-bright)}
-  .contact-cta{margin-top:2rem;text-align:center}
-  .contact-cta button{background:none;padding:.8rem 2.5rem;border:1px solid var(--gold-dim);color:var(--gold-light);font-family:inherit;border-radius:4px;font-size:.75rem;letter-spacing:.15em;cursor:pointer;transition:transform .16s ease-out,background .25s,color .25s,border-color .25s}
-  .contact-cta button:active{transform:scale(.97)}
-  .contact-cta button:hover{background:var(--gold-dim);color:var(--bg)}
-  footer{padding:2rem 3rem;text-align:center;border-top:1px solid var(--border);font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;line-height:1.8}
+/* ═══ H-SCROLL ═══ */
+.hscroll-section{padding:5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hscroll-head{padding:0 5% 2rem;max-width:1400px;margin:0 auto}
+.hscroll-head h3{font-size:1.1rem;font-weight:300;letter-spacing:.2em;color:var(--text-bright)}
+.hscroll-track{display:flex;gap:1rem;padding:0 5%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.hscroll-track::-webkit-scrollbar{display:none}
+.hscroll-card{flex:0 0 auto;width:clamp(300px,38vw,520px);scroll-snap-align:start;border-radius:2px;overflow:hidden;position:relative}
+.hscroll-card img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;transition:transform .5s var(--ease-out)}
+.hscroll-card:hover img{transform:scale(1.03)}
+.hscroll-card .hc-info{padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;font-size:.6rem;background:var(--bg-alt)}
+.hscroll-card .hc-info .hct{color:var(--text-bright);letter-spacing:.08em}
+.hscroll-card .hc-info .hcm{color:var(--text-dim)}
+.hscroll-dots{display:flex;justify-content:center;gap:.35rem;padding:1.5rem 0 0}
+.hscroll-dot{width:4px;height:4px;border-radius:50%;background:var(--border);transition:all .4s var(--ease-out);cursor:pointer}
+.hscroll-dot.active{background:rgba(255,255,255,.3);transform:scale(1.6)}
 
-  /* ===== BOOKING CARDS ===== */
-  .bk-card{transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s cubic-bezier(.16,1,.3,1);cursor:pointer}
-  .bk-card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.4)}.bk-card:active{transform:scale(.98);transition:transform .1s ease-out}
-  .bk-card .bk-photo img{will-change:transform}
-  .bk-card:hover .bk-photo img{transform:scale(1.04)}
-  .bk-card:hover .bk-info{background:rgba(8,6,4,.98)!important}
-  .booking-cards{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
-  .booking-card{flex:1;min-width:200px;max-width:260px;padding:2.2rem 1.8rem;border:1px solid var(--border);border-radius:8px;background:rgba(14,11,8,.4);text-align:center;transition:all .4s var(--ease-out);cursor:default}
-  .booking-card:hover{transform:translateY(-4px);border-color:var(--gold-dim);box-shadow:0 8px 24px rgba(0,0,0,.3)}
-  .booking-card .bk-tag{font-size:.65rem;color:var(--gold-dim);letter-spacing:.25em;margin-bottom:1.2rem}
-  .booking-card .bk-price{font-size:2rem;color:var(--gold-light);font-weight:200;letter-spacing:.03em;margin-bottom:.8rem}
-  .booking-card .bk-price small{font-size:.9rem;color:var(--gold-dim)}
-  .booking-card .bk-desc{font-size:.72rem;color:var(--text-dim);line-height:1.9;letter-spacing:.03em}
-  .booking-card .bk-note{margin-top:1rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.1em;opacity:.6}
-  .parallax{will-change:transform}
+/* ═══ BOOKING ═══ */
+.booking-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:1100px;margin:0 auto}
+.bk-card{background:var(--bg-alt);border:1px solid var(--border);border-radius:4px;overflow:hidden;text-decoration:none;color:inherit;display:block;transition:transform .45s var(--ease-out),border-color .45s var(--ease-out),box-shadow .45s var(--ease-out)}
+.bk-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.1);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.bk-card .bk-photo{aspect-ratio:3/2;overflow:hidden;position:relative}
+.bk-card .bk-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-out)}
+.bk-card:hover .bk-photo img{transform:scale(1.05)}
+.bk-card .bk-photo .bk-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,5,.85),transparent 60%)}
+.bk-card .bk-body{padding:1.4rem}
+.bk-card .bk-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem}
+.bk-card .bk-tag{font-size:.58rem;color:var(--text-dim);letter-spacing:.22em;font-family:"Noto Sans SC",sans-serif}
+.bk-card .bk-price{font-size:1.5rem;color:var(--text-bright);font-weight:200}
+.bk-card .bk-desc{font-size:.65rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em}
+.process{display:flex;gap:2.5rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:5rem}
+.process-step{text-align:center}
+.process-step .ps-num{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .7rem;color:var(--text-dim);font-size:.65rem;font-family:"Noto Sans SC",sans-serif}
+.process-step .ps-label{font-size:.58rem;color:var(--text-dim);letter-spacing:.1em;font-family:"Noto Sans SC",sans-serif}
+.process-arrow{color:var(--text-dim);font-size:.75rem;padding-bottom:16px;opacity:.4}
 
-  /* ===== GRAIN ===== */
-  .grain{position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+/* ═══ ABOUT ═══ */
+.about-section{padding:8rem 5%;border-top:1px solid var(--border)}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:center}
+.about-visual{border-radius:2px;overflow:hidden}
+.about-visual img{width:100%;display:block;object-fit:cover;aspect-ratio:3/4;transition:transform .6s var(--ease-out)}
+.about-visual:hover img{transform:scale(1.02)}
+.about-text .about-lead{font-size:.95rem;color:var(--text-bright);line-height:2.2;letter-spacing:.04em;margin-bottom:2.5rem}
+.about-text .timeline{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 2rem;margin-bottom:2rem}
+.about-text .timeline-item{font-size:.68rem;padding:.6rem 0;border-bottom:1px solid var(--border);opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+.about-text .timeline-item.visible{opacity:1;transform:translateY(0)}
+.about-text .timeline-item .year{color:var(--gold-dim);font-size:.58rem;letter-spacing:.15em;display:block;margin-bottom:.2rem}
+.about-text .timeline-item .event{color:var(--text-dim);line-height:1.5}
+.about-text .pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:2rem}
+.about-text .pills span{font-size:.58rem;color:var(--text-dim);padding:.3rem .8rem;border:1px solid var(--border);border-radius:20px;letter-spacing:.08em;transition:all .25s;cursor:default;font-family:"Noto Sans SC",sans-serif}
+.about-text .pills span:hover{color:var(--text-bright);border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
+.about-currently{margin-top:2rem;padding:1.2rem 1.5rem;border:1px solid var(--border);border-radius:4px}
+.about-currently .ac-label{color:var(--gold-dim);font-size:.58rem;letter-spacing:.25em;display:block;margin-bottom:.8rem;font-family:"Noto Sans SC",sans-serif}
+.about-currently .ac-text{font-size:.68rem;color:var(--text-dim);line-height:2;letter-spacing:.05em}
 
-  /* Scroll progress bar */
-  .scroll-progress{position:fixed;top:0;left:0;height:1px;background:var(--gold);z-index:9995;transition:width .15s linear}
+/* ═══ CONTACT ═══ */
+.contact-section{padding:6rem 5%;text-align:center;border-top:1px solid var(--border)}
+.contact-inner{max-width:460px;margin:0 auto}
+.contact-card{background:var(--bg-alt);border:1px solid var(--border);border-radius:4px;padding:2.5rem;text-align:left;transition:border-color .4s}
+.contact-card:hover{border-color:rgba(255,255,255,.08)}
+.contact-row{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid rgba(255,255,255,.025);font-size:.72rem;color:var(--text-dim)}
+.contact-row:last-child{border-bottom:none}
+.contact-row .clabel{color:var(--text-dim);font-size:.58rem;letter-spacing:.15em;width:48px;flex-shrink:0;font-family:"Noto Sans SC",sans-serif}
+.contact-row .cval{color:var(--text-bright)}
+.contact-btn-wrap{margin-top:2rem}
+.contact-btn{background:none;padding:.75rem 2.5rem;border:1px solid rgba(255,255,255,.12);color:var(--text-bright);font-family:inherit;border-radius:4px;font-size:.68rem;letter-spacing:.15em;cursor:pointer;transition:all .2s var(--ease-out)}
+.contact-btn:hover{background:rgba(255,255,255,.05);color:#fff;border-color:rgba(255,255,255,.2)}
+.contact-btn:active{transform:scale(.97)}
 
-  @media(max-width:768px){
-    .nav{padding:.8rem 1rem}
-    .nav-links{gap:1rem}
-    .nav-links a{font-size:.65rem}
-    .nav-logo{font-size:.75rem}
-    .hero{padding:0 0 6rem 1.5rem}
-    .hero{padding:0 0 4rem 5%}.hero h1{letter-spacing:.2em}
-    .block-head{padding:5rem 1rem 1rem;flex-direction:column;align-items:flex-start;gap:1rem}
-    .macro-type{padding:5rem 1rem}
-    .macro-type .big{font-size:1.4rem}
-    .duo{flex-direction:column;padding:2rem 1rem}
-    .duo-overlay{padding:1.5rem}
-    .duo-overlay .duo-title{font-size:.85rem}
-    .full-img{margin:2rem 1rem;height:55vh}
-    .full-img .cap{bottom:1rem;left:1rem;font-size:.65rem}
-    .hscroll-head{padding:0 1rem 1.5rem;flex-direction:column;align-items:flex-start;gap:.8rem}
-    .hscroll-card{width:82vw}
+/* ═══ FOOTER ═══ */
+footer{padding:3rem 5%;text-align:center;border-top:1px solid var(--border)}
+footer .flinks{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+footer .flinks a{color:var(--text-dim);text-decoration:none;font-size:.58rem;letter-spacing:.12em;transition:color .25s}
+footer .flinks a:hover{color:var(--text-bright)}
+footer .fcopy{font-size:.52rem;color:var(--text-dim);letter-spacing:.1em;line-height:2}
 
-    .masonry{grid-template-columns:1fr;grid-auto-rows:280px;padding:2rem 1rem}
-    .masonry>:first-child{grid-column:1;grid-row:span 1}
-    .masonry>:nth-child(2),.masonry>:nth-child(3),.masonry>:nth-child(4){grid-column:1;grid-row:span 1}
-
-    .about-section{flex-direction:column;padding:4rem 1rem;gap:3rem}
-    .about-visual{max-height:40vh}
-    .about-text .timeline{grid-template-columns:1fr}
-    .contact{padding:5rem 1rem}
-    .contact-card{padding:1.5rem}
-    footer{padding:2rem 1rem}
-  }
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .nav{padding:.7rem 1rem}
+  .nav-links{gap:.8rem;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}
+  .nav-links a{font-size:.55rem;white-space:nowrap}
+  .nav-logo{font-size:.7rem}
+  .hero-content{padding:0 5% 10%}
+  .hero h1{font-size:2.6rem;letter-spacing:.1em}
+  .identity-bar{padding:2rem 5%;flex-direction:column;align-items:flex-start;gap:.6rem}
+  .identity-bar .id-location{text-align:left}
+  .statement{padding:5rem 5% 4rem}
+  .statement .quote{font-size:1.2rem}
+  .story-body{grid-template-columns:1fr;gap:2rem}
+  .story-body .story-visual{aspect-ratio:3/4}
+  .section{padding:4rem 5%}
+  .section-title{font-size:2.2rem}
+  .gallery-full img{height:45vh;height:45dvh}
+  .gallery-grid{grid-template-columns:1fr 1fr;gap:.5rem;padding:0 .5rem}
+  .gi-c3,.gi-c4,.gi-c5,.gi-c6,.gi-c7,.gi-c8{grid-column:span 2}
+  .duo{grid-template-columns:1fr;gap:.5rem}
+  .duo.reverse{grid-template-columns:1fr}
+  .booking-grid{grid-template-columns:1fr;gap:.75rem;padding:0 1rem}
+  .about-inner{grid-template-columns:1fr;gap:2.5rem}
+  .about-visual{max-height:45vh;overflow:hidden}
+  .about-visual img{aspect-ratio:4/5}
+  .about-text .timeline{grid-template-columns:1fr}
+  .hscroll-card{width:75vw}
+  .process{gap:1rem;flex-direction:column}
+  .process-arrow{display:none}
+  .contact-section{padding:4rem 1rem}
+  .contact-card{padding:1.5rem}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
-<link rel="stylesheet" href="src/styles/tokens.css">
 </head>
 <body>
 <div class="grain"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<!-- ═══ NAV ═══ -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">Stellan</a>
     <div class="nav-links">
-      <a href="#work" data-lang="zh">作品</a>
-      <a href="#work" data-lang="ja">作品</a>
-      <a href="#work" data-lang="en">Work</a>
-      <a href="#about" data-lang="zh">关于</a>
-      <a href="#about" data-lang="ja">关于</a>
-      <a href="#about" data-lang="en">About</a>
-      <a href="#booking" data-lang="zh">预约</a>
-      <a href="#booking" data-lang="ja">予約</a>
-      <a href="#booking" data-lang="en">Book</a>
-      <a href="src/pages/Prints/Prints.html" data-lang="zh">商店</a>
-      <a href="src/pages/Prints/Prints.html" data-lang="ja">商店</a>
-      <a href="src/pages/Prints/Prints.html" data-lang="en">Prints</a>
-      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="zh">展览</a>
-      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="ja">展示</a>
-      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="en">Exhibitions</a>
-      <a href="#contact" data-lang="zh">联系</a>
-      <a href="#contact" data-lang="ja">連絡</a>
-      <a href="#contact" data-lang="en">Contact</a>
+      <a href="#work" data-lang="zh">作品</a><a href="#work" data-lang="ja">作品</a><a href="#work" data-lang="en">Work</a>
+      <a href="#about" data-lang="zh">关于</a><a href="#about" data-lang="ja">关于</a><a href="#about" data-lang="en">About</a>
+      <a href="#booking" data-lang="zh">预约</a><a href="#booking" data-lang="ja">予約</a><a href="#booking" data-lang="en">Book</a>
+      <a href="src/pages/Prints/Prints.html" data-lang="zh">商店</a><a href="src/pages/Prints/Prints.html" data-lang="ja">商店</a><a href="src/pages/Prints/Prints.html" data-lang="en">Prints</a>
+      <a href="src/pages/Exhibitions/Exhibitions.html" data-lang="zh">展览</a><a href="src/pages/Exhibitions/Exhibitions.html" data-lang="ja">展示</a><a href="src/pages/Exhibitions/Exhibitions.html" data-lang="en">Exhib</a>
+      <a href="#contact" data-lang="zh">联系</a><a href="#contact" data-lang="ja">連絡</a><a href="#contact" data-lang="en">Contact</a>
       <div class="lang-dot">
         <button class="lang-current" id="langCurrent">中</button>
         <div class="lang-dropdown" id="langDropdown">
@@ -308,405 +306,372 @@
 </nav>
 
 <!-- ═══ HERO ═══ -->
-<section class="hero">
-  <img class="hero-img" alt="" id="heroImg" data-speed=".25" fetchpriority="high" loading="eager" width="1600" height="1067">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <h1>瓛 瓛</h1>
-    <p class="ja" data-lang="ja">Stellan · フォトグラフィー</p>
-    <p class="ja" data-lang="zh">Stellan</p>
-    <p class="ja" data-lang="en">Stellan</p>
-    
-    <div class="intro" data-lang="zh">按下快门的那一秒，世界安静下来<br>郑州与东京之间，光替我说话</div>
-    <div class="intro" data-lang="ja">シャッターを切る一秒、世界が静まる<br>鄭州と東京のあいだで、光が代わりに語る</div>
-    <div class="intro" data-lang="en">The world goes quiet at the shutter's click<br>Between Zhengzhou and Tokyo, the light speaks for me</div>
-  </div>
+<section class="hero" id="hero">
+  <div class="hero-img-wrap"><img class="hero-img parallax" id="heroImg" alt="" data-speed=".1" fetchpriority="high" width="1600" height="1067"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content"><h1>STELLAN HUAN</h1></div>
+  <div class="scroll-hint"><span data-lang="zh">向下滚动</span><span data-lang="ja">スクロール</span><span data-lang="en">Scroll</span><div class="line"></div></div>
 </section>
 
-<!-- ═══ QUOTE ═══ -->
-<section class="macro-type">
-  <div class="big reveal">
-    <span data-lang="zh">拍照走路时<br><span class="hl">不看地图。</span><br>本来就没有目的地<br>看了也没用。</span>
-    <span data-lang="ja">写真を撮りながら街を歩く時は<br><span class="hl">地図を見ない。</span><br>そもそも目的地などないわけなので<br>地図を見たところで仕方がない。</span>
-    <span data-lang="en">When walking the streets with a camera,<br><span class="hl">I never look at a map.</span><br>Since I have no destination,<br>there's no point.</span>
-  </div>
-  <p class="ref reveal reveal-d2">— Arimoto Shinya · 有元伸也</p>
-</section>
-
-<!-- ═══ 01 SELECTED ═══ -->
-<div class="block-head" id="work">
-  <div class="left">
-    <span class="num">01</span>
-    <h2 data-lang="zh">目光所及</h2>
-    <h2 data-lang="ja">視線の先</h2>
-    <h2 data-lang="en">Within Sight</h2>
-  </div>
-  <a href="series/#portrait" class="more-link" data-lang="zh">阅读更多 →</a>
-  <a href="series/#portrait" class="more-link" data-lang="ja">もっと見る →</a>
-  <a href="series/#portrait" class="more-link" data-lang="en">View More →</a>
+<!-- ═══ IDENTITY BAR ═══ -->
+<div class="identity-bar reveal">
+  <div class="id-tagline" data-lang="zh">Nikon Z8 · 人像与编辑摄影 · 师从有元慎也</div>
+  <div class="id-tagline" data-lang="ja">Nikon Z8 · ポートレートとエディトリアル · 有元慎也に師事</div>
+  <div class="id-tagline" data-lang="en">Nikon Z8 · Portrait & Editorial Photography · Student of Arimoto Shinya</div>
+  <div class="id-location">Zhengzhou · Tokyo</div>
 </div>
 
-<div class="masonry" id="featuredDuo">
-  <div class="duo-item reveal"><img alt="" id="duo1a" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">PORTRAIT</div><div class="duo-overlay"><span class="duo-title">肖像</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
-  <div class="duo-item reveal reveal-d1"><img alt="" id="duo1b" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">STREET</div><div class="duo-overlay"><span class="duo-title">街头</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
+<!-- ═══ STATEMENT ═══ -->
+<div class="statement reveal">
+  <div class="quote">
+    <span data-lang="zh">肖像不是记录外貌，<br>是寻找一个人<span class="hl">在时间中的状态</span>。</span>
+    <span data-lang="ja">ポートレートは外見の記録ではなく、<br><span class="hl">時間のなかの存在</span>を探すこと。</span>
+    <span data-lang="en">A portrait isn't about appearance.<br>It is about <span class="hl">presence in time</span>.</span>
+  </div>
+  <div class="attr">— Stellan Huan</div>
 </div>
 
-<!-- ═══ 02 STREET ═══ -->
-<div class="hscroll-wrap">
-  <div class="hscroll-head">
-    <div class="left">
-      <span class="tag">02</span>
-      <h3 data-lang="zh">街头的呼吸</h3>
-      <h3 data-lang="ja">街の呼吸</h3>
-      <h3 data-lang="en">The Street Breathes</h3>
+<!-- ═══ PROJECT STORY ═══ -->
+<div class="story-section reveal" id="storySection">
+  <div class="story-head">
+    <span class="story-year">2025 — 2026</span>
+    <span class="story-title" data-lang="zh">在街上 · On the Street</span>
+    <span class="story-title" data-lang="ja">街のなかで · On the Street</span>
+    <span class="story-title" data-lang="en">On the Street</span>
+  </div>
+  <div class="story-body">
+    <div class="story-text">
+      <span class="story-quote" data-lang="zh">在城市噪音中寻找人的孤独感。</span>
+      <span class="story-quote" data-lang="ja">都市のノイズのなかに、人の孤独を探す。</span>
+      <span class="story-quote" data-lang="en">Finding solitude within urban noise.</span>
+      <br><br>
+      <span data-lang="zh">从郑州到东京，从漯河的小巷到新宿的十字路口——相机是我理解这个世界的方式。每一张照片都是一次不打扰的在场。</span>
+      <span data-lang="ja">鄭州から東京へ、漯河の路地から新宿の交差点まで——カメラはこの世界を理解するための方法です。すべての写真は、邪魔をしない「そこにいること」。</span>
+      <span data-lang="en">From Zhengzhou to Tokyo, from the alleys of Luohe to the intersections of Shinjuku — the camera is how I understand this world. Every photograph is an unobtrusive presence.</span>
     </div>
-    <a href="series/#street" class="more-link" data-lang="zh">阅读更多 →</a>
-    <a href="series/#street" class="more-link" data-lang="ja">もっと見る →</a>
-    <a href="series/#street" class="more-link" data-lang="en">View More →</a>
+    <div class="story-visual"><img id="storyImg" src="" alt="" loading="lazy"></div>
+  </div>
+</div>
+
+<!-- ═══ FEATURED FULL-WIDTH ═══ -->
+<div class="gallery-full reveal" id="featuredFull"></div>
+
+<!-- ═══ WORKS ═══ -->
+<div class="section reveal" style="padding-bottom:2rem" id="work">
+  <span class="section-label">01</span>
+  <h2 class="section-title" data-lang="zh">精选作品</h2>
+  <h2 class="section-title" data-lang="ja">厳選作品</h2>
+  <h2 class="section-title" data-lang="en">Selected Works</h2>
+</div>
+<div class="duo-wrap"><div class="duo reveal" id="duoFeatured"></div></div>
+
+<!-- ═══ CITY & SKY ═══ -->
+<div class="section reveal" style="padding-bottom:1rem">
+  <span class="section-label">02</span>
+  <h2 class="section-title" data-lang="zh">城市与天空</h2>
+  <h2 class="section-title" data-lang="ja">都市と空</h2>
+  <h2 class="section-title" data-lang="en">City &amp; Sky</h2>
+</div>
+<div class="gallery-grid reveal" id="editorialGrid"></div>
+<div class="duo-wrap" style="margin-top:.75rem"><div class="duo reverse reveal" id="duoCity"></div></div>
+
+<!-- ═══ H-SCROLL STREET ═══ -->
+<div class="hscroll-section reveal" id="hscrollSection">
+  <div class="hscroll-head">
+    <span class="section-label" style="margin-bottom:.5rem" data-lang="zh">街头</span>
+    <span class="section-label" style="margin-bottom:.5rem" data-lang="ja">ストリート</span>
+    <span class="section-label" style="margin-bottom:.5rem" data-lang="en">Street</span>
+    <h3 data-lang="zh">目光所及</h3><h3 data-lang="ja">視線の先</h3><h3 data-lang="en">The Gaze</h3>
   </div>
   <div class="hscroll-track" id="hscroll"></div>
   <div class="hscroll-dots" id="hscrollDots"></div>
 </div>
 
-<!-- ═══ 03 LANDSCAPE ═══ -->
-<div class="block-head" style="border-bottom:none">
-  <div class="left">
-    <span class="num">03</span>
-    <h2 data-lang="zh">大地与天空</h2>
-    <h2 data-lang="ja">大地と空</h2>
-    <h2 data-lang="en">Earth & Sky</h2>
+<!-- ═══ BOOKING ═══ -->
+<div class="section reveal" id="booking">
+  <span class="section-label">03</span>
+  <h2 class="section-title" data-lang="zh">合作拍摄</h2>
+  <h2 class="section-title" data-lang="ja">撮影依頼</h2>
+  <h2 class="section-title" data-lang="en">Commission</h2>
+  <div class="booking-grid">
+    <a href="src/pages/Services/Services.html" class="bk-card">
+      <div class="bk-photo"><img id="bkImg1" src="" alt="" loading="lazy"><div class="bk-gradient"></div></div>
+      <div class="bk-body">
+        <div class="bk-header"><span class="bk-tag">PORTRAIT</span><span class="bk-price">¥299</span></div>
+        <div class="bk-desc" data-lang="zh">个人写真 · 情侣 · 亲子 · 1小时起</div>
+        <div class="bk-desc" data-lang="ja">ポートレート · カップル · ファミリー</div>
+        <div class="bk-desc" data-lang="en">Portrait · Couple · Family · 1hr+</div>
+      </div>
+    </a>
+    <a href="src/pages/Services/Services.html" class="bk-card">
+      <div class="bk-photo"><img id="bkImg2" src="" alt="" loading="lazy"><div class="bk-gradient"></div></div>
+      <div class="bk-body">
+        <div class="bk-header"><span class="bk-tag">EVENT</span><span class="bk-price">¥599</span></div>
+        <div class="bk-desc" data-lang="zh">婚礼 · 活动 · 聚会 · 2小时起</div>
+        <div class="bk-desc" data-lang="ja">結婚式 · イベント · パーティー</div>
+        <div class="bk-desc" data-lang="en">Wedding · Event · Party · 2hr+</div>
+      </div>
+    </a>
+    <a href="src/pages/Services/Services.html" class="bk-card">
+      <div class="bk-photo"><img id="bkImg3" src="" alt="" loading="lazy"><div class="bk-gradient"></div></div>
+      <div class="bk-body">
+        <div class="bk-header"><span class="bk-tag">AERIAL</span><span class="bk-price">+¥500</span></div>
+        <div class="bk-desc" data-lang="zh">航拍加购 · DJI 4K · 城市全景</div>
+        <div class="bk-desc" data-lang="ja">空撮オプション · DJI 4K · 都市</div>
+        <div class="bk-desc" data-lang="en">Aerial Add-on · DJI 4K · City Panorama</div>
+      </div>
+    </a>
   </div>
-  <a href="series/#landscape" class="more-link" data-lang="zh">阅读更多 →</a>
-  <a href="series/#landscape" class="more-link" data-lang="ja">もっと見る →</a>
-  <a href="series/#landscape" class="more-link" data-lang="en">View More →</a>
-</div>
-
-<div class="masonry" id="landscapeDuo">
-  <div class="duo-item reveal" style="flex:1"><img alt="" id="duo2a" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">LANDSCAPE</div><div class="duo-overlay"><span class="duo-title">风光</span><span class="duo-meta">Nikon Z8 · 2026</span></div></div>
-  <div class="duo-item reveal reveal-d1" style="flex:1.7"><img alt="" id="duo2b" loading="lazy" decoding="async" width="1600" height="1067"><div class="duo-label">AERIAL</div><div class="duo-overlay"><span class="duo-title">俯瞰</span><span class="duo-meta">DJI · 2026</span></div></div>
+  <div class="process">
+    <div class="process-step reveal"><div class="ps-num">1</div><div class="ps-label" data-lang="zh">微信联系</div><div class="ps-label" data-lang="ja">WeChat</div><div class="ps-label" data-lang="en">Contact</div></div>
+    <div class="process-arrow">→</div>
+    <div class="process-step reveal reveal-d1"><div class="ps-num">2</div><div class="ps-label" data-lang="zh">沟通需求</div><div class="ps-label" data-lang="ja">打ち合わせ</div><div class="ps-label" data-lang="en">Discuss</div></div>
+    <div class="process-arrow">→</div>
+    <div class="process-step reveal reveal-d2"><div class="ps-num">3</div><div class="ps-label" data-lang="zh">拍摄交付</div><div class="ps-label" data-lang="ja">撮影 · 納品</div><div class="ps-label" data-lang="en">Deliver</div></div>
+  </div>
 </div>
 
 <!-- ═══ ABOUT ═══ -->
-<!-- ═══ BOOKING: Immersive Photo Cards ═══ -->
-<div class="booking-section" id="booking" style="padding:6rem 3rem;max-width:1100px;margin:0 auto;border-top:1px solid var(--border)">
-  <div style="text-align:center;margin-bottom:4rem;">
-    <span style="font-size:.65rem;letter-spacing:.5em;color:var(--gold-dim);display:block;margin-bottom:1rem;">04</span>
-    <h2 style="font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light);" data-lang="zh">写真预约</h2>
-    <h2 style="font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light);" data-lang="ja">写真予約</h2>
-    <h2 style="font-size:1.2rem;font-weight:400;letter-spacing:.2em;color:var(--gold-light);" data-lang="en">Book a Session</h2>
-  </div>
-
-  <div class="booking-cards" style="display:flex;gap:1.2rem;flex-wrap:wrap;">
-    <!-- Portrait -->
-    <a href="series/#portrait" class="bk-card reveal" style="flex:1.3;min-width:300px;position:relative;overflow:hidden;border-radius:8px;text-decoration:none;display:flex;flex-direction:column;background:#0a0704;">
-      <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:380px;aspect-ratio:4/3;">
-        <img loading="lazy" decoding="async" width="1600" height="1067" alt="Portrait" id="bkImg1" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
-        <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);transition:opacity .5s cubic-bezier(.16,1,.3,1);"></div>
-        
-        
-      </div>
-      <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);transition:background .4s;">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
-          <span style="font-size:.7rem;color:var(--gold-dim);letter-spacing:.2em;">PORTRAIT</span>
-          <span style="font-size:1.8rem;color:var(--gold-light);font-weight:200;">¥398</span>
-        </div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="zh">个人写真 · 情侣 · 闺蜜 · 含精修 · Nikon Z8</div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="ja">個人 · カップル · レタッチ込み · Nikon Z8</div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="en">Solo · Couple · Friends · Retouched · Nikon Z8</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="zh">点击查看作品 →</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="ja">タップして作品を見る →</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="en">Tap to view work →</div>
-      </div>
-    </a>
-
-    <!-- Event -->
-    <a href="series/#street" class="bk-card reveal reveal-d1" style="flex:1;min-width:260px;position:relative;overflow:hidden;border-radius:8px;text-decoration:none;display:flex;flex-direction:column;background:#0a0704;">
-      <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:300px;aspect-ratio:4/3;">
-        <img loading="lazy" decoding="async" width="1600" height="1067" alt="Event" id="bkImg2" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
-        <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);"></div>
-      </div>
-      <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
-          <span style="font-size:.7rem;color:var(--gold-dim);letter-spacing:.2em;">EVENT</span>
-          <span style="font-size:1.8rem;color:var(--gold-light);font-weight:200;">¥1500</span>
-        </div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="zh">活动跟拍 · 半天4小时 · 年会 · 开业</div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="ja">イベント · 半日 · 年会 · 開業式</div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="en">Event · Half Day · Conference · Ceremony</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="zh">点击查看作品 →</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="ja">タップして作品を見る →</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="en">Tap to view work →</div>
-      </div>
-    </a>
-
-    <!-- Aerial -->
-    <a href="series/#aerial" class="bk-card reveal reveal-d2" style="flex:1;min-width:260px;position:relative;overflow:hidden;border-radius:8px;text-decoration:none;display:flex;flex-direction:column;background:#0a0704;">
-      <div class="bk-photo" style="position:relative;overflow:hidden;flex:1;min-height:300px;aspect-ratio:4/3;">
-        <img loading="lazy" decoding="async" width="1600" height="1067" alt="Aerial" id="bkImg3" style="width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);">
-        <div class="bk-photo-overlay" style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,4,.95) 0%,rgba(8,6,4,.2) 60%,transparent 100%);"></div>
-      </div>
-      <div class="bk-info" style="padding:1.5rem;background:rgba(10,7,4,.95);backdrop-filter:blur(12px);">
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.8rem;">
-          <span style="font-size:.7rem;color:var(--gold-dim);letter-spacing:.2em;">AERIAL</span>
-          <span style="font-size:1.8rem;color:var(--gold-light);font-weight:200;">+¥500</span>
-        </div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="zh">航拍加购 · DJI 4K · 城市全景</div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="ja">空撮オプション · DJI 4K · 都市</div>
-        <div style="font-size:.72rem;color:var(--text-dim);line-height:1.8;letter-spacing:.03em;" data-lang="en">Aerial Add-on · DJI 4K · City Panorama</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="zh">点击查看作品 →</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="ja">タップして作品を見る →</div>
-        <div style="margin-top:.8rem;font-size:.6rem;color:var(--gold-dim);letter-spacing:.15em;" data-lang="en">Tap to view work →</div>
-      </div>
-    </a>
-  </div>
-
-  <!-- Process line -->
-  <div style="display:flex;gap:2rem;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:5rem;max-width:600px;margin-left:auto;margin-right:auto;">
-    <div class="reveal" style="text-align:center;">
-      <div style="width:36px;height:36px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;color:var(--gold-light);font-size:.7rem;">1</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="zh">微信联系</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="ja">WeChat</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="en">Contact</div>
-    </div>
-    <div style="color:var(--gold-dim);font-size:1rem;display:flex;align-items:center;padding-bottom:20px;">→</div>
-    <div class="reveal reveal-d1" style="text-align:center;">
-      <div style="width:36px;height:36px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;color:var(--gold-light);font-size:.7rem;">2</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="zh">沟通需求</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="ja">打ち合わせ</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="en">Discuss</div>
-    </div>
-    <div style="color:var(--gold-dim);font-size:1rem;display:flex;align-items:center;padding-bottom:20px;">→</div>
-    <div class="reveal reveal-d2" style="text-align:center;">
-      <div style="width:36px;height:36px;border:1px solid var(--gold-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;color:var(--gold-light);font-size:.7rem;">3</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="zh">拍摄交付</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="ja">撮影 · 納品</div>
-      <div style="font-size:.6rem;color:var(--text-dim);letter-spacing:.1em;" data-lang="en">Shoot & Deliver</div>
-    </div>
-  </div>
-</div>
-
 <div class="about-section" id="about">
-  <div class="about-visual reveal"><img alt="" id="aboutImg" loading="lazy" decoding="async" width="1600" height="1067"></div>
-  <div class="about-text">
-    <span class="about-num">05</span>
-    <h3 data-lang="zh">关于</h3>
-    <h3 data-lang="ja">について</h3>
-    <h3 data-lang="en">About</h3>
-    <div class="about-lead" data-lang="zh">相机不是工具，是另一双眼睛。<br>街上的人、低头的瞬间、被忽略的角落——<br>都在取景框里重新活过来。</div>
-    <div class="about-lead" data-lang="ja">カメラは道具じゃなく、もう一つの目。<br>街の人、うつむく瞬間、見過ごされた隅——<br>すべてがファインダーのなかで息を吹き返す。</div>
-    <div class="about-lead" data-lang="en">A camera isn't a tool. It's another pair of eyes.<br>Strangers on the street, a downward glance, the overlooked corner—<br>all come alive again inside the frame.</div>
-    <div class="timeline">
-      <div class="timeline-item reveal reveal-d1" style="transition-delay:.1s">
-        <span class="year">1999</span>
-        <span class="event" data-lang="zh">生于河南临颍</span>
-        <span class="event" data-lang="ja">河南省臨潁県に生まれる</span>
-        <span class="event" data-lang="en">Born in Linying, Henan</span>
+  <div class="about-inner">
+    <div class="about-visual reveal"><img alt="" id="aboutImg" loading="lazy" width="1600" height="1067"></div>
+    <div class="about-text">
+      <span class="section-label">04</span>
+      <h2 class="section-title" data-lang="zh">关于</h2>
+      <h2 class="section-title" data-lang="ja">について</h2>
+      <h2 class="section-title" data-lang="en">About</h2>
+      <div class="about-lead" data-lang="zh">相机不是工具，是另一双眼睛。<br>街上的人、低头的瞬间、被忽略的角落——<br>都在取景框里重新活过来。</div>
+      <div class="about-lead" data-lang="ja">カメラは道具じゃなく、もう一つの目。<br>街の人、うつむく瞬間、見過ごされた隅——<br>すべてがファインダーのなかで息を吹き返す。</div>
+      <div class="about-lead" data-lang="en">A camera isn't a tool. It's another pair of eyes.<br>Strangers on the street, a downward glance, the overlooked corner—<br>all come alive again inside the frame.</div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="year">1999</span><span class="event" data-lang="zh">生于河南临颍</span><span class="event" data-lang="ja">河南省臨潁県に生まれる</span><span class="event" data-lang="en">Born in Linying, Henan</span></div>
+        <div class="timeline-item"><span class="year">2022</span><span class="event" data-lang="zh">赴日，东京TVA</span><span class="event" data-lang="ja">来日、東京TVA</span><span class="event" data-lang="en">Tokyo TVA, Japan</span></div>
+        <div class="timeline-item"><span class="year">2025</span><span class="event" data-lang="zh">归国，自由摄影师</span><span class="event" data-lang="ja">帰国、フリーランス</span><span class="event" data-lang="en">Freelance photographer</span></div>
+        <div class="timeline-item"><span class="year">Now</span><span class="event" data-lang="zh">郑州 · 漯河</span><span class="event" data-lang="ja">鄭州 · 漯河</span><span class="event" data-lang="en">Zhengzhou · Luohe</span></div>
       </div>
-      <div class="timeline-item reveal reveal-d1" style="transition-delay:.15s">
-        <span class="year">2022</span>
-        <span class="event" data-lang="zh">赴日，东京TVA</span>
-        <span class="event" data-lang="ja">来日、東京TVA</span>
-        <span class="event" data-lang="en">Tokyo TVA, Japan</span>
+      <div class="pills"><span>Nikon Z8</span><span>DJI</span><span>RICOH GXR</span><span>郑州</span><span>东京</span><span>漯河</span><span>Portrait</span><span>Street</span><span>Aerial</span></div>
+      <div class="about-currently">
+        <span class="ac-label">CURRENTLY</span>
+        <div class="ac-text" data-lang="zh">📍 郑州 · 自由摄影师<br>📷 Nikon Z8 为主力机<br>🎓 师从有元慎也</div>
+        <div class="ac-text" data-lang="ja">📍 鄭州 · フリーランス<br>📷 Nikon Z8 メイン<br>🎓 有元慎也に師事</div>
+        <div class="ac-text" data-lang="en">📍 Zhengzhou · Freelance<br>📷 Main: Nikon Z8<br>🎓 Student of Arimoto Shinya</div>
       </div>
-      <div class="timeline-item reveal reveal-d2" style="transition-delay:.2s">
-        <span class="year">2025</span>
-        <span class="event" data-lang="zh">归国，自由摄影师</span>
-        <span class="event" data-lang="ja">帰国、フリーランス</span>
-        <span class="event" data-lang="en">Freelance photographer</span>
-      </div>
-      <div class="timeline-item reveal reveal-d3" style="transition-delay:.25s">
-        <span class="year">Now</span>
-        <span class="event" data-lang="zh">郑州 · 漯河</span>
-        <span class="event" data-lang="ja">鄭州 · 漯河</span>
-        <span class="event" data-lang="en">Zhengzhou · Luohe</span>
-      </div>
-    </div>
-    <div class="pills">
-      <span>Nikon Z8</span><span>DJI</span><span>RICOH GXR</span>
-      <span>郑州</span><span>东京</span><span>漯河</span>
-      <span>Portrait</span><span>Street</span><span>Aerial</span>
-    </div>
-    <div class="currently" style="margin-top:2rem;padding:1.2rem 1.5rem;border:1px solid var(--border);border-radius:4px;font-size:.75rem;color:var(--text-dim);letter-spacing:.05em;line-height:2;">
-      <span style="color:var(--gold-dim);font-size:.65rem;letter-spacing:.2em;display:block;margin-bottom:.5rem;">CURRENTLY</span>
-      <span data-lang="zh">📍 郑州 · 自由摄影师<br>📷 Nikon Z8 为主力机<br>🎓 师从有元伸也</span>
-      <span data-lang="ja">📍 鄭州 · フリーランス<br>📷 Nikon Z8 メイン<br>🎓 有元伸也に師事</span>
-      <span data-lang="en">📍 Zhengzhou · Freelance<br>📷 Main: Nikon Z8<br>🎓 Student of Arimoto Shinya</span>
     </div>
   </div>
 </div>
 
 <!-- ═══ CONTACT ═══ -->
-<div class="contact" id="contact">
+<div class="contact-section reveal" id="contact">
+  <span class="section-label">05</span>
+  <h2 class="section-title" data-lang="zh">联系</h2>
+  <h2 class="section-title" data-lang="ja">お問い合わせ</h2>
+  <h2 class="section-title" data-lang="en">Contact</h2>
   <div class="contact-inner">
-    <h3 data-lang="zh">联系</h3>
-    <h3 data-lang="ja">お問い合わせ</h3>
-    <h3 data-lang="en">Contact</h3>
     <div class="contact-card">
-      <div class="contact-row">
-        <span class="label">微信</span>
-        <span class="value">S0688888860</span>
-      </div>
-      <div class="contact-row">
-        <span class="label" data-lang="zh">地区</span>
-        <span class="label" data-lang="ja">地域</span>
-        <span class="label" data-lang="en">Location</span>
-        <span class="value">郑州 · 漯河</span>
-      </div>
-      <div class="contact-row">
-        <span class="label" data-lang="zh">服务</span>
-        <span class="label" data-lang="ja">内容</span>
-        <span class="label" data-lang="en">Services</span>
-        <span class="value" data-lang="zh">写真 · 跟拍 · 航拍</span>
-        <span class="value" data-lang="ja">ポートレート · イベント · 空撮</span>
-        <span class="value" data-lang="en">Portrait · Event · Aerial</span>
-      </div>
+      <div class="contact-row"><span class="clabel">微信</span><span class="cval">S0688888860</span></div>
+      <div class="contact-row"><span class="clabel" data-lang="zh">地区</span><span class="clabel" data-lang="ja">地域</span><span class="clabel" data-lang="en">Location</span><span class="cval">郑州 · 漯河</span></div>
+      <div class="contact-row"><span class="clabel" data-lang="zh">服务</span><span class="clabel" data-lang="ja">内容</span><span class="clabel" data-lang="en">Services</span><span class="cval" data-lang="zh">写真 · 跟拍 · 航拍</span><span class="cval" data-lang="ja">ポートレート · イベント · 空撮</span><span class="cval" data-lang="en">Portrait · Event · Aerial</span></div>
     </div>
-    <div class="contact-cta">
-      <button id="copyWechat"><span data-lang="zh">复制微信号</span><span data-lang="ja">WeChatをコピー</span><span data-lang="en">Copy WeChat</span></button>
-    </div>
+    <div class="contact-btn-wrap"><button class="contact-btn" id="copyWechat"><span data-lang="zh">复制微信号</span><span data-lang="ja">WeChatをコピー</span><span data-lang="en">Copy WeChat</span></button></div>
   </div>
 </div>
 
+<!-- ═══ FOOTER ═══ -->
 <footer>
-  <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:.8rem;font-size:.65rem">
-    <a href="src/pages/Services/Services.html" style="color:var(--gold-dim);text-decoration:none">Services</a>
-    <a href="src/pages/Prints/Prints.html" style="color:var(--gold-dim);text-decoration:none">Prints</a>
-    <a href="src/pages/Exhibitions/Exhibitions.html" style="color:var(--gold-dim);text-decoration:none">Exhibitions</a>
-    <a href="src/pages/Publications/Publications.html" style="color:var(--gold-dim);text-decoration:none">Press</a>
-    <a href="src/pages/About/About.html" style="color:var(--gold-dim);text-decoration:none">About</a>
-    <a href="src/pages/Inquiry/Inquiry.html" style="color:var(--gold-dim);text-decoration:none">Contact</a>
+  <div class="flinks">
+    <a href="src/pages/Services/Services.html">Services</a>
+    <a href="src/pages/Prints/Prints.html">Prints</a>
+    <a href="src/pages/Exhibitions/Exhibitions.html">Exhibitions</a>
+    <a href="src/pages/Publications/Publications.html">Press</a>
+    <a href="src/pages/About/About.html">About</a>
+    <a href="src/pages/Inquiry/Inquiry.html">Contact</a>
   </div>
-  <span data-lang="zh">© 2026 Stellan HuanHuan<br>有元伸也に師事 · 光を追いかけて</span>
-  <span data-lang="ja">© 2026 Stellan HuanHuan<br>有元伸也に師事 · 光を追いかけて</span>
-  <span data-lang="en">© 2026 Stellan HuanHuan<br>Student of Arimoto Shinya · Chasing light</span>
+  <div class="fcopy">
+    <span data-lang="zh">© 2026 Stellan Huan · 有元慎也に師事 · 光を追いかけて</span>
+    <span data-lang="ja">© 2026 Stellan Huan · 有元慎也に師事 · 光を追いかけて</span>
+    <span data-lang="en">© 2026 Stellan Huan · Student of Arimoto Shinya · Chasing light</span>
+  </div>
 </footer>
 
-
-(localStorage.getItem('cms_section_titles')||'{"featured":{"zh":"目光所及","ja":"視線の先","en":"Within Sight"},"hscroll":{"zh":"街头的呼吸","ja":"街の呼吸","en":"The Street Breathes"},"landscape":{"zh":"大地与天空","ja":"大地と空","en":"Earth & Sky"},"aerial":{"zh":"俯瞰","ja":"俯瞰","en":"Aerial"},"about":{"zh":"关于","ja":"について","en":"About"},"booking":{"zh":"写真预约","ja":"写真予約","en":"Book a Session"},"contact":{"zh":"联系","ja":"お問い合わせ","en":"Contact"}}');
-<script src="data.js?v=7?v=6">
-// ═══ Section Titles (editable via CMS Content tab) ═══
-(function(){
-  const titles=JSON.parse(localStorage.getItem('cms_section_titles')||'{}');
-  if(!Object.keys(titles).length)return;
-  const map={featured:{sel:'.block-head h2',idx:0},hscroll:{sel:'.hscroll-head h3',idx:0},landscape:{sel:'.block-head h2',idx:2}};
-  const allH2=document.querySelectorAll('.block-head h2,.hscroll-head h3');
-  const lang=document.documentElement.getAttribute('data-current-lang')||'zh';
-  // featured = first block-head h2 (index 0-2)
-  // hscroll = hscroll-head h3 (index 0-2)
-  // landscape = second block-head h2 (index 3-5)
-  const langIdx={zh:0,ja:1,en:2};
-  [['featured',0],['hscroll',0],['landscape',0]].forEach(([key,base])=>{
-    if(titles[key]&&titles[key][lang]){
-      const els=document.querySelectorAll(key==='hscroll'?'.hscroll-head h3':'.block-head h2');
-      const idx=key==='featured'?0:key==='hscroll'?0:2;
-      const target=Array.from(els).filter(el=>el.closest(key==='hscroll'?'.hscroll-head':'.block-head'));
-      if(target.length>=3)target[langIdx[lang]].textContent=titles[key][lang];
-    }
-  });
-})();
-</script>
+<script src="data.js?v=7"></script>
 <script src="src/analytics/health-monitor.js"></script>
 <script>
-// ═══ PHOTOS (from data.js?v=7) ═══
 const P=SITE_DATA.photos.map(p=>p.file);
 const photosByFile={};
 SITE_DATA.photos.forEach(p=>{photosByFile[p.file]=p});
 const sec=SITE_DATA.sections;
-function getPhoto(key,i){const a=sec[key];return a?`images/${a[i%a.length]}`:P[i%P.length]}
-function getTitle(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.title:''}
-function getSeries(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.series:'portrait'}
+function gp(key,i){const a=sec[key];return a?`images/${a[i%a.length]}`:P[i%P.length]}
+function gTitle(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.title:''}
+function gSeries(src){const f=src.split('/').pop();const p=photosByFile[f];return p?p.series:'portrait'}
 
-// Assign hero + about + booking
-['heroImg'].forEach((id,i)=>document.getElementById(id).src=getPhoto('hero',i));
-document.getElementById('aboutImg').src=getPhoto('about',0);
-document.getElementById('bkImg1').src=getPhoto('booking_portrait',0);
-document.getElementById('bkImg2').src=getPhoto('booking_event',0);
-document.getElementById('bkImg3').src=getPhoto('booking_aerial',0);
+// Assign images
+document.getElementById('heroImg').src=gp('hero',0);
+document.getElementById('aboutImg').src=gp('about',0);
+document.getElementById('storyImg').src=P[Math.floor(P.length*.6)]; // later photo for story
+document.getElementById('bkImg1').src=gp('booking_portrait',0);
+document.getElementById('bkImg2').src=gp('booking_event',0);
+document.getElementById('bkImg3').src=gp('booking_aerial',0);
 
-// Dynamic Featured Duo (from sections data)
-const featuredPhotos=sec['featured']||[];
-const featDuo=document.getElementById('featuredDuo');
-if(featDuo&&featuredPhotos.length){
-  let html='';
-  for(let i=0;i<featuredPhotos.length;i+=2){
-    const a=featuredPhotos[i],b=featuredPhotos[i+1];
-    html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
-      <img src="images/${a}" alt=""><div class="duo-label">${getSeries('images/'+a).toUpperCase()}</div>
-      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
-    </div>`;
-    if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
-      <img src="images/${b}" alt=""><div class="duo-label">${getSeries('images/'+b).toUpperCase()}</div>
-      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
-    </div>`;
+// Featured Full-Width
+(function(){
+  const el=document.getElementById('featuredFull'),f=sec['featured']||[];
+  if(!el||!f.length)return;
+  const src=f[1]||f[0];
+  el.innerHTML='<img src="images/'+src+'" alt="" loading="lazy"><div class="cap">'+gTitle('images/'+src)+'</div>';
+})();
+
+// Duo Featured
+(function(){
+  const el=document.getElementById('duoFeatured'),f=sec['featured']||[];
+  if(!el)return;
+  const imgs=[f[2],f[3],f[4],f[5]].filter(Boolean);
+  let h='';
+  for(let i=0;i<Math.min(imgs.length,4);i+=2){
+    const a=imgs[i],b=imgs[i+1];
+    h+='<div class="di reveal'+(i>0?' reveal-d'+Math.floor(i/2):'')+'"><img src="images/'+a+'" alt="" loading="lazy"><div class="di-overlay"><span class="di-title">'+gTitle('images/'+a)+'</span><span class="di-meta">'+gSeries('images/'+a).toUpperCase()+'</span></div></div>';
+    if(b)h+='<div class="di reveal reveal-d1"><img src="images/'+b+'" alt="" loading="lazy"><div class="di-overlay"><span class="di-title">'+gTitle('images/'+b)+'</span><span class="di-meta">'+gSeries('images/'+b).toUpperCase()+'</span></div></div>';
   }
-  featDuo.innerHTML=html;featDuo.querySelectorAll(".reveal").forEach(el=>new IntersectionObserver(e=>e.forEach(ee=>{if(ee.isIntersecting)ee.target.classList.add("visible")}),{threshold:.12}).observe(el));
-}
+  el.innerHTML=h||el.innerHTML;
+})();
 
-// Dynamic Landscape Duo
-const landPhotos=sec['landscape']||[];
-const aerPhotos=sec['aerial']||[];
-const landDuo=document.getElementById('landscapeDuo');
-if(landDuo){
-  let html='';
-  const allLand=[...landPhotos,...aerPhotos];
-  for(let i=0;i<allLand.length;i+=2){
-    const a=allLand[i],b=allLand[i+1];
-    html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1}s">
-      <img src="images/${a}" alt=""><div class="duo-label">${getSeries('images/'+a).toUpperCase()}</div>
-      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+a)}</span><span class="duo-meta">Nikon Z8 · 2026</span></div>
-    </div>`;
-    if(b)html+=`<div class="duo-item reveal" style="transition-delay:${Math.floor(i/2)*.1+.05}s">
-      <img src="images/${b}" alt=""><div class="duo-label">${getSeries('images/'+b).toUpperCase()}</div>
-      <div class="duo-overlay"><span class="duo-title">${getTitle('images/'+b)}</span><span class="duo-meta">DJI · 2026</span></div>
-    </div>`;
+// Editorial Grid
+(function(){
+  const el=document.getElementById('editorialGrid');
+  if(!el)return;
+  const imgs=[...sec['landscape']||[],...sec['aerial']||[]].slice(0,8);
+  if(!imgs.length)return;
+  const spans=['gi-c3','gi-c5','gi-c4','gi-c6','gi-c4','gi-c4','gi-c5','gi-c3'];
+  let h='';
+  imgs.forEach((f,i)=>{
+    h+='<div class="gi reveal reveal-d'+Math.min(i,3)+' '+spans[i]+'" style="aspect-ratio:'+([3,4,4,3,5,5,4,3][i])+'/'+([2,3,3,2,4,4,3,2][i])+'"><img src="images/'+f+'" alt="" loading="lazy"><div class="gi-cap"><span class="t">'+gTitle('images/'+f)+'</span><span class="s">'+gSeries('images/'+f).toUpperCase()+'</span></div></div>';
+  });
+  el.innerHTML=h;
+})();
+
+// Duo City
+(function(){
+  const el=document.getElementById('duoCity');
+  if(!el)return;
+  const imgs=[...sec['landscape']||[],...sec['aerial']||[]].slice(8,12);
+  let h='';
+  for(let i=0;i<imgs.length;i+=2){
+    const a=imgs[i],b=imgs[i+1];
+    h+='<div class="di reveal"><img src="images/'+a+'" alt="" loading="lazy"><div class="di-overlay"><span class="di-title">'+gTitle('images/'+a)+'</span><span class="di-meta">'+gSeries('images/'+a).toUpperCase()+'</span></div></div>';
+    if(b)h+='<div class="di reveal reveal-d1"><img src="images/'+b+'" alt="" loading="lazy"><div class="di-overlay"><span class="di-title">'+gTitle('images/'+b)+'</span><span class="di-meta">'+gSeries('images/'+b).toUpperCase()+'</span></div></div>';
   }
-  landDuo.innerHTML=html;landDuo.querySelectorAll(".reveal").forEach(el=>new IntersectionObserver(e=>e.forEach(ee=>{if(ee.isIntersecting)ee.target.classList.add("visible")}),{threshold:.12}).observe(el));
-}
+  el.innerHTML=h||el.innerHTML;
+})();
 
-// Hscroll
+// H-Scroll
 const hscroll=document.getElementById('hscroll');
 const hscrollPhotos=sec['hscroll']||[];
 for(let i=0;i<hscrollPhotos.length;i++){
-  const src=`images/${hscrollPhotos[i]}`;
   const card=document.createElement('div');
   card.className='hscroll-card';
-  card.innerHTML=`<img src="${src}" alt="Street" loading="lazy" width="1600" height="900"><div class="info"><span class="t">街头 ${i+1}</span><span class="m">Nikon Z8</span></div>`;
+  card.innerHTML='<img src="images/'+hscrollPhotos[i]+'" alt="" loading="lazy"><div class="hc-info"><span class="hct">'+gTitle('images/'+hscrollPhotos[i])+'</span><span class="hcm">Nikon Z8</span></div>';
   hscroll.appendChild(card);
 }
-// Dots (dynamic count)
-const dots=document.getElementById('hscrollDots');
-for(let i=0;i<hscrollPhotos.length;i++){const d=document.createElement('div');d.className='hscroll-dot';dots.appendChild(d)}
+const hdots=document.getElementById('hscrollDots');
+for(let i=0;i<hscrollPhotos.length;i++){const d=document.createElement('div');d.className='hscroll-dot';hdots.appendChild(d)}
 hscroll.addEventListener('scroll',()=>{
   const idx=Math.round(hscroll.scrollLeft/(hscroll.scrollWidth/Math.max(1,hscrollPhotos.length)));
-  dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  hdots.querySelectorAll('.hscroll-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
 });
-// Dot click to scroll
-dots.querySelectorAll('.hscroll-dot').forEach((d,i)=>{
-  d.style.cursor='pointer';
-  d.addEventListener('click',()=>{
-    hscroll.scrollTo({left:(hscroll.scrollWidth/hscrollPhotos.length)*i,behavior:'smooth'});
-  });
+hdots.querySelectorAll('.hscroll-dot').forEach((d,i)=>{
+  d.addEventListener('click',()=>{hscroll.scrollTo({left:(hscroll.scrollWidth/hscrollPhotos.length)*i,behavior:'smooth'})});
 });
 
-// ═══ LANGUAGE (dropdown) ═══
+// H-Scroll Momentum
+let isDown=false,startX,scrollLeft,velocity=0,rafId;
+hscroll.addEventListener('mousedown',e=>{isDown=true;hscroll.style.cursor='grabbing';startX=e.pageX-hscroll.offsetLeft;scrollLeft=hscroll.scrollLeft;cancelAnimationFrame(rafId)});
+hscroll.addEventListener('mouseleave',()=>{isDown=false;hscroll.style.cursor='grab';applyMomentum()});
+hscroll.addEventListener('mouseup',()=>{isDown=false;hscroll.style.cursor='grab';applyMomentum()});
+hscroll.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-hscroll.offsetLeft;velocity=(x-startX);hscroll.scrollLeft=scrollLeft-(x-startX)*1.5});
+function applyMomentum(){let v=velocity*.95;function step(){if(Math.abs(v)<.5){velocity=0;return}hscroll.scrollLeft-=v;v*=.92;rafId=requestAnimationFrame(step)}if(Math.abs(velocity)>2)step();else velocity=0}
+
+// Language
 function setLang(lang){
   document.documentElement.setAttribute('data-current-lang',lang);
   const names={zh:'中文',ja:'日本語',en:'English'};
   document.getElementById('langCurrent').childNodes[0].textContent=names[lang];
   document.querySelectorAll('.lang-dropdown button').forEach(b=>b.classList.toggle('active',b.dataset.langSwitch===lang));
+  localStorage.setItem('lang',lang);
 }
 const langCurrent=document.getElementById('langCurrent'),langDropdown=document.getElementById('langDropdown');
 langCurrent.addEventListener('click',e=>{e.stopPropagation();langCurrent.classList.toggle('open');langDropdown.classList.toggle('open')});
 document.addEventListener('click',()=>{langCurrent.classList.remove('open');langDropdown.classList.remove('open')});
 document.querySelectorAll('.lang-dropdown button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.langSwitch);langCurrent.classList.remove('open');langDropdown.classList.remove('open')}));
-setLang('zh');
+setLang(localStorage.getItem('lang')||'zh');
 
-// ═══ QUOTE CHAR REVEAL ═══
-(function setupQuoteReveal(){
-  const quoteEl=document.querySelector('.macro-type .big [data-lang="zh"]');
-  if(!quoteEl)return;
-  const text=quoteEl.innerHTML;
-  // Split into chars, preserving HTML tags
+// Reveal Observer
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+const tlObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.3});
+document.querySelectorAll('.timeline-item').forEach(el=>tlObs.observe(el));
+
+// Contact Copy
+document.getElementById('copyWechat')?.addEventListener('click',async()=>{
+  const btn=document.getElementById('copyWechat');
+  const orig=btn.innerHTML;
+  try{await navigator.clipboard.writeText('S0688888860');btn.innerHTML='<span data-lang="zh">✓ 已复制</span><span data-lang="ja">✓ コピー済み</span><span data-lang="en">✓ Copied</span>';btn.style.background='rgba(255,255,255,.1)';btn.style.color='#fff'}catch(e){btn.innerHTML=orig}
+  setTimeout(()=>{btn.innerHTML=orig;btn.style.background='none';btn.style.color=''},2000);
+});
+
+// Smooth Scroll
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
+  link.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(link.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})});
+});
+
+// Parallax
+(function loop(){
+  document.querySelectorAll('.parallax').forEach(el=>{
+    const speed=parseFloat(el.dataset.speed)||.15;
+    const rect=el.getBoundingClientRect();
+    const offset=(rect.top+rect.height/2-window.innerHeight/2)*speed;
+    el.style.transform='translate3d(0,'+(offset*.3)+'px,0)';
+  });
+  requestAnimationFrame(loop);
+})();
+
+// Nav Hide + Progress
+let last=0;const nav=document.getElementById('nav'),prog=document.getElementById('scrollProgress');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  nav.classList.toggle('hidden',y>last&&y>600);
+  last=y;
+  const docH=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.transform=docH>0?'scaleX('+(y/docH)+')':'scaleX(0)';
+},{passive:true});
+
+// Image Fade
+document.querySelectorAll('img').forEach(img=>{
+  img.style.transition='opacity .4s var(--ease-out)';
+  img.style.opacity='0';
+  img.addEventListener('load',function(){this.style.opacity='1'});
+  if(img.complete)img.style.opacity='1';
+});
+
+// Hero Load
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('hero').classList.add('loaded'),150)});
+
+// About Photo Cycle
+let aboutIdx=0;
+setInterval(()=>{
+  aboutIdx=(aboutIdx+1)%P.length;
+  const img=document.getElementById('aboutImg');
+  img.style.opacity='0';
+  setTimeout(()=>{img.src=P[aboutIdx];img.style.opacity='1'},350);
+},7000);
+
+// Statement Char Reveal
+(function(){
+  const el=document.querySelector('.statement .quote [data-lang="zh"]');
+  if(!el)return;
+  const text=el.innerHTML;
   const chars=[];
   let i=0;
   while(i<text.length){
@@ -714,98 +679,11 @@ setLang('zh');
     else if(text[i]==='\n'){chars.push('<br>');i++}
     else{chars.push(text[i]);i++}
   }
-  quoteEl.innerHTML=chars.map((c,idx)=>`<span class="qr-char" style="opacity:0;transition:opacity .35s var(--ease-out);transition-delay:${idx*.08}s">${c}</span>`).join('');
+  el.innerHTML=chars.map((c,idx)=>'<span class="qr-char" style="opacity:0;transition:opacity .04s var(--ease-out);transition-delay:'+(idx*.035)+'s">'+c+'</span>').join('');
   new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        quoteEl.querySelectorAll('.qr-char').forEach(c=>c.style.opacity='1');
-      }
-    });
-  },{threshold:.4,once:true}).observe(quoteEl);
+    entries.forEach(e=>{if(e.isIntersecting)el.querySelectorAll('.qr-char').forEach(c=>c.style.opacity='1')});
+  },{threshold:.3,once:true}).observe(el);
 })();
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:.12,rootMargin:'0px 0px -20px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// ═══ CONTACT COPY ═══
-document.getElementById('copyWechat')?.addEventListener('click',async()=>{
-  const btn=document.getElementById('copyWechat');
-  const origHTML=btn.innerHTML;
-  try{await navigator.clipboard.writeText('S0688888860');btn.innerHTML='<span data-lang="zh">✓ 已复制</span><span data-lang="ja">✓ コピー済み</span><span data-lang="en">✓ Copied</span>';btn.style.background='var(--gold-dim)';btn.style.color='var(--bg)'}catch(e){btn.innerHTML=origHTML}
-  setTimeout(()=>{btn.innerHTML=origHTML;btn.style.background='none';btn.style.color='var(--gold-light)'},2000);
-});
-document.querySelectorAll('.nav-links a[href^="#"]').forEach(link=>{
-  link.addEventListener('click',e=>{
-    e.preventDefault();
-    const target=document.querySelector(link.getAttribute('href'));
-    if(target)target.scrollIntoView({behavior:'smooth'});
-  });
-});
-
-// ═══ PARALLAX (multi-speed depth) ═══
-(function loop(){
-  const sy=window.scrollY;
-  document.querySelectorAll('.parallax').forEach(el=>{
-    const speed=parseFloat(el.dataset.speed)||.15;
-    const rect=el.getBoundingClientRect();
-    const center=rect.top+rect.height/2;
-    const viewCenter=window.innerHeight/2;
-    const offset=(center-viewCenter)*speed;
-    el.style.transform=`translate3d(0,${offset*.4}px,0)`;
-  });
-  // Scroll-driven hero fade
-  const hero=document.querySelector('.hero');
-  if(hero){
-    const heroBottom=hero.getBoundingClientRect().bottom;
-    const progress=Math.max(0,Math.min(1,1-heroBottom/window.innerHeight));
-    hero.style.opacity=1-progress*.4;
-  }
-  requestAnimationFrame(loop);
-})();
-
-// ═══ NAV HIDE + SCROLL PROGRESS ═══
-let last=0;const nav=document.getElementById('nav'),prog=document.getElementById('scrollProgress');
-window.addEventListener('scroll',()=>{
-  const y=window.scrollY;
-  nav.classList.toggle('hidden',y>last&&y>400);
-  last=y;
-  const docH=document.documentElement.scrollHeight-window.innerHeight;
-  prog.style.width=docH>0?(y/docH*100)+'%':'0%';
-},{passive:true});
-
-// ═══ IMAGE FADE + PERF ═══
-document.querySelectorAll('img').forEach((img,i)=>{
-  img.style.transition='opacity .6s var(--ease-out)';
-  img.style.opacity='0';
-  img.addEventListener('load',function(){this.style.opacity='1'});
-  if(img.complete)img.style.opacity='1';
-  if(i>2){img.decoding='async';img.fetchPriority='low'}
-});
-
-// ═══ H-SCROLL MOMENTUM ═══
-let isDown=false,startX,scrollLeft,velocity=0,rafId;
-hscroll.addEventListener('mousedown',e=>{isDown=true;hscroll.style.cursor='grabbing';startX=e.pageX-hscroll.offsetLeft;scrollLeft=hscroll.scrollLeft;cancelAnimationFrame(rafId)});
-hscroll.addEventListener('mouseleave',()=>{isDown=false;hscroll.style.cursor='grab';applyMomentum()});
-hscroll.addEventListener('mouseup',()=>{isDown=false;hscroll.style.cursor='grab';applyMomentum()});
-hscroll.addEventListener('mousemove',e=>{if(!isDown)return;e.preventDefault();const x=e.pageX-hscroll.offsetLeft;const walk=(x-startX)*1.5;velocity=(x-startX);hscroll.scrollLeft=scrollLeft-walk});
-function applyMomentum(){
-  let v=velocity*.95;
-  function step(){
-    if(Math.abs(v)<.5){velocity=0;return}
-    hscroll.scrollLeft-=v;v*=.92;rafId=requestAnimationFrame(step);
-  }
-  if(Math.abs(velocity)>2)step();else velocity=0;
-}
-
-// ═══ ABOUT PHOTO CYCLE ═══
-let aboutIdx=0;
-setInterval(()=>{aboutIdx=(aboutIdx+1)%P.length;document.getElementById('aboutImg').src=P[aboutIdx]},6000);
-
-// ═══ HERO LOAD ═══
-window.addEventListener('load',()=>{
-  setTimeout(()=>document.querySelector('.hero').classList.add('loaded'),300);
-});
 </script>
 </body>
 </html>
